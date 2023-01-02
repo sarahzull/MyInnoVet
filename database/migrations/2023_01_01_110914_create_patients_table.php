@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->timestamp('dob')->nullable();
+            $table->date('dob')->nullable();
             $table->string('breed')->nullable();
             $table->enum('gender', ['male', 'female', 'unknown'])->nullable();
             $table->string('species')->nullable();
