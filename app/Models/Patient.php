@@ -21,7 +21,8 @@ class Patient extends Model
         'weight',
         'chronic_disease',
         'image',
-        'owner_id'
+        'owner_id',
+        'created_by_id'
     ];
 
     protected $dates = [

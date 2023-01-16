@@ -40,7 +40,21 @@ class PatientsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Patient::create([
+            'name' => $request->name,
+            'dob' => $request->dob,
+            'breed' => $request->breed,
+            'gender' => $request->gender,
+            'species' => $request->species,
+            'height' => $request->height,
+            'weight' => $request->weight,
+            'chronic_disease' => $request->chronic_disease,
+            'image' => $request->image,
+            'owner_id' => $request->owner_id,
+            'created_by_id' => auth()->user()->id,
+        ]);
+
+        return redirect()->route('patients.index')->with('message', 'Patient has been created');
     }
 
     /**
