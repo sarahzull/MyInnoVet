@@ -3,21 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Patient;
 use Illuminate\Http\Request;
 
-class PatientsController extends Controller
+class StaffsController extends Controller
 {
-    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $patients = Patient::all();
-
-        return view('patients.index', compact('patients'));
+    public function index()
+    {
+        //
     }
 
     /**
@@ -25,8 +22,9 @@ class PatientsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
-        return view('patients.create');
+    public function create()
+    {
+        //
     }
 
     /**

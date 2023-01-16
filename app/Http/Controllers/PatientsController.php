@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 
 class PatientsController extends Controller
 {
-    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         $patients = Patient::all();
 
         return view('patients.index', compact('patients'));
@@ -25,7 +24,8 @@ class PatientsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
         return view('patients.create');
     }
 
