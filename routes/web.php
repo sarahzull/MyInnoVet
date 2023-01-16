@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\PatientsController;
+use App\Http\Controllers\PatientsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +24,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::prefix('/patients')->middleware(['auth'])->group(function () {
     Route::get('/', [PatientsController::class, 'index'])->name('patients.index');
+    Route::get('/create', [PatientsController::class, 'create'])->name('patients.create');
 
     // Route::middleware('can:isAdmin')->group(function () {
     //     Route::get('/create', [StudentsController::class, 'create'])->name('students.create');

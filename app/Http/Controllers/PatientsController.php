@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Patient;
+use App\Models\Species;
 use Illuminate\Http\Request;
 
 class PatientsController extends Controller
@@ -26,7 +27,9 @@ class PatientsController extends Controller
      */
     public function create()
     {
-        return view('patients.create');
+        $species = Species::all();
+
+        return view('patients.create', compact('species'));
     }
 
     /**
