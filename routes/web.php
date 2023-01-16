@@ -25,6 +25,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::prefix('/patients')->middleware(['auth'])->group(function () {
     Route::get('/', [PatientsController::class, 'index'])->name('patients.index');
     Route::get('/create', [PatientsController::class, 'create'])->name('patients.create');
+    Route::post('/', [PatientsController::class, 'store'])->name('patients.store');
+    Route::get('/edit/{id}', [PatientsController::class, 'edit'])->name('patients.edit');
 
     // Route::middleware('can:isAdmin')->group(function () {
     //     Route::get('/create', [StudentsController::class, 'create'])->name('students.create');

@@ -14,7 +14,11 @@
                         </div>
                     @endif --}}
 
-                  <form>
+                  <form
+                    action="{{ route('patients.store') }}"
+                    method="POST">
+                    @csrf
+
                     <div class="mb-3">
                       <label for="name" class="form-label">Name</label>
                       <input type="text" class="form-control" id="name" name="name">
@@ -57,7 +61,7 @@
 
                     <div class="mb-3">
                       <label for="weight" class="form-label">Weight (kg)</label>
-                      <input type="number" class="form-control" id="weight" name="weight" min="0.01">
+                      <input type="number" class="form-control" id="weight" name="weight" min="1">
                     </div>
 
                     <div class="mb-3">
@@ -70,11 +74,18 @@
                       <input class="form-control" type="file" id="image">
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary" href="{{ route('patients.index')}}">Submit</button>
                   </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+  flatpickr('#dob', {
+      altInput: true,
+      altFormat: 'j F, Y'
+  });
+</script>
 @endsection
