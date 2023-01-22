@@ -40,6 +40,29 @@ class PatientsController extends Controller
      */
     public function store(Request $request)
     {
+        //Methods we can use on $request
+        //guessExtension()
+        //getMimeType()
+        //store()
+        //asStore()
+        //storePublicly()
+        //move()
+        //getClientOriginalName()
+        //getClientMimeType()
+        //getClientExtension()
+        //getSize() [in kb]
+        //getError()
+        //isValid
+
+        $request->validate([
+            'name'  => 'required',
+            'image' => 'required|mimes:jpg,png,jpeg|max:5048'
+        ]);
+
+        $newImageName = time() . '-' . $request->name . '.' .$request->image->extension();
+
+        $request->image->move(public_path('images'), $newImageName);
+
         Patient::create([
             'name' => $request->name,
             'dob' => $request->dob,
@@ -49,7 +72,7 @@ class PatientsController extends Controller
             'height' => $request->height,
             'weight' => $request->weight,
             'chronic_disease' => $request->chronic_disease,
-            'image' => $request->image,
+            'image' => $newImageName,
             'owner_id' => $request->owner_id,
             'created_by_id' => auth()->user()->id,
         ]);
