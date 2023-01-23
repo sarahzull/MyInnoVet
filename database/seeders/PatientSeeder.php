@@ -19,7 +19,7 @@ class PatientSeeder extends Seeder
             [
                 'id'            => 1,
                 'name'          => 'Mittens',
-                'dob'           => '01-01-2018',
+                'dob'           => '2008-01-01',
                 'breed'         => 'Siamese',
                 'gender'        => 'Female',
                 'species'       => 'Cat',
@@ -28,16 +28,26 @@ class PatientSeeder extends Seeder
             ],
             [
                 'id'            => 2,
-                'name'          => 'Jeromy',
-                'dob'           => '27-11-2008',
+                'name'          => 'Ruben',
+                'dob'           => '2013-11-27',
                 'breed'         => 'American Shorthair',
                 'gender'        => 'Male',
                 'species'       => 'Cat',
                 'height'        => '15',
                 'weight'        => '4',
             ],
+            [
+                'id'            => 3,
+                'name'          => 'Fred',
+                'dob'           => '2020-05-13',
+                'breed'         => 'Agnora',
+                'gender'        => 'Male',
+                'species'       => 'Rabbit',
+                'height'        => '20',
+                'weight'        => '2.5',
+            ],
             
-        ];
+        ]; 
 
         Patient::insert($patients);
     }
