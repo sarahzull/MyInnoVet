@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->date('dob')->nullable();
             $table->string('breed')->nullable();
-            $table->enum('gender', ['male', 'female', 'unknown'])->nullable();
+            $table->string('gender')->nullable();
             $table->string('species')->nullable();
             $table->string('height')->nullable();
             $table->string('weight')->nullable();
