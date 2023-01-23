@@ -88,7 +88,9 @@ class PatientsController extends Controller
      */
     public function show($id)
     {
-        //
+        $patient = Patient::findOrFail($id);
+        
+        return view('patients.show', compact('patient'));
     }
 
     /**
@@ -99,7 +101,9 @@ class PatientsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $patient = Patient::findOrFail($id);
+        
+        return view('patients.edit', compact('patient'));
     }
 
     /**

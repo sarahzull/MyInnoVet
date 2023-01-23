@@ -44,16 +44,9 @@
                             <td>{{ $patient->gender }}</td>
                             <td>{{ $patient->species }}</td>
                             <td class="text-center">
-                              <div class="dropdown-center">
-                                <button class="btn btn-transparent dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  <i class="fa-solid fa-ellipsis"></i>
-                                </button>
-                                <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#">Action</a></li>
-                                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                              </div>
+                              <a href="{{ route('patients.show', $patient->id) }}" class="text-dark">
+                                <i class="fa-solid fa-ellipsis"></i>
+                              </a>
                             </td>
                           </tr>
                           @endforeach
