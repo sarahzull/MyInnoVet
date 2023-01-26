@@ -33,7 +33,6 @@
 <body>
 
   <div class="d-md-flex h-md-100 align-items-center">
-
     <!-- First Half -->
     <div class="col-md-6 p-0 bg-ghost-white h-md-100">
         <div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
@@ -48,9 +47,8 @@
         <div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
             <img src="{{ asset('assets/img/login-img.svg') }}" alt="">
         </div>
-    </div>
-        
-</div>
+    </div>  
+  </div>
     {{-- <div id="app">
       <div class="container-fluid">
         <div class="row">
