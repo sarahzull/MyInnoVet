@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\PatientsController;
+use App\Http\Controllers\PermissionsController;
+use App\Http\Controllers\RolesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,4 +38,27 @@ Route::prefix('/patients')->middleware(['auth'])->group(function () {
     //     Route::patch('/{id}', [StudentsController::class, 'update'])->name('students.update');
     //     Route::delete('/{id}', [StudentsController::class, 'destroy'])->name('students.destroy');
     // });
+});
+
+
+Route::prefix('/settings')->middleware(['auth'])->group(function () {
+    //Role
+    Route::prefix('/roles')->group(function () {
+        Route::get('/', [RolesController::class, 'index'])->name('roles.index');
+        Route::get('/create', [RolesController::class, 'create'])->name('roles.create');
+        Route::post('/', [RolesController::class, 'store'])->name('roles.store');
+        Route::get('/edit/{id}', [RolesController::class, 'edit'])->name('roles.edit');
+        Route::patch('/{id}', [RolesController::class, 'update'])->name('roles.update');
+        Route::delete('/{id}', [RolesController::class, 'destroy'])->name('roles.destroy');
+    });
+
+    //Permission
+    Route::prefix('/permisisons')->group(function () {
+        Route::get('/', [PermissionsController::class, 'index'])->name('permissions.index');
+        Route::get('/create', [PermissionsController::class, 'create'])->name('permissions.create');
+        Route::post('/', [PermissionsController::class, 'store'])->name('permissions.store');
+        Route::get('/edit/{id}', [PermissionsController::class, 'edit'])->name('permissions.edit');
+        Route::patch('/{id}', [PermissionsController::class, 'update'])->name('permissions.update');
+        // Route::delete('/{id}', [PermissionsController::class, 'destroy'])->name('permissions.destroy');
+    });
 });

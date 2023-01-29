@@ -39,6 +39,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('patients.index') }}">{{ __('Patients') }}</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('roles.index') }}">{{ __('Roles') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('permissions.index') }}">{{ __('Permissons') }}</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -84,5 +90,7 @@
             @yield('content')
         </main>
     </div>
+
+    @include('sweetalert::alert')
 </body>
 </html>
