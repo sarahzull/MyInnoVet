@@ -25,6 +25,11 @@
                       <input type="text" class="form-control" name="name" value="{{ $role->name }}">
                     </div>
 
+                    <div class="mb-3">
+                        <label for="name" class="form-label required">Permissions</label>
+                        <input type="text" class="form-control" id="permissions" name="permissions">
+                    </div>
+
                     <button type="submit" class="btn btn-success">Update</button>
                   </form>
                 </div>
