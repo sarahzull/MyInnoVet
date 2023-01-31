@@ -3,6 +3,7 @@
 use App\Http\Controllers\PatientsController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,5 +61,15 @@ Route::prefix('/settings')->middleware(['auth'])->group(function () {
         Route::get('/edit/{id}', [PermissionsController::class, 'edit'])->name('permissions.edit');
         Route::patch('/{id}', [PermissionsController::class, 'update'])->name('permissions.update');
         // Route::delete('/{id}', [PermissionsController::class, 'destroy'])->name('permissions.destroy');
+    });
+
+    //User
+    Route::prefix('/users')->group(function () {
+        Route::get('/', [UsersController::class, 'index'])->name('users.index');
+        // Route::get('/create', [UsersController::class, 'create'])->name('permissions.create');
+        // Route::post('/', [UsersController::class, 'store'])->name('permissions.store');
+        Route::get('/edit/{id}', [UsersController::class, 'edit'])->name('users.edit');
+        Route::patch('/{id}', [UsersController::class, 'update'])->name('users.update');
+        // Route::delete('/{id}', [UsersController::class, 'destroy'])->name('permissions.destroy');
     });
 });

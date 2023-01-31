@@ -26,9 +26,9 @@
                     @endcan
                     
                     <div class="table-responsive">
-                      <table class="table">
+                      <table class="table table table-bordered">
                         <thead>
-                          <tr>
+                          <tr class="table-light">
                             <th scope="col">ID</th>
                             <th scope="col">Name</th>
                             <th scope="col">Breed</th>
