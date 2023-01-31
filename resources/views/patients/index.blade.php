@@ -14,14 +14,16 @@
                         </div>
                     @endif
                     
-                    <div class="row mb-2">
-                      <div class="col"></div>
-                      <div class="col text-end">
-                          <a type="button" class="btn btn-primary" href="{{ route('patients.create')}}">
-                              Add Patient
-                          </a>
+                    @can('patient_create')
+                      <div class="row mb-2">
+                        <div class="col"></div>
+                        <div class="col text-end">
+                            <a type="button" class="btn btn-primary" href="{{ route('patients.create')}}">
+                                Add Patient
+                            </a>
+                        </div>
                       </div>
-                    </div>
+                    @endcan
                     
                     <div class="table-responsive">
                       <table class="table">

@@ -11,7 +11,9 @@ class RolesController extends Controller
 {
     public function index()
     {
-        $roles = Role::all();
+        // $roles = Role::all();
+        $roles = Role::with(['permissions'])->get();
+
         return view('settings.roles.index', compact('roles'));
     }
 
@@ -43,15 +45,26 @@ class RolesController extends Controller
 
     public function edit($id)
     {
+        // $role = Role::findById($id);
+        // return view('settings.roles.edit', compact('role'));
+        
         $role = Role::findById($id);
-        return view('settings.roles.edit', compact('role'));
+        $permissions = Permission::pluck('name', 'id');
+
+        $role->load('permissions');
+
+        return view('settings.roles.edit', compact('permissions', 'role'));
     }
 
     public function update(Request $request, $id)
     {
-        Role::where('id', $id)->update([
-            'name' => $request->name,
-        ]);
+        // Role::where('id', $id)->update([
+        //     'name' => $request->name,
+        // ]);
+        
+        $role = Role::findById($id);
+        $role->update($request->all());
+        $role->permissions()->sync($request->input('permissions', []));
 
         return redirect()->route('roles.index');
     }

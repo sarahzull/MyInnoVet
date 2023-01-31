@@ -23,6 +23,7 @@
                         <tr class="table-light">
                           <th scope="col" class="text-center">ID</th>
                           <th scope="col">Name</th>
+                          <th scope="col">Role</th>
                           <th scope="col" class="text-center">Action</th>
                         </tr>
                       </thead>
@@ -31,6 +32,11 @@
                         <tr>
                           <th scope="row" class="text-center">{{ $role->id }}</th>
                           <td>{{ $role->name }}</td>
+                          <td>
+                            @foreach($role->permissions as $key => $item)
+                            <span class="badge bg-secondary fw-light">{{ $item->name }}</span>
+                            @endforeach
+                          </td>
                           <td class="text-center">
                             {{-- {{ route('lecturers.edit', $lecturer->id) }} --}}
                             <div class="d-flex justify-content-center p-0">
