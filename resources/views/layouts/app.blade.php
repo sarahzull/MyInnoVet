@@ -41,18 +41,26 @@
                         
                     @else
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('patients.index') }}">{{ __('Patients') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('roles.index') }}">{{ __('Roles') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('permissions.index') }}">{{ __('Permissons') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('users.index') }}">{{ __('Users') }}</a>
-                        </li>
+                        @can('patient_access')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('patients.index') }}">{{ __('Patients') }}</a>
+                             </li>
+                        @endcan
+                        @can('role_access')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('roles.index') }}">{{ __('Roles') }}</a>
+                            </li>
+                        @endcan
+                        @can('permission_access')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('permissions.index') }}">{{ __('Permissons') }}</a>
+                            </li>
+                        @endcan
+                        @can('user_access')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('users.index') }}">{{ __('Users') }}</a>
+                            </li>
+                        @endcan
                     </ul>
                     @endguest
 

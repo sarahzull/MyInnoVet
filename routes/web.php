@@ -44,7 +44,7 @@ Route::prefix('/patients')->middleware(['auth'])->group(function () {
 
 Route::prefix('/settings')->middleware(['auth'])->group(function () {
     //Role
-    Route::prefix('/roles')->group(function () {
+    Route::prefix('/roles')->middleware(['can:role_access'])->group(function () {
         Route::get('/', [RolesController::class, 'index'])->name('roles.index');
         Route::get('/create', [RolesController::class, 'create'])->name('roles.create');
         Route::post('/', [RolesController::class, 'store'])->name('roles.store');
@@ -54,7 +54,7 @@ Route::prefix('/settings')->middleware(['auth'])->group(function () {
     });
 
     //Permission
-    Route::prefix('/permisisons')->group(function () {
+    Route::prefix('/permisisons')->middleware(['can:permission_access'])->group(function () {
         Route::get('/', [PermissionsController::class, 'index'])->name('permissions.index');
         Route::get('/create', [PermissionsController::class, 'create'])->name('permissions.create');
         Route::post('/', [PermissionsController::class, 'store'])->name('permissions.store');
@@ -64,7 +64,7 @@ Route::prefix('/settings')->middleware(['auth'])->group(function () {
     });
 
     //User
-    Route::prefix('/users')->group(function () {
+    Route::prefix('/users')->middleware(['can:user_access'])->group(function () {
         Route::get('/', [UsersController::class, 'index'])->name('users.index');
         // Route::get('/create', [UsersController::class, 'create'])->name('permissions.create');
         // Route::post('/', [UsersController::class, 'store'])->name('permissions.store');
