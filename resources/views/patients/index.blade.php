@@ -29,7 +29,7 @@
                       <table class="table table table-bordered">
                         <thead>
                           <tr class="table-light">
-                            <th scope="col">ID</th>
+                            <th scope="col" class="text-center">ID</th>
                             <th scope="col">Name</th>
                             <th scope="col">Breed</th>
                             <th scope="col">Gender</th>
@@ -40,7 +40,7 @@
                         <tbody>
                           @foreach ($patients as $patient)
                             <tr>
-                            <th scope="row">{{ $patient->id }}</th>
+                            <th scope="row" class="text-center">{{ $patient->id }}</th>
                             <td>{{ $patient->name }}</td>
                             <td>{{ $patient->breed }}</td>
                             <td>{{ $patient->gender }}</td>
