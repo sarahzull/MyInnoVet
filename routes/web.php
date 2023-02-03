@@ -68,7 +68,7 @@ Route::prefix('/settings')->middleware(['auth'])->group(function () {
         Route::post('/', [PermissionsController::class, 'store'])->name('permissions.store');
         Route::get('/edit/{id}', [PermissionsController::class, 'edit'])->name('permissions.edit');
         Route::patch('/{id}', [PermissionsController::class, 'update'])->name('permissions.update');
-        // Route::delete('/{id}', [PermissionsController::class, 'destroy'])->name('permissions.destroy');
+        Route::delete('/{id}', [PermissionsController::class, 'destroy'])->name('permissions.destroy');
     });
 
     //User

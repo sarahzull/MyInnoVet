@@ -36,13 +36,13 @@
                               <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-sm text-secondary text-decoration-none ml-2" href="">
                                 <i class="fa-solid fa-pen"></i>
                               </a>
-                              {{-- <form action="{{ route('roles.destroy', $role->id) }}" method="POST">
+                              <form action="{{ route('permissions.destroy', $permission->id) }}" method="POST">
                                   @csrf
                                   @method('DELETE')
                                   <button type="submit" class="btn btn-sm text-secondary text-decoration-none">
                                       <i class="fa-solid fa-trash"></i>
                                   </button>
-                              </form> --}}
+                              </form>
                             </div>
                           </td>
                         </tr>
