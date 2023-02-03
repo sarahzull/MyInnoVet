@@ -22,7 +22,12 @@
 
                     <div class="mb-3">
                       <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control" id="name" name="name">
+                      <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name" name="name">
+                      @if($errors->has('name'))
+                          <div class="invalid-feedback">
+                              {{ $errors->first('name') }}
+                          </div>
+                      @endif
                     </div>
 
                     <div class="mb-3">
@@ -32,7 +37,12 @@
 
                     <div class="mb-3">
                       <label for="breed" class="form-label">Breed</label>
-                      <input type="text" class="form-control" id="breed" name="breed">
+                      <input type="text" class="form-control {{ $errors->has('breed') ? 'is-invalid' : '' }}" id="breed" name="breed">
+                      @if($errors->has('breed'))
+                          <div class="invalid-feedback">
+                              {{ $errors->first('breed') }}
+                          </div>
+                      @endif
                     </div>
 
                     <div class="mb-3">
