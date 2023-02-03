@@ -41,10 +41,10 @@
                           @foreach ($patients as $patient)
                             <tr>
                             <th scope="row" class="text-center">{{ $patient->id }}</th>
-                            <td>{{ $patient->name }}</td>
-                            <td>{{ $patient->breed }}</td>
-                            <td>{{ $patient->gender }}</td>
-                            <td>{{ $patient->species }}</td>
+                            <td>{{ $patient->name ?? '' }}</td>
+                            <td>{{ $patient->breed ?? '' }}</td>
+                            <td>{{ $patient->gender ?? '' }}</td>
+                            <td>{{ $patient->species->name ?? '' }}</td>
                             <td class="text-center">
                               <a href="{{ route('patients.show', $patient->id) }}" class="text-dark">
                                 <i class="fa-solid fa-ellipsis"></i>

@@ -4,27 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Patient;
 use App\Models\Species;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PatientsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $patients = Patient::all();
+        $patients = Patient::with('species')->get();
 
         return view('patients.index', compact('patients'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $species = Species::all();
@@ -32,35 +24,14 @@ class PatientsController extends Controller
         return view('patients.create', compact('species'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //Methods we can use on $request
-        //guessExtension()
-        //getMimeType()
-        //store()
-        //asStore()
-        //storePublicly()
-        //move()
-        //getClientOriginalName()
-        //getClientMimeType()
-        //getClientExtension()
-        //getSize() [in kb]
-        //getError()
-        //isValid
-
         $request->validate([
             'name'  => 'required',
-            'image' => 'required|mimes:jpg,png,jpeg|max:5048'
+            'image' => 'required|mimes:jpg,png,jpeg|max:2048'
         ]);
 
         $newImageName = time() . '-' . $request->name . '.' .$request->image->extension();
-
         $request->image->move(public_path('images'), $newImageName);
 
         Patient::create([
@@ -68,7 +39,7 @@ class PatientsController extends Controller
             'dob' => $request->dob,
             'breed' => $request->breed,
             'gender' => $request->gender,
-            'species' => $request->species,
+            'species_id' => $request->species,
             'height' => $request->height,
             'weight' => $request->weight,
             'chronic_disease' => $request->chronic_disease,
@@ -76,6 +47,16 @@ class PatientsController extends Controller
             'owner_id' => $request->owner_id,
             'created_by_id' => auth()->user()->id,
         ]);
+
+        $patient = Patient::create($request->all());
+
+        if ($request->input('photo', false)) {
+            $patient->addMedia(storage_path('tmp/uploads/' . basename($request->input('photo'))))->toMediaCollection('photo');
+        }
+
+        if ($media = $request->input('ck-media', false)) {
+            Media::whereIn('id', $media)->update(['model_id' => $patient->id]);
+        }
 
         return redirect()->route('patients.index')->with('message', 'Patient has been created');
     }
@@ -89,41 +70,65 @@ class PatientsController extends Controller
     public function show($id)
     {
         $patient = Patient::findOrFail($id);
-        
-        return view('patients.show', compact('patient'));
+        $birthDate = Carbon::parse($patient->dob)->format('d F Y');
+        $joinedDate = Carbon::parse($patient->created_at)->format('d F Y');
+
+        return view('patients.show', compact('patient', 'birthDate', 'joinedDate'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        $patient = Patient::findOrFail($id);
-        
-        return view('patients.edit', compact('patient'));
+        $patient = Patient::with(['owner'])->findOrFail($id);
+        $species = Species::all();
+        $owners = User::all();
+
+        return view('patients.edit', compact('patient', 'species', 'owners'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+
+        // if ($request->hasFile('image')) {
+        //     $destination = 'images/' . $request->oldImage;
+        //     if (file_exists($destination)) {
+        //         @unlink($destination);
+        //     }
+        //     $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
+        //     $request->image->move(public_path('images'), $newImageName);
+        // } else {
+        //     $newImageName = $request->oldImage;
+        // }
+
+        $request->validate([
+            'image' => 'mimes:jpg,png,jpeg|max:2048'
+        ]);
+
+        $input = [
+            'name' => $request->name,
+            'dob' => $request->dob,
+            'breed' => $request->breed,
+            'gender' => $request->gender,
+            'species_id' => $request->species,
+            'height' => $request->height,
+            'weight' => $request->weight,
+            'chronic_disease' => $request->chronic_disease,
+            'owner_id' => $request->owner_id,
+          ];
+
+        if ($image = $request->file('image')) {
+            $destinationPath = 'images/';
+            $profileImage = date('YmdHis') . '-' . $request->name . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['image'] = "$profileImage";
+        } else {
+            unset($input['image']);
+        }
+        
+        Patient::where('id', $id)->update($input);
+
+        return redirect()->route('patients.show', [$id])->with('success', 'Patient has been updated');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

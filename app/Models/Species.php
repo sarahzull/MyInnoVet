@@ -14,4 +14,9 @@ class Species extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function patient()
+    {
+        return $this->hasOne(Patient::class);
+    }
 }

@@ -17,7 +17,7 @@ class Patient extends Model
         'dob',
         'breed',
         'gender',
-        'species',
+        'species_id',
         'height',
         'weight',
         'chronic_disease',
@@ -35,7 +35,7 @@ class Patient extends Model
 
     public function owner()
     {
-        return $this->belongsTo(User::class, 'owner_id');
+        return $this->belongsTo(User::class);
     }
 
     public function age()
@@ -45,6 +45,6 @@ class Patient extends Model
 
     public function species()
     {
-        return $this->belongsTo(Species::class, 'species_id');
+        return $this->belongsTo(Species::class);
     }
 }
