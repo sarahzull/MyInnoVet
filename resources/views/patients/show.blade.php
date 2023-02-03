@@ -16,7 +16,11 @@
                     <div class="row row-cols-2">
                       <div class="col py-2">
                         <div class="d-flex justify-between">
-                          <div class="col"></div>
+                          <div class="col text-start">
+                            <a href="{{ route('patients.index') }}" class="text-secondary text-sm">
+                              <i class="fa-solid fa-arrow-left"></i>
+                            </a>
+                          </div>
                           <div class="col"></div>
                           <div class="col text-end">
                             <a href="{{ route('patients.edit', $patient->id) }}" class="text-secondary text-sm">
