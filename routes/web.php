@@ -32,6 +32,7 @@ Route::prefix('/patients')->middleware(['auth'])->group(function () {
     Route::post('/', [PatientsController::class, 'store'])->name('patients.store');
     Route::get('/{id}', [PatientsController::class, 'show'])->name('patients.show');
     Route::get('/edit/{id}', [PatientsController::class, 'edit'])->name('patients.edit');
+    Route::patch('/{id}', [PatientsController::class, 'update'])->name('patients.update');
 
     // Route::middleware('can:isAdmin')->group(function () {
     //     Route::get('/create', [StudentsController::class, 'create'])->name('students.create');

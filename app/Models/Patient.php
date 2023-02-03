@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Patient extends Model
 {
@@ -32,11 +33,18 @@ class Patient extends Model
         'deleted_at',
     ];
 
-    /**
-     * @return BelongsTo
-     */
-    public function user()
+    public function owner()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'owner_id');
+    }
+
+    public function age()
+    {
+        return Carbon::parse($this->dob)->diff(Carbon::now())->format('%y years, %m months');
+    }
+
+    public function species()
+    {
+        return $this->belongsTo(Species::class, 'species_id');
     }
 }
