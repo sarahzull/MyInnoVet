@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('dob')->nullable();
             $table->string('breed')->nullable();
             $table->string('gender')->nullable();
-            $table->unsignedBigInteger('species')->nullable();
+            $table->unsignedBigInteger('species_id')->nullable();
             $table->foreign('species_id')->references('id')->on('species')->onDelete('cascade');
             $table->string('height')->nullable();
             $table->string('weight')->nullable();
