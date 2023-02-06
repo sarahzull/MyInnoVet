@@ -18,7 +18,7 @@
                       <div class="row mb-2">
                         <div class="col"></div>
                         <div class="col text-end">
-                            <a type="button" class="btn btn-primary" href="{{ route('patients.create')}}">
+                            <a type="button" class="btn btn-primary" href="{{ route('clients.create')}}">
                                 Add Client
                             </a>
                         </div>

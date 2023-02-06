@@ -22,6 +22,13 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    <style>
+        .required-field::after {
+            content: " *";
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
