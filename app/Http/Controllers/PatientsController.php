@@ -39,7 +39,7 @@ class PatientsController extends Controller
             'dob' => $request->dob,
             'breed' => $request->breed,
             'gender' => $request->gender,
-            'species_id' => $request->species,
+            'species_id' => $request->species_id,
             'height' => $request->height,
             'weight' => $request->weight,
             'chronic_disease' => $request->chronic_disease,
@@ -58,7 +58,7 @@ class PatientsController extends Controller
             Media::whereIn('id', $media)->update(['model_id' => $patient->id]);
         }
 
-        return redirect()->route('patients.index')->with('message', 'Patient has been created');
+        return back()->with('message', 'Patient has been created');
     }
 
     /**
@@ -108,7 +108,7 @@ class PatientsController extends Controller
             'dob' => $request->dob,
             'breed' => $request->breed,
             'gender' => $request->gender,
-            'species_id' => $request->species,
+            'species_id' => $request->species_id,
             'height' => $request->height,
             'weight' => $request->weight,
             'chronic_disease' => $request->chronic_disease,

@@ -62,7 +62,7 @@
 
                     <div class="mb-3">
                       <label for="species" class="form-label">Species</label>
-                      <select class="form-select" aria-label="species-select" name="species">
+                      <select class="form-select" aria-label="species-select" name="species_id">
                         <option selected>Choose species</option>
                         @foreach ($species as $sp)
                           <option value="{{ $sp->id }}">{{ $sp->name }}</option>
