@@ -27,7 +27,12 @@ class ClientsController extends Controller
 
     public function show($id)
     {
-        //
+        $role = Role::findByName('client');
+        $client = User::whereHas('roles', function ($query) use ($role) {
+            $query->where('name', $role->name);
+        })->findOrFail($id);
+
+        return view('clients.show', compact('client'));
     }
 
     public function edit($id)
