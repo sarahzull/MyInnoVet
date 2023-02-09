@@ -40,9 +40,11 @@
                             <th scope="row" class="text-center">{{ $client->id }}</th>
                             <td>{{ $client->name }}</td>
                             <td class="text-center">
-                              <a href="{{ route('clients.show', $client->id) }}" class="text-dark">
-                                <i class="fa-solid fa-ellipsis"></i>
-                              </a>
+                              @can('client_show')
+                                <a href="{{ route('clients.show', $client->id) }}" class="text-dark">
+                                  <i class="fa-solid fa-ellipsis"></i>
+                                </a>
+                              @endcan
                             </td>
                           </tr>
                           @endforeach

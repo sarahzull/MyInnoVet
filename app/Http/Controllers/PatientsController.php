@@ -108,7 +108,7 @@ class PatientsController extends Controller
             'dob' => $request->dob,
             'breed' => $request->breed,
             'gender' => $request->gender,
-            'species_id' => $request->species_id,
+            'species_id' => $request->species,
             'height' => $request->height,
             'weight' => $request->weight,
             'chronic_disease' => $request->chronic_disease,
