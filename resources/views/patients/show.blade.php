@@ -6,11 +6,11 @@
         <div class="col-md-10">
             <div class="card">
                 <div class="card-body">
-                  @if ($message = session('success'))
+                  {{-- @if ($message = session('success'))
                       <div class="alert alert-success" role="alert">
                           {{ session('success') }}
                       </div>
-                  @endif
+                  @endif --}}
                   
                   <div class="container text-center">
                     <div class="row row-cols-2">
@@ -98,4 +98,16 @@
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+  @if (session('success'))
+    <script>
+      toastr.options = {
+        "closeButton": true,
+        "progressBar": true,
+      }
+      toastr.success('{{ session('success') }}');
+    </script>
+  @endif
 @endsection
