@@ -47,8 +47,9 @@ Route::prefix('/clients')->middleware(['auth'])->group(function () {
     Route::get('/', [ClientsController::class, 'index'])->name('clients.index');
     Route::get('/create', [ClientsController::class, 'create'])->name('clients.create');
     // Route::post('/', [PatientsController::class, 'store'])->name('patients.store');
-    // Route::get('/{id}', [PatientsController::class, 'show'])->name('patients.show');
+    Route::get('/{id}', [ClientsController::class, 'show'])->name('clients.show');
     // Route::get('/edit/{id}', [PatientsController::class, 'edit'])->name('patients.edit');
+    Route::patch('/{id}', [ClientsController::class, 'update'])->name('clients.update');
 });
 
 Route::prefix('/settings')->middleware(['auth'])->group(function () {

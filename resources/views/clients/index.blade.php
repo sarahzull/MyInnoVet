@@ -39,12 +39,13 @@
                             <tr>
                             <th scope="row" class="text-center">{{ $client->id }}</th>
                             <td>{{ $client->name }}</td>
-                            <td></td>
-                            {{-- <td class="text-center">
-                              <a href="{{ route('patients.show', $patient->id) }}" class="text-dark">
-                                <i class="fa-solid fa-ellipsis"></i>
-                              </a>
-                            </td> --}}
+                            <td class="text-center">
+                              @can('client_show')
+                                <a href="{{ route('clients.show', $client->id) }}" class="text-dark">
+                                  <i class="fa-solid fa-ellipsis"></i>
+                                </a>
+                              @endcan
+                            </td>
                           </tr>
                           @endforeach
                           
