@@ -15,7 +15,7 @@
     <link rel="icon" href="{{ asset('assets/img/myinnovet-icon.ico') }}">
     <link rel="canonical" href=""/>
 
-    {!! includeFavicon() !!}
+    {{-- {!! includeFavicon() !!} --}}
 
     <!--begin::Fonts-->
     {!! includeFonts() !!}
@@ -71,9 +71,9 @@
                                 <!--begin::Breadcrumb-->
                                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                                     <!--begin::Item-->
-                                    {{-- <li class="breadcrumb-item text-muted">
+                                    <li class="breadcrumb-item text-muted">
                                         <a href="/" class="text-muted text-hover-primary">Home</a>
-                                    </li> --}}
+                                    </li>
                                     <!--end::Item-->
                                     <!--begin::Item-->
                                     <li class="breadcrumb-item">
@@ -81,7 +81,7 @@
                                     </li>
                                     <!--end::Item-->
                                     <!--begin::Item-->
-                                    {{-- <li class="breadcrumb-item text-muted">Dashboards</li> --}}
+                                    <li class="breadcrumb-item text-muted">@yield('breadcrumb')</li>
                                     <!--end::Item-->
                                 </ul>
                                 <!--end::Breadcrumb-->
@@ -91,10 +91,10 @@
                             <!--begin::Actions-->
                             <div class="d-flex align-items-center gap-2 gap-lg-3">
                                 <!--begin::Secondary button-->
-                                <a href="#" class="btn btn-sm fw-bold bg-body btn-color-gray-700 btn-active-color-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Rollover</a>
+                                {{-- <a href="#" class="btn btn-sm fw-bold bg-body btn-color-gray-700 btn-active-color-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Rollover</a> --}}
                                 <!--end::Secondary button-->
                                 <!--begin::Primary button-->
-                                <a href="#" class="btn btn-sm fw-bold btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_new_target">Add Target</a>
+                                @yield('header-button')
                                 <!--end::Primary button-->
                             </div>
                             <!--end::Actions-->
@@ -133,6 +133,14 @@
 
 <!--begin::Javascript-->
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+<script>
+    var KTAppSettings = { 
+        "light": {
+            "success": "#9DA831",
+        },
+     };
+</script>
+
 @foreach(getGlobalAssets() as $path)
     {!! sprintf('<script src="%s"></script>', asset($path)) !!}
 @endforeach

@@ -1,6 +1,7 @@
 
 @extends('layout.master')
 @section('title', 'Dashboard')
+@section('breadcrumb', 'Dashboard')
 
 @section('content')
     <!--begin::Row-->

@@ -12,7 +12,7 @@
 			<!--begin:Menu item-->
 			<div class="menu-item">
 				<!--begin:Menu link-->
-				<a class="menu-link" href="#">
+				<a class="menu-link" href="/">
 					<span class="menu-icon">{!! getSvgIcon('duotune/general/gen025.svg', 'svg-icon svg-icon-2') !!}</span>
 					<span class="menu-title">Dashboards</span>
 				</a>
@@ -35,6 +35,7 @@
 				<div class="menu-sub menu-sub-accordion">
 					
 					<!--begin:Menu item-->
+					@can('role_access')
 					<div class="menu-item">
 						<!--begin:Menu link-->
 						<a class="menu-link" href="#">
@@ -45,9 +46,11 @@
 						</a>
 						<!--end:Menu link-->
 					</div>
+					@endcan
 					<!--end:Menu item-->
 
 					<!--begin:Menu item-->
+					@can('permission_access')
 					<div class="menu-item">
 						<!--begin:Menu link-->
 						<a class="menu-link" href="#">
@@ -58,9 +61,11 @@
 						</a>
 						<!--end:Menu link-->
 					</div>
+					@endcan
 					<!--end:Menu item-->
 
 					<!--begin:Menu item-->
+					@can('user_access')
 					<div class="menu-item">
 						<!--begin:Menu link-->
 						<a class="menu-link" href="#">
@@ -71,6 +76,7 @@
 						</a>
 						<!--end:Menu link-->
 					</div>
+					@endcan
 					<!--end:Menu item-->
 
 				</div>
@@ -80,6 +86,7 @@
 			<!--end:Menu item-->
 
 			<!--begin:Menu item-->
+			@can('appointment_access')
 			<div class="menu-item">
 				<!--begin:Menu link-->
 				<a class="menu-link" href="#">
@@ -88,9 +95,11 @@
 				</a>
 				<!--end:Menu link-->
 			</div>
+			@endcan
 			<!--end:Menu item-->
 			
 			<!--begin:Menu item-->
+			@can('calendar_access')
 			<div class="menu-item">
 				<!--begin:Menu link-->
 				<a class="menu-link" href="#">
@@ -99,6 +108,7 @@
 				</a>
 				<!--end:Menu link-->
 			</div>
+			@endcan
 			<!--end:Menu item-->
 
 
@@ -106,7 +116,7 @@
 			@can('patient_access')
 			<div class="menu-item">
 				<!--begin:Menu link-->
-				<a class="menu-link" href="#">
+				<a class="menu-link" href="{{ route('patients.index') }}">
 					<span class="menu-icon"><i class="fa-solid fa-paw fs-3"></i></span>
 					<span class="menu-title">Patients</span>
 				</a>
@@ -116,6 +126,7 @@
 			<!--end:Menu item-->
 
 			<!--begin:Menu item-->
+			@can('client_access')
 			<div class="menu-item">
 				<!--begin:Menu link-->
 				<a class="menu-link" href="#">
@@ -124,9 +135,11 @@
 				</a>
 				<!--end:Menu link-->
 			</div>
+			@endcan
 			<!--end:Menu item-->
 
 			<!--begin:Menu item-->
+			@can('staff_access')
 			<div class="menu-item">
 				<!--begin:Menu link-->
 				<a class="menu-link" href="#">
@@ -135,6 +148,7 @@
 				</a>
 				<!--end:Menu link-->
 			</div>
+			@endcan
 			<!--end:Menu item-->
 			
 			<!--begin:Menu item-->
