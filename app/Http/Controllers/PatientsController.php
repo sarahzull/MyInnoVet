@@ -14,14 +14,14 @@ class PatientsController extends Controller
     {
         $patients = Patient::with('species')->get();
 
-        return view('patients.index', compact('patients'));
+        return view('pages.patients.index', compact('patients'));
     }
 
     public function create()
     {
         $species = Species::all();
 
-        return view('patients.create', compact('species'));
+        return view('pages.patients.create', compact('species'));
     }
 
     public function store(Request $request)
@@ -39,7 +39,7 @@ class PatientsController extends Controller
             'dob' => $request->dob,
             'breed' => $request->breed,
             'gender' => $request->gender,
-            'species_id' => $request->species_id,
+            'species_id' => $request->species,
             'height' => $request->height,
             'weight' => $request->weight,
             'chronic_disease' => $request->chronic_disease,
@@ -58,7 +58,7 @@ class PatientsController extends Controller
             Media::whereIn('id', $media)->update(['model_id' => $patient->id]);
         }
 
-        return back()->with('message', 'Patient has been created');
+        return redirect()->route('patients.index')->with('message', 'Patient has been created');
     }
 
     /**
@@ -73,7 +73,7 @@ class PatientsController extends Controller
         $birthDate = Carbon::parse($patient->dob)->format('d F Y');
         $joinedDate = Carbon::parse($patient->created_at)->format('d F Y');
 
-        return view('patients.show', compact('patient', 'birthDate', 'joinedDate'));
+        return view('pages.patients.show', compact('patient', 'birthDate', 'joinedDate'));
     }
 
     public function edit($id)
@@ -82,7 +82,7 @@ class PatientsController extends Controller
         $species = Species::all();
         $owners = User::all();
 
-        return view('patients.edit', compact('patient', 'species', 'owners'));
+        return view('pages.patients.edit', compact('patient', 'species', 'owners'));
     }
 
     public function update(Request $request, $id)
