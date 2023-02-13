@@ -4,7 +4,7 @@
 	<a href="/">
 		@php $bodyAttribute = getHtmlAttribute('body', 'data-kt-app-layout') @endphp
 		@if ($bodyAttribute === 'dark-sidebar')
-			<img alt="Logo" src="{{ image('logos/custom-myinnovet-1.svg') }}" class="h-25px app-sidebar-logo-default" />
+			<img alt="Logo" src="{{ image('logos/custom-myinnovet-1.svg') }}" class="h-35px app-sidebar-logo-default" />
         @elseif($bodyAttribute === 'light-sidebar')
 				<img alt="Logo" src="{{ image('logos/custom-myinnovet-1.svg') }}" class="theme-light-show h-25px app-sidebar-logo-default" />
 				<img alt="Logo" src="{{ image('logos/custom-myinnovet-1.svg') }}" class="theme-dark-show h-25px app-sidebar-logo-default" />
