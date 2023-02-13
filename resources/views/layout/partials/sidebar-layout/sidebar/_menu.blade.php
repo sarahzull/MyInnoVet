@@ -38,7 +38,7 @@
 					@can('role_access')
 					<div class="menu-item">
 						<!--begin:Menu link-->
-						<a class="menu-link" href="#">
+						<a class="menu-link" href="{{ route('roles.index') }}">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
@@ -53,7 +53,7 @@
 					@can('permission_access')
 					<div class="menu-item">
 						<!--begin:Menu link-->
-						<a class="menu-link" href="#">
+						<a class="menu-link" href="{{ route('permissions.index') }}">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
@@ -68,7 +68,7 @@
 					@can('user_access')
 					<div class="menu-item">
 						<!--begin:Menu link-->
-						<a class="menu-link" href="#">
+						<a class="menu-link" href="{{ route('users.index') }}">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
@@ -129,7 +129,7 @@
 			@can('client_access')
 			<div class="menu-item">
 				<!--begin:Menu link-->
-				<a class="menu-link" href="#">
+				<a class="menu-link" href="{{ route('clients.index') }}">
 					<span class="menu-icon">{!! getSvgIcon('duotune/abstract/abs025.svg', 'svg-icon svg-icon-2') !!}</i></span>
 					<span class="menu-title">Clients</span>
 				</a>

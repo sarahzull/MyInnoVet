@@ -12,9 +12,9 @@
 <div class="card">
   <div class="card-body">
     <div class="table-responsive">
-      <table id="kt_datatable" class="table table-striped gy-3 gs-3 align-middle">
+      <table id="kt_datatable" class="table table-bordered gy-3 gs-3 align-middle">
         <thead>
-          <tr class="fw-bold fs-6 text-gray-800 border-bottom">
+          <tr class="text-start text-gray-600 fw-bold fs-7 text-uppercase bg-light">
             <th scope="col" class="text-center">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Breed</th>
@@ -48,11 +48,19 @@
 @endsection
 
 @section('scripts')
-  <script src="{{ asset('assets/js/pages/crud/ktdatatable/base/data-local.js') }}"></script>
+  
   <script>
-    $("#kt_datatable").DataTable();
+    KTUtil.onDOMContentLoaded(function () {
+      $("#kt_datatable").DataTable({
+        language: {
+          paginate: {
+            next: '&#8594;', // or '→'
+            previous: '&#8592;' // or '←'   
+          }
+        }
+      });
+    })
   </script>
-
 @endsection
 
 

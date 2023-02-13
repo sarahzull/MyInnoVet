@@ -1,59 +1,54 @@
-@extends('layouts.app')
+@extends('layout.master')
+@section('title', 'Clients')
+@section('breadcrumb', 'View Clients')
+@section('header-button')
+  @can('patient_create')
+    <a href="{{ route('clients.create')}}" class="btn btn-sm fw-bold btn-success">Add Client</a>
+  @endcan
+@endsection
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Clients') }}</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    
-                    @can('patient_create')
-                      <div class="row mb-2">
-                        <div class="col"></div>
-                        <div class="col text-end">
-                            <a type="button" class="btn btn-primary" href="{{ route('clients.create')}}">
-                                Add Client
-                            </a>
-                        </div>
-                      </div>
-                    @endcan
-                    
-                    <div class="table-responsive">
-                      <table class="table table table-bordered">
-                        <thead>
-                          <tr class="table-light">
-                            <th scope="col" class="text-center">ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col" class="text-center">Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          @foreach ($clients as $client)
-                            <tr>
-                            <th scope="row" class="text-center">{{ $client->id }}</th>
-                            <td>{{ $client->name }}</td>
-                            <td></td>
-                            {{-- <td class="text-center">
-                              <a href="{{ route('patients.show', $patient->id) }}" class="text-dark">
-                                <i class="fa-solid fa-ellipsis"></i>
-                              </a>
-                            </td> --}}
-                          </tr>
-                          @endforeach
-                          
-                        </tbody>
-                      </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="card">
+  <div class="card-body">
+    <div class="table-responsive">
+      <table id="kt_datatable" class="table table-bordered gy-3 gs-3 align-middle">
+        <thead>
+          <tr class="text-start text-gray-600 fw-bold fs-7 text-uppercase bg-light">
+            <th scope="col" class="text-center">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col" class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($clients as $client)
+            <tr>
+            <th scope="row" class="text-center">{{ $client->id }}</th>
+            <td>{{ $client->name }}</td>
+            <td class="text-center">
+              {{-- <a href="{{ route('patients.show', $patient->id) }}" class="text-dark">
+                <i class="fa-solid fa-ellipsis"></i>
+              </a> --}}
+            </td>
+          </tr>
+          @endforeach
+          
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>
+
 @endsection
+
+@section('scripts')
+  <script>
+    KTUtil.onDOMContentLoaded(function () {
+      $("#kt_datatable").DataTable();
+    })
+  </script>
+@endsection
+
+
+
+

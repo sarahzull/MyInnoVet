@@ -3,7 +3,7 @@
 <!--begin::Head-->
 <head>
     <base href=""/>
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8"/>
     <meta name="description" content=""/>
@@ -19,7 +19,7 @@
     <!--begin::Fonts-->
     {!! includeFonts() !!}
     <!--end::Fonts-->
-
+    
     <!--begin::Global Stylesheets Bundle(used by all pages)-->
     @foreach(getGlobalAssets('css') as $path)
         {!! sprintf('<link rel="stylesheet" href="%s">', asset($path)) !!}
@@ -37,6 +37,8 @@
         {!! sprintf('<link rel="stylesheet" href="%s">', asset($path)) !!}
     @endforeach
     <!--end::Custom Stylesheets-->
+
+    <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css"/>
 </head>
 <!--end::Head-->
 
@@ -139,6 +141,11 @@
         },
      };
 </script>
+
+<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+<script src="assets/plugins/global/plugins.bundle.js"></script>
+<script src="assets/js/scripts.bundle.js"></script>
+@yield('scripts')
 
 @foreach(getGlobalAssets() as $path)
     {!! sprintf('<script src="%s"></script>', asset($path)) !!}
