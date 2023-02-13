@@ -1,6 +1,6 @@
 @extends('layout.master')
-@section('title', 'Patients')
-@section('breadcrumb', 'View Patients')
+@section('title', 'Patient List')
+@section('breadcrumb', 'Patients')
 @section('header-button')
   @can('patient_create')
     <a href="{{ route('patients.create')}}" class="btn btn-sm fw-bold btn-success">Add Patient</a>
@@ -14,7 +14,7 @@
     <div class="table-responsive">
       <table id="kt_datatable" class="table table-bordered gy-3 gs-3 align-middle">
         <thead>
-          <tr class="text-start text-gray-600 fw-bold fs-7 text-uppercase bg-light">
+          <tr class="text-start text-gray-700 fw-bold fs-7 text-uppercase bg-light">
             <th scope="col" class="text-center">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Breed</th>
