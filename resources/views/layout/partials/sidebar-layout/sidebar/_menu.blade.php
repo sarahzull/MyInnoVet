@@ -151,45 +151,42 @@
 			@endcan
 			<!--end:Menu item-->
 			
-			<!--begin:Menu item-->
-			<div class="menu-item pt-5">
-				<!--begin:Menu content-->
+			<div class="separator my-4"></div>
+
+			<div class="menu-item">
+				<a class="menu-link" href="#">
+					<span class="menu-icon">{!! getSvgIcon('duotune/arrows/arr076.svg', 'svg-icon svg-icon-2') !!}</span>
+					<span class="menu-title">Logout</span>
+				</a>
+			</div>
+
+			{{-- <div class="menu-item pt-5">
 				<div class="menu-content">
 					<span class="menu-heading fw-semibold text-uppercase fs-7">Help</span>
 				</div>
-				<!--end:Menu content-->
 			</div>
-			<!--end:Menu item-->
-			<!--begin:Menu item-->
+			
 			<div class="menu-item">
-				<!--begin:Menu link-->
 				<a class="menu-link" href="#">
 					<span class="menu-icon">{!! getSvgIcon('duotune/general/gen002.svg', 'svg-icon svg-icon-2') !!}</span>
 					<span class="menu-title">Components</span>
 				</a>
-				<!--end:Menu link-->
 			</div>
-			<!--end:Menu item-->
-			<!--begin:Menu item-->
+
 			<div class="menu-item">
-				<!--begin:Menu link-->
 				<a class="menu-link" href="#">
 					<span class="menu-icon">{!! getSvgIcon('duotune/abstract/abs027.svg', 'svg-icon svg-icon-2') !!}</span>
 					<span class="menu-title">Documentation</span>
 				</a>
-				<!--end:Menu link-->
 			</div>
-			<!--end:Menu item-->
-			<!--begin:Menu item-->
+
 			<div class="menu-item">
-				<!--begin:Menu link-->
 				<a class="menu-link" href="#">
 					<span class="menu-icon">{!! getSvgIcon('duotune/coding/cod003.svg', 'svg-icon svg-icon-2') !!}</span>
 					<span class="menu-title">Changelog</span>
 				</a>
-				<!--end:Menu link-->
-			</div>
-			<!--end:Menu item-->
+			</div> --}}
+
 		</div>
 		<!--end::Menu-->
 	</div>
