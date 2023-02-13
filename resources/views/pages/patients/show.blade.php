@@ -18,20 +18,22 @@
             <div class="d-flex justify-between">
               <div class="col text-start">
                 <a href="{{ route('patients.index') }}" class="text-sm">
-                  <i class="fa-solid fa-arrow-left"></i>
+                  {!! getSvgIcon('duotune/arrows/arr063.svg', 'svg-icon svg-icon-2') !!}
                 </a>
               </div>
               <div class="col"></div>
               <div class="col text-end">
                 @can('patient_edit')
                 <a href="{{ route('patients.edit', $patient->id) }}" class="text-sm">
-                  <i class="fas fa-edit"></i>
+                  {!! getSvgIcon('duotune/general/gen055.svg', 'svg-icon svg-icon-2') !!}
                 </a>
                 @endcan
               </div>
             </div>
             <div class="text-center mb-3">
-              <img src="{{ asset('images/' . $patient->image) }}" class="" width="40%">
+              <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
+                <img src="{{ asset('storage/image/' . $patient->image) }}" class="" width="40%">
+              </div>
             </div>
             
             <div class="row text-center">
@@ -117,29 +119,31 @@
       <div class="card-body d-flex flex-column justify-content-between mt-9 bgi-no-repeat bgi-size-cover bgi-position-x-center pb-0">
         <!--begin::Wrapper-->
         <div class="mb-10">
-          <ul class="nav nav-pills mb- justify-content-center" id="pills-tab" role="tablist">
-            <li class="nav-item" role="presentation">
-              <button class="btn btn-success btn-sm" id="pills-medical-tab" data-bs-toggle="pill" data-bs-target="#pills-medical" type="button" role="tab" aria-controls="pills-medical" aria-selected="true">Medical History</button>
+          <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" data-bs-toggle="tab" href="#pills-medical-tab">Medical History</a>
             </li>
-            <li class="nav-item" role="presentation">
-              <button class="btn btn-success btn-sm" id="pills-medications-tab" data-bs-toggle="pill" data-bs-target="#pills-medications" type="button" role="tab" aria-controls="pills-medications" aria-selected="false">Medications</button>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#pills-medications-tab">Medications</a>
             </li>
-            <li class="nav-item" role="presentation">
-              <button class="btn btn-success btn-sm" id="pills-appointments-tab" data-bs-toggle="pill" data-bs-target="#pills-appointments" type="button" role="tab" aria-controls="pills-appointments" aria-selected="false">Appointments</button>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#pills-appointments-tab">Appointments</a>
             </li>
           </ul>
+
           <div class="separator my-4"></div>
-          <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-medical" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-              <a href="http://" class="text-success">This is medical history</a>
+
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="pills-medical-tab" role="tabpanel">
+              This is medical history
             </div>
-            <div class="tab-pane fade" id="pills-medications" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
+            <div class="tab-pane fade" id="pills-medications-tab" role="tabpanel">
               This is medications
             </div>
-            <div class="tab-pane fade" id="pills-appointments" role="tabpanel" aria-labelledby="pills-disabled-tab" tabindex="0">
+            <div class="tab-pane fade" id="pills-appointments-tab" role="tabpanel">
               This is appointments
             </div>
-          </div>          
+          </div>
         </div>
         <!--end::Wrapper-->
       </div>

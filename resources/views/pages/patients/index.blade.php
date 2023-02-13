@@ -12,9 +12,9 @@
 <div class="card">
   <div class="card-body">
     <div class="table-responsive">
-      <table class="table table-bordered table-rounded table-striped">
+      <table id="kt_datatable" class="table table-striped gy-3 gs-3 align-middle">
         <thead>
-          <tr>
+          <tr class="fw-bold fs-6 text-gray-800 border-bottom">
             <th scope="col" class="text-center">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Breed</th>
@@ -47,6 +47,13 @@
 
 @endsection
 
+@section('scripts')
+  <script src="{{ asset('assets/js/pages/crud/ktdatatable/base/data-local.js') }}"></script>
+  <script>
+    $("#kt_datatable").DataTable();
+  </script>
+
+@endsection
 
 
 
