@@ -12,10 +12,9 @@
     <meta property="og:locale" content="en_US"/>
     <meta property="og:type" content="article"/>
     <meta property="og:title" content=""/>
-    <link rel="icon" href="{{ asset('assets/img/myinnovet-icon.ico') }}">
     <link rel="canonical" href=""/>
 
-    {{-- {!! includeFavicon() !!} --}}
+    {!! includeFavicon() !!}
 
     <!--begin::Fonts-->
     {!! includeFonts() !!}
