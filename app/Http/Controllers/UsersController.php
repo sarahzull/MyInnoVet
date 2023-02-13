@@ -12,7 +12,7 @@ class UsersController extends Controller
     {
         $users = User::all();
 
-        return view('settings.users.index', compact('users'));
+        return view('pages.settings.users.index', compact('users'));
     }
 
     public function create()
@@ -41,7 +41,7 @@ class UsersController extends Controller
         $roles = Role::pluck('name', 'id');
         $user->load('roles');
 
-        return view('settings.users.edit', compact('roles', 'user'));
+        return view('pages.settings.users.edit', compact('roles', 'user'));
     }
 
     public function update(Request $request, $id)

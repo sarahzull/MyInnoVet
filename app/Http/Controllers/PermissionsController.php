@@ -15,7 +15,7 @@ class PermissionsController extends Controller
     public function index()
     {
         $permissions = Permission::all();
-        return view('settings.permissions.index', compact('permissions'));
+        return view('pages.settings.permissions.index', compact('permissions'));
     }
 
     /**
@@ -25,7 +25,7 @@ class PermissionsController extends Controller
      */
     public function create()
     {
-        return view('settings.permissions.create');
+        return view('pages.settings.permissions.create');
     }
 
     /**
@@ -62,7 +62,7 @@ class PermissionsController extends Controller
     public function edit($id)
     {
         $permission = Permission::findById($id);
-        return view('settings.permissions.edit', compact('permission'));
+        return view('pages.settings.permissions.edit', compact('permission'));
     }
 
     /**

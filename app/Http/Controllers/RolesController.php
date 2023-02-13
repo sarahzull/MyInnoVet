@@ -14,13 +14,13 @@ class RolesController extends Controller
         // $roles = Role::all();
         $roles = Role::with(['permissions'])->get();
 
-        return view('settings.roles.index', compact('roles'));
+        return view('pages.settings.roles.index', compact('roles'));
     }
 
     public function create()
     {
         $permissions = Permission::pluck('name', 'id');
-        return view('settings.roles.create', compact('permissions'));
+        return view('pages.settings.roles.create', compact('permissions'));
     }
 
     public function store(Request $request)
@@ -53,7 +53,7 @@ class RolesController extends Controller
 
         $role->load('permissions');
 
-        return view('settings.roles.edit', compact('permissions', 'role'));
+        return view('pages.settings.roles.edit', compact('permissions', 'role'));
     }
 
     public function update(Request $request, $id)
