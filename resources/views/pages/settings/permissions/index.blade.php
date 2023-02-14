@@ -38,7 +38,13 @@
                       <a href="#" class="menu-link px-3">View</a>
                     </div>
                     <div class="menu-item px-3">
-                      <a href="#" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Delete</a>
+                      <form action="{{ route('permissions.destroy', $permission->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm text-secondary text-decoration-none">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -60,8 +66,8 @@
         "bSort": false,
         language: {
           paginate: {
-            next: '&#8594;', // or '→'
-            previous: '&#8592;' // or '←'   
+            previous: '<i class="previous"></i>', // or '←'
+            next: '<i class="next"></i>' // or '→'   
           }
         }
       });

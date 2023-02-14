@@ -1,111 +1,200 @@
-@extends('layouts.app')
+@extends('layout.master-page')
+@section('title', 'Edit Patient')
+@section('breadcrumb', 'Patients')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Edit Patient') }}</div>
 
-                <div class="card-body">
-                    {{-- @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif --}}
+<div class="card">
+  <div class="card-body">
+    <form
+      action="{{ route('patients.update', $patient->id) }}"
+      method="POST"
+      enctype="multipart/form-data">
+      @csrf
+      @method('PATCH')
 
-                  <form
-                    action="{{ route('patients.update', $patient->id) }}"
-                    method="POST"
-                    enctype="multipart/form-data">
-                    @csrf
-                    @method('PATCH')
-
-                    <div class="mb-3">
-                      <label for="owner" class="form-label">Owner</label>
-                      <select class="form-select" aria-label="owner-select" name="owner_id">
-                        <option selected>Select owner</option>
-                        <option value="{{ $patient->owner->id ?? ''  }}" selected>{{ $patient->owner->name ?? '' }}</option>
-                        @foreach ($owners as $own)
-                          <option value="{{ $own->id }}">{{ $own->name }}</option>
-                        @endforeach
-                      </select>
-                    </div>
-
-                    <div class="mb-3">
-                      <label for="name" class="form-label">Name</label>
-                      <input type="text" class="form-control" id="name" name="name" value="{{ $patient->name ?? '' }}">
-                    </div>
-
-                    <div class="mb-3">
-                      <label for="name" class="form-label">Date of Birth</label>
-                      <input type="date" class="form-control" id="dob" name="dob">
-                    </div>
-
-                    <div class="mb-3">
-                      <label for="breed" class="form-label">Breed</label>
-                      <input type="text" class="form-control" id="breed" name="breed" value="{{ $patient->breed ?? '' }}">
-                    </div>
-
-                    <div class="mb-3">
-                      <label for="gender" class="form-label">Gender</label>
-                      <select class="form-select" aria-label="gender-select" id="gender" name="gender">
-                        <option value="Male" @if ($patient->gender == "Male") {{ 'selected' }} @endif>Male</option>
-                        <option value="Female" @if ($patient->gender == "Female") {{ 'selected' }} @endif>Female</option>
-                      </select>
-                      @if($errors->has('gender'))
-                          <div class="invalid-feedback">
-                              {{ $errors->first('gender') }}
-                          </div>
-                      @endif
-                    </div>
-
-                    <div class="mb-3">
-                      <label for="species" class="form-label">Species</label>
-                      <select class="form-select" aria-label="species-select" name="species">
-                        <option selected>Choose species</option>
-                        @foreach ($species as $sp)
-                          <option value="{{ $sp->id }}">{{ $sp->name }}</option>
-                        @endforeach
-                      </select>
-                    </div>
-
-                    <div class="mb-3">
-                      <label for="height" class="form-label">Height (cm)</label>
-                      <input type="number" class="form-control" id="height" name="height" min="1.0" value="{{ $patient->height ?? '' }}">
-                    </div>
-
-                    <div class="mb-3">
-                      <label for="weight" class="form-label">Weight (kg)</label>
-                      <input type="number" class="form-control" id="weight" name="weight" value="{{ $patient->weight ?? '' }}">
-                    </div>
-
-                    <div class="mb-3">
-                      <label for="chronic_disease" class="form-label">Chronic Disease</label>
-                      <input type="text" class="form-control" id="chronic_disease" name="chronic_disease" value="{{ $patient->chronic_disease ?? '' }}">
-                    </div>
-
-                    <div class="mb-3">
-                      <label for="image" class="form-label">Image</label>
-                      <input class="form-control mb-2" type="file" id="image" name="image" value="{{ $patient->image }}">
-                      <img src="{{ asset('images/' . $patient->image) }}" alt="{{ $patient->name }}" width="20%">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </form>
+      <div class="mb-6">
+        <div class="row">
+          <label class="col-lg-4 col-form-label required fw-semibold fs-6">Image</label>
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col-lg-12 fv-row">
+                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/avatars/blank.svg')">
+                  <div class="image-input-wrapper w-125px h-125px" style="background-image: url('{{ asset('storage/image/' . $patient->image) }}')">
+                  </div>
+                  <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                    <i class="bi bi-pencil-fill fs-7"></i>
+                    <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                    <input type="hidden" name="avatar_remove" />
+                  </label>
+                  <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+                    <i class="bi bi-x fs-2"></i>
+                  </span>
+                  <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                    <i class="bi bi-x fs-2"></i>
+                  </span>
                 </div>
+                <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="row">
+          <label class="col-lg-4 col-form-label required fw-semibold fs-6">Owner</label>
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col-lg-12 fv-row">
+                <select name="patient" id="patient" aria-label="Select owner" data-control="select2" data-placeholder="Select a owner" class="form-select form-select-solid form-select-lg fw-semibold">
+                  @foreach ($owners as $own)
+                    <option value="{{ $own->id }}" {{ (old('owners') ? old('owners') : $patient->owner->id ?? '') == $own->id ? 'selected' : '' }}>{{ $own->name }}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="row">
+          <label class="col-lg-4 col-form-label required fw-semibold fs-6">Patient's Name</label>
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col-lg-12 fv-row">
+                <input type="text" name="name" id="name" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" value="{{ $patient->name ?? '' }}" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="row">
+          <label class="col-lg-4 col-form-label fw-semibold fs-6">Date of Birth</label>
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col-lg-12 fv-row">
+                <input type="date" name="dob" id="dob" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="row">
+          <label class="col-lg-4 col-form-label fw-semibold fs-6">Breed</label>
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col-lg-12 fv-row">
+                <input type="text" name="breed" id="breed" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" value="{{ $patient->breed ?? '' }}"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="row">
+          <label class="col-lg-4 col-form-label fw-semibold fs-6">Gender</label>
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col-lg-12 fv-row">
+                <select name="gender" id="gender" aria-label="Select gender" data-control="select2" data-placeholder="Select a gender" class="form-select form-select-solid form-select-lg fw-semibold">
+                  <option value="Male" @if ($patient->gender == "Male") {{ 'selected' }} @endif>Male</option>
+                  <option value="Female" @if ($patient->gender == "Female") {{ 'selected' }} @endif>Female</option>
+                </select>
+                @if($errors->has('gender'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('gender') }}
+                    </div>
+                @endif
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="row">
+          <label class="col-lg-4 col-form-label fw-semibold fs-6">Species</label>
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col-lg-12 fv-row">
+                <select name="species" id="species" aria-label="species-select" data-control="select2" data-placeholder="Select a species" class="form-select form-select-solid form-select-lg fw-semibold">
+                  @foreach ($species as $sp)
+                    <option value="{{ $sp->id }}" {{ (old('species') ? old('species') : $patient->species->id ?? '') == $sp->id ? 'selected' : '' }}>{{ $sp->name }}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="row">
+          <label class="col-lg-4 col-form-label fw-semibold fs-6">Height (cm)</label>
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col-lg-12 fv-row">
+                <input type="number" name="height" id="height" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" value="{{ $patient->height ?? '' }}"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="row">
+          <label class="col-lg-4 col-form-label fw-semibold fs-6">Weight (kg)</label>
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col-lg-12 fv-row">
+                <input type="number" name="weight" id="weight" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" value="{{ $patient->weight ?? '' }}"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="row">
+          <label class="col-lg-4 col-form-label fw-semibold fs-6">Chronic Disease</label>
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col-lg-12 fv-row">
+                <input type="text" name="chronic_disease" id="chronic_disease" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" value="{{ $patient->chronic_disease ?? '' }}"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+      </div>
+    </form>
+  </div>
 </div>
+
 @endsection
 
 @section('scripts')
-<script>
-  flatpickr('#dob', {
-    defaultDate: '{{ $patient->dob }}',
-    altInput: true,
-    altFormat: 'j F Y'
-  });
-</script>
+  <script>
+    KTUtil.onDOMContentLoaded(function () {
+      flatpickr('#dob', {
+        defaultDate: '{{ $patient->dob }}',
+        altInput: true,
+        altFormat: 'j F Y'
+      });
+    })
+  </script>
 @endsection
+
+
+
+

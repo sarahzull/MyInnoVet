@@ -53,8 +53,8 @@
         "bSort": false,
         language: {
           paginate: {
-            next: '&#8594;', // or '→'
-            previous: '&#8592;' // or '←'   
+            previous: '<i class="previous"></i>', // or '←'
+            next: '<i class="next"></i>' // or '→'   
           }
         }
       });
