@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\PatientsController;
 use App\Http\Controllers\PermissionsController;
@@ -49,6 +50,14 @@ Route::prefix('/patients')->middleware(['auth'])->group(function () {
 Route::prefix('/clients')->middleware(['auth'])->group(function () {
     Route::get('/', [ClientsController::class, 'index'])->name('clients.index');
     Route::get('/create', [ClientsController::class, 'create'])->name('clients.create');
+    // Route::post('/', [PatientsController::class, 'store'])->name('patients.store');
+    // Route::get('/{id}', [PatientsController::class, 'show'])->name('patients.show');
+    // Route::get('/edit/{id}', [PatientsController::class, 'edit'])->name('patients.edit');
+});
+
+Route::prefix('/calendar')->middleware(['auth'])->group(function () {
+    Route::get('/', [CalendarController::class, 'index'])->name('calendar.index');
+    // Route::get('/create', [ClientsController::class, 'create'])->name('clients.create');
     // Route::post('/', [PatientsController::class, 'store'])->name('patients.store');
     // Route::get('/{id}', [PatientsController::class, 'show'])->name('patients.show');
     // Route::get('/edit/{id}', [PatientsController::class, 'edit'])->name('patients.edit');
