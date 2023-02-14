@@ -1,34 +1,39 @@
-@extends('layouts.app')
+@extends('layout.master-page')
+@section('title', 'Create Permission')
+@section('breadcrumb', 'Permissions')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Create Permission') }}</div>
 
-                <div class="card-body">
-                    {{-- @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif --}}
+<div class="card">
+  <div class="card-body">
+    <form
+        action="{{ route('permissions.store') }}"
+        method="POST">
+        @csrf
 
-                  <form
-                    action="{{ route('permissions.store') }}"
-                    method="POST">
-                    @csrf
-
-                    <div class="mb-3">
-                      <label for="name" class="form-label">Name</label>
-                      <input type="text" class="form-control" id="name" name="name">
-                    </div>
-
-                    <button type="submit" class="btn btn-success">Save</button>
-                  </form>
-                </div>
+      <div class="mb-6">
+        <div class="row">
+          <label class="col-lg-4 col-form-label required fw-semibold fs-6">Name</label>
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col-lg-12 fv-row">
+                <input type="text" name="name" id="name" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"/>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
+      </div>
+
+      <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-success">Save Changes</button>
+      </div>
+    </form>
+  </div>
 </div>
+
 @endsection
+
+
+
+
+
