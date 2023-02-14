@@ -12,7 +12,7 @@
 <div class="card">
   <div class="card-body">
     <div class="table-responsive">
-      <table id="permission_datatable" class="table table-bordered gy-3 gs-3 align-middle">
+      <table id="kt_datatable" class="table table-bordered gy-3 gs-3 align-middle">
         <thead>
           <tr class="text-start text-gray-700 fw-bold fs-7 text-uppercase bg-light">
             <th scope="col" class="text-center w-100px">ID</th>
@@ -23,8 +23,8 @@
         <tbody>
           @foreach ($permissions as $permission)
             <tr>
-              <th scope="row" class="text-center">{{ $permission->id }}</th>
-              <td>{{ $permission->name }}</td>
+              <th scope="row" class="text-center">{{ $permission->id ?? '' }}</th>
+              <td>{{ $permission->name ?? '' }}</td>
               <td class="text-center">
                 <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
                   <span class="svg-icon svg-icon-5 m-0">
@@ -42,18 +42,6 @@
                     </div>
                   </div>
                 </div>
-                {{-- <div class="d-flex justify-content-center p-0">
-                  <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-sm text-secondary text-decoration-none ml-2" href="">
-                    <i class="fa-solid fa-pen"></i>
-                  </a>
-                  <form action="{{ route('permissions.destroy', $permission->id) }}" method="POST">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="btn btn-sm text-secondary text-decoration-none">
-                          <i class="fa-solid fa-trash"></i>
-                      </button>
-                  </form>
-                </div> --}}
               </td>
             </tr>
             @endforeach
@@ -68,7 +56,15 @@
 @section('scripts')
   <script>
     KTUtil.onDOMContentLoaded(function () {
-      $("#permission_datatable").DataTable();
+      $("#kt_datatable").DataTable({
+        "bSort": false,
+        language: {
+          paginate: {
+            next: '&#8594;', // or '→'
+            previous: '&#8592;' // or '←'   
+          }
+        }
+      });
     })
   </script>
 @endsection

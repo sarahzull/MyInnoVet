@@ -38,7 +38,6 @@
             </td>
           </tr>
           @endforeach
-          
         </tbody>
       </table>
     </div>
@@ -48,10 +47,10 @@
 @endsection
 
 @section('scripts')
-  
   <script>
     KTUtil.onDOMContentLoaded(function () {
       $("#kt_datatable").DataTable({
+        "bSort": false,
         language: {
           paginate: {
             next: '&#8594;', // or '→'

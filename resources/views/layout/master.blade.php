@@ -37,8 +37,8 @@
         {!! sprintf('<link rel="stylesheet" href="%s">', asset($path)) !!}
     @endforeach
     <!--end::Custom Stylesheets-->
-
-    <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css"/>
+    <script src="{{ asset('assets/plugins/global/plugins.bundle.css') }}"></script>
+    <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css"/>
 </head>
 <!--end::Head-->
 
@@ -142,9 +142,10 @@
      };
 </script>
 
-<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
-<script src="assets/plugins/global/plugins.bundle.js"></script>
-<script src="assets/js/scripts.bundle.js"></script>
+
+<script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+<script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
+<script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
 @yield('scripts')
 
 @foreach(getGlobalAssets() as $path)
