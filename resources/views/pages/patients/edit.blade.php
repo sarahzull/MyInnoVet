@@ -6,6 +6,12 @@
 
 <div class="card">
   <div class="card-body">
+    <div class="d-grid gap-2 d-md-block mb-4">
+      <a href="{{ route('patients.index') }}" class="text-sm">
+        {!! getSvgIcon('duotune/arrows/arr063.svg', 'svg-icon svg-icon-2') !!}
+      </a>
+    </div>
+
     <form
       action="{{ route('patients.update', $patient->id) }}"
       method="POST"
@@ -19,7 +25,7 @@
           <div class="col-lg-8">
             <div class="row">
               <div class="col-lg-12 fv-row">
-                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/avatars/blank.svg')">
+                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('{{ asset('assets/media/svg/avatars/blank.svg')}}')">
                   <div class="image-input-wrapper w-125px h-125px" style="background-image: url('{{ asset('storage/image/' . $patient->image) }}')">
                   </div>
                   <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
@@ -186,7 +192,7 @@
 @section('scripts')
   <script>
     KTUtil.onDOMContentLoaded(function () {
-      flatpickr('#dob', {
+      $("#dob").flatpickr({
         defaultDate: '{{ $patient->dob }}',
         altInput: true,
         altFormat: 'j F Y'

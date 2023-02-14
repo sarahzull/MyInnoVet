@@ -15,10 +15,10 @@
       <table id="kt_datatable" class="table table-bordered gy-3 gs-3 align-middle">
         <thead>
           <tr class="text-start text-gray-700 fw-bold fs-7 text-uppercase bg-light">
-            <th scope="col" class="text-center w-100px">ID</th>
+            <th scope="col" class="text-center w-70px">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
-            <th scope="col" class="text-center w-150px">Action</th>
+            <th scope="col" class="text-center w-100px">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -36,11 +36,11 @@
                   </span>
                 </a>
                   <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
-                    <div class="menu-item px-3">
+                    {{-- <div class="menu-item px-3">
                       <a href="#" class="menu-link px-3">View</a>
-                    </div>
+                    </div> --}}
                     <div class="menu-item px-3">
-                      <a href="#" class="menu-link px-3">Edit</a>
+                      <a href="{{ route('users.edit', $user->id) }}" class="menu-link px-3">Edit</a>
                     </div>
                     <div class="menu-item px-3">
                       <a href="#" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Delete</a>
