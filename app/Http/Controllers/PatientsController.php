@@ -32,7 +32,7 @@ class PatientsController extends Controller
         ]);
 
         $newImageName = time() . '-' . $request->name . '.' .$request->image->extension();
-        $request->image->move(public_path('images'), $newImageName);
+        $request->image->move(public_path('storage'), $newImageName);
 
         Patient::create([
             'name' => $request->name,
