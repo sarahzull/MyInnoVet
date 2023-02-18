@@ -17,7 +17,7 @@
           <tr class="text-start text-gray-700 fw-bold fs-7 text-uppercase bg-light">
             <th scope="col" class="text-center w-70px">ID</th>
             <th scope="col">Name</th>
-            <th scope="col" class="text-center w-100px">Action</th>
+            <th scope="col" class="text-center w-150px">Action</th>
           </tr>
         </thead>
         <tbody>

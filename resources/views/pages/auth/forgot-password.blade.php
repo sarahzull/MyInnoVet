@@ -1,5 +1,6 @@
-<x-auth-layout>
+@extends('layout._auth-login')
 
+@section('page')
     <!--begin::Form-->
     <form class="form w-100" novalidate="novalidate" id="kt_password_reset_form" data-kt-redirect-url="/reset-password" action="#">
         @csrf
@@ -38,4 +39,4 @@
     </form>
     <!--end::Form-->
 
-</x-auth-layout>
+@endsection

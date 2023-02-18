@@ -39,7 +39,7 @@ class PermissionsController extends Controller
         $validated = $request->validate(['name' => ['required', 'min:3']]);
         Permission::create(($validated));
 
-        return redirect()->route('permissions.index');
+        return redirect()->route('permissions.index')->with('message', 'Permission created successfully');
     }
 
     /**
@@ -78,7 +78,7 @@ class PermissionsController extends Controller
             'name' => $request->name,
         ]);
 
-        return redirect()->route('permissions.index');
+        return redirect()->route('permissions.index')->with('message', 'Permission updated successfully');
     }
 
     /**
