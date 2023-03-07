@@ -1,9 +1,9 @@
 @extends('layout.master')
-@section('title', 'Permission List')
-@section('breadcrumb', 'Permissions')
+@section('title', 'User List')
+@section('breadcrumb', 'Users')
 @section('header-button')
   @can('patient_create')
-    <a href="{{ route('permissions.create')}}" class="btn btn-sm fw-bold btn-success">Add Permissions</a>
+    <a href="#" class="btn fw-bold btn-success">Add User</a>
   @endcan
 @endsection
 
@@ -18,7 +18,7 @@
             <th scope="col" class="text-center w-70px">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
-            <th scope="col" class="text-center w-100px">Action</th>
+            <th scope="col" class="text-center w-150px">Action</th>
           </tr>
         </thead>
         <tbody>

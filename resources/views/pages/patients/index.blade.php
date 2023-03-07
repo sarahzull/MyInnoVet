@@ -20,7 +20,7 @@
             <th scope="col">Breed</th>
             <th scope="col">Gender</th>
             <th scope="col">Species</th>
-            <th scope="col" class="text-center w-100px">Action</th>
+            <th scope="col" class="text-center w-150px">Action</th>
           </tr>
         </thead>
         <tbody>

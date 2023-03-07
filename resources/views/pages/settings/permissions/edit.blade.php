@@ -18,7 +18,7 @@
           <div class="col-lg-8">
             <div class="row">
               <div class="col-lg-12 fv-row">
-                <input type="text" name="name" id="name" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" value="{{ $permission->name }}"/>
+                <input type="text" name="name" id="name" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" value="{{ $permission->name ?? '' }}"/>
               </div>
             </div>
           </div>
@@ -29,6 +29,22 @@
         <button type="submit" class="btn btn-success">Save Changes</button>
       </div>
     </form>
+
+    @if (Session::has('success'))
+    <script>
+      KTUtil.onDOMContentLoaded(function () {
+        .Swal.fire("Message", "{{ Session::get('success') }}", "success", {
+          button: true,
+          button: "OK",
+          timer: 3000,
+        })
+        .then(function() {
+          window.location = "{{ route('permissions.index') }}";
+        })
+      });
+    </script>
+    @endif
+
   </div>
 </div>
 

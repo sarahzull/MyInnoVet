@@ -28,6 +28,22 @@
         <button type="submit" class="btn btn-success">Save</button>
       </div>
     </form>
+
+    @if (Session::has('success'))
+    <script>
+      KTUtil.onDOMContentLoaded(function () {
+        .Swal.fire("Message", "{{ Session::get('success') }}", "success", {
+          button: true,
+          button: "OK",
+          timer: 3000,
+        })
+        .then(function() {
+          window.location = "{{ route('permissions.index') }}";
+        })
+      });
+    </script>
+    @endif
+    
   </div>
 </div>
 

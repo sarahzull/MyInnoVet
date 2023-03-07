@@ -18,7 +18,7 @@
             <th scope="col" class="text-center w-70px">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Role</th>
-            <th scope="col" class="text-center w-100px">Action</th>
+            <th scope="col" class="text-center w-150px">Action</th>
           </tr>
         </thead>
         <tbody>
