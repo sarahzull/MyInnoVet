@@ -142,7 +142,7 @@
 			@can('staff_access')
 			<div class="menu-item">
 				<!--begin:Menu link-->
-				<a class="menu-link" href="#">
+				<a class="menu-link" href="{{ route('staffs.index') }}">
 					<span class="menu-icon"><i class="fa-solid fa-people-group fs-3"></i></span>
 					<span class="menu-title">Staff</span>
 				</a>
@@ -154,7 +154,10 @@
 			<div class="separator my-4"></div>
 
 			<div class="menu-item">
-				<a class="menu-link" href="#">
+				<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+					@csrf
+				</form>
+				<a class="menu-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
 					<span class="menu-icon">{!! getSvgIcon('duotune/arrows/arr076.svg', 'svg-icon svg-icon-2') !!}</span>
 					<span class="menu-title">Logout</span>
 				</a>

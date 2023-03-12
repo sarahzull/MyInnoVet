@@ -7,6 +7,7 @@ use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\StaffsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,6 +51,13 @@ Route::prefix('/patients')->middleware(['auth'])->group(function () {
 Route::prefix('/clients')->middleware(['auth'])->group(function () {
     Route::get('/', [ClientsController::class, 'index'])->name('clients.index');
     Route::get('/create', [ClientsController::class, 'create'])->name('clients.create');
+    // Route::post('/', [PatientsController::class, 'store'])->name('patients.store');
+    // Route::get('/{id}', [PatientsController::class, 'show'])->name('patients.show');
+    // Route::get('/edit/{id}', [PatientsController::class, 'edit'])->name('patients.edit');
+});
+
+Route::prefix('/staffs')->middleware(['auth'])->group(function () {
+    Route::get('/', [StaffsController::class, 'index'])->name('staffs.index');
     // Route::post('/', [PatientsController::class, 'store'])->name('patients.store');
     // Route::get('/{id}', [PatientsController::class, 'show'])->name('patients.show');
     // Route::get('/edit/{id}', [PatientsController::class, 'edit'])->name('patients.edit');
