@@ -36,20 +36,29 @@
                   </span>
                 </a>
                   <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
-                    {{-- <div class="menu-item px-3">
-                      <a href="#" class="menu-link px-3">View</a>
-                    </div> --}}
+                    @can('user_show')
+                    <div class="menu-item px-3">
+                      <a href="{{ route('users.show', $user->id) }}" class="menu-link px-3">View</a>
+                    </div>
+                    @endcan
+
+                    @can('user_edit')
                     <div class="menu-item px-3">
                       <a href="{{ route('users.edit', $user->id) }}" class="menu-link px-3">Edit</a>
                     </div>
+                    @endcan
+          
+                    @can('user_delete')
                     <div class="menu-item px-3">
-                      <a href="#" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Delete</a>
-                      {{-- <form action="{{ route('roles.destroy', $role->id) }}" method="POST">
+                      <form action="{{ route('clients.destroy', $user->id) }}" onsubmit="return confirm('Are you sure want to delete?');" method="POST">
                         @csrf
                         @method('DELETE')
-                        <a href="#" type="submit" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Delete</a>
-                      </form> --}}
+                        <button type="submit" class="btn btn-sm menu-link text-primary">
+                            Delete
+                        </button>
+                      </form>
                     </div>
+                    @endcan
                   </div>
                 </div>
               </td>

@@ -101,11 +101,12 @@ Route::prefix('/settings')->middleware(['auth'])->group(function () {
     //User
     Route::prefix('/users')->middleware(['can:user_access'])->group(function () {
         Route::get('/', [UsersController::class, 'index'])->name('users.index');
-        // Route::get('/create', [UsersController::class, 'create'])->name('permissions.create');
-        // Route::post('/', [UsersController::class, 'store'])->name('permissions.store');
+        Route::get('/create', [UsersController::class, 'create'])->name('users.create');
+        Route::post('/', [UsersController::class, 'store'])->name('users.store');
+        Route::get('/{id}', [UsersController::class, 'show'])->name('users.show');
         Route::get('/edit/{id}', [UsersController::class, 'edit'])->name('users.edit');
         Route::patch('/{id}', [UsersController::class, 'update'])->name('users.update');
-        // Route::delete('/{id}', [UsersController::class, 'destroy'])->name('permissions.destroy');
+        Route::delete('/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
     });
 });
 

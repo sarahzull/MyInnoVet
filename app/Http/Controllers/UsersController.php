@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
 
 class UsersController extends Controller
 {
@@ -17,41 +18,57 @@ class UsersController extends Controller
 
     public function create()
     {
-        // $permissions = Permission::pluck('name', 'id');
-        // return view('settings.roles.create', compact('permissions'));
+        return view('pages.settings.users.create');
     }
 
     public function store(Request $request)
     {
 
-        // $role = Role::create($request->all());
-        // $role->permissions()->sync($request->input('permissions', []));
-
-        // return redirect()->route('roles.index');
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->phone_no = $request->input('phone_no');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->password);
+        $user->dob = $request->input('dob');
+        $user->street_address = $request->input('street_address');
+        $user->city = $request->input('city');
+        $user->state = $request->input('state');
+        $user->postcode = $request->input('postcode');
+        $user->assignRole('user');
+        $user->save();
+    
+        return redirect()->route('users.index');
     }
 
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $birthDate = Carbon::parse($user->dob)->format('d F Y');
+        $joinedDate = Carbon::parse($user->created_at)->format('d F Y');
+
+        return view('pages.settings.users.show', compact('user', 'birthDate', 'joinedDate'));
     }
 
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-        $roles = Role::pluck('name', 'id');
-        $user->load('roles');
+        $user = User::find($id);
 
-        return view('pages.settings.users.edit', compact('roles', 'user'));
+        return view('pages.settings.users.edit', compact('user'));
     }
 
     public function update(Request $request, $id)
     {
-        // $user->update($request->all());
-        // $user->roles()->sync($request->input('roles', []));
-        
-        $user = User::findOrFail($id);
-        $user->update($request->all());
-        $user->roles()->sync($request->input('roles', []));
+        $user = User::find($id);
+        $user->name = $request->input('name');
+        $user->phone_no = $request->input('phone_no');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->password);
+        $user->dob = $request->input('dob');
+        $user->street_address = $request->input('street_address');
+        $user->city = $request->input('city');
+        $user->state = $request->input('state');
+        $user->postcode = $request->input('postcode');
+        $user->update();
 
         return redirect()->route('users.index');
     }
@@ -59,7 +76,6 @@ class UsersController extends Controller
     public function destroy($id)
     {
         User::destroy($id);
-
-        return redirect(route('users.index'));
+        return redirect()->route('users.index');
     }
 }

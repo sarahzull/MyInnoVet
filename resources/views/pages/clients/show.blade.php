@@ -1,5 +1,5 @@
 @extends('layout.master-page')
-@section('title', 'Create Client')
+@section('title', 'View Client')
 @section('breadcrumb', 'Clients')
 
 @section('content')
