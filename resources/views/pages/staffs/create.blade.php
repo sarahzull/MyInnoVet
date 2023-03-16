@@ -1,6 +1,6 @@
 @extends('layout.master-page')
-@section('title', 'Create Client')
-@section('breadcrumb', 'Clients')
+@section('title', 'Create Staff')
+@section('breadcrumb', 'Staffs')
 
 @section('styles')
 <style>
@@ -32,7 +32,7 @@
     </div>
     
     <form
-      action="{{ route('clients.store') }}"
+      action="{{ route('staffs.store') }}"
       method="POST">
       @csrf
 

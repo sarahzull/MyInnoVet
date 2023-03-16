@@ -1,13 +1,13 @@
 @extends('layout.master-page')
-@section('title', 'Create Client')
-@section('breadcrumb', 'Clients')
+@section('title', 'Create Staff')
+@section('breadcrumb', 'Staffs')
 
 @section('content')
 <div class="card">
   <div class="card-body">
     <div class="d-flex justify-between mb-4">
       <div class="col text-start">
-        <a class="text-sm" href="{{ route('clients.index') }}">
+        <a class="text-sm" href="{{ route('staffs.index') }}">
           {!! getSvgIcon('duotune/arrows/arr063.svg', 'svg-icon svg-icon-2') !!}
         </a>
       </div>
@@ -20,35 +20,35 @@
         <tbody>
           <tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
             <th class="border w-50">Name</th>
-            <td>{{ $client->name }}</td>
+            <td>{{ $staff->name }}</td>
           </tr>
           <tr class="fs-6 text-gray-800 border-bottom border-gray-200">
             <th class="border w-50">Phone Number</th>
-            <td>{{ $client->phone_no }}</td>
+            <td>{{ $staff->phone_no }}</td>
           </tr>
           <tr class="fs-6 text-gray-800 border-bottom border-gray-200">
             <th class="border w-50">Email</th>
-            <td>{{ $client->email }}</td>
+            <td>{{ $staff->email }}</td>
           </tr>
           <tr class="fs-6 text-gray-800 border-bottom border-gray-200">
             <th class="border w-50">Date of Birth</th>
-            <td>{{ $client->dob }}</td>
+            <td>{{ $staff->dob }}</td>
           </tr>
           <tr class="fs-6 text-gray-800 border-bottom border-gray-200">
             <th class="border w-50">Street Address</th>
-            <td>{{ $client->street_address }}</td>
+            <td>{{ $staff->street_address }}</td>
           </tr>
           <tr class="fs-6 text-gray-800 border-bottom border-gray-200">
             <th class="border w-50">City</th>
-            <td>{{ $client->city }}</td>
+            <td>{{ $staff->city }}</td>
           </tr>
           <tr class="fs-6 text-gray-800 border-bottom border-gray-200">
             <th class="border w-50">State</th>
-            <td>{{ $client->state }}</td>
+            <td>{{ $staff->state }}</td>
           </tr>
           <tr class="fs-6 text-gray-800 border-bottom border-gray-200">
             <th class="border w-50">Postcode</th>
-            <td>{{ $client->postcode }}</td>
+            <td>{{ $staff->postcode }}</td>
           </tr>
         </tbody>
       </table>

@@ -172,7 +172,7 @@
 @section('scripts')
 <script>
   KTUtil.onDOMContentLoaded(function() {
-    ('#dob').flatpickr({
+    $('#dob').flatpickr({
       altInput: true,
       altFormat: 'j F Y'
     });

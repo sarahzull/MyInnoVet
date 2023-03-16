@@ -39,8 +39,10 @@
     <!--end::Custom Stylesheets-->
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="{{ asset('assets/plugins/global/plugins.bundle.css') }}"></script>
-    <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}">
+    <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}"/>
+
+    @yield('styles')
 </head>
 <!--end::Head-->
 
@@ -147,7 +149,6 @@
 <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
 <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
 <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 @yield('scripts')
 

@@ -23,7 +23,7 @@
         <tbody>
           @foreach ($clients as $client)
             <tr>
-            <th scope="row" class="text-center">{{ $client->id }}</th>
+            <th scope="row" class="text-center w-30px">{{ $client->id }}</th>
             <td>{{ $client->name }}</td>
             <td class="text-center">
               <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
@@ -34,25 +34,25 @@
                 </span>
               </a>
               <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4 text-center" data-kt-menu="true">
-                {{-- @can('patient_view')
+                @can('client_show')
                 <div class="d-grid menu-item px-3">
                   <button class="btn btn-sm btn-block menu-link">
-                    <a href="{{ route('patients.show', $patient->id) }}" class="text-primary">View</a>
+                    <a href="{{ route('clients.show', $client->id) }}" class="text-primary">View</a>
                   </button>
                 </div>
-                @endcan --}}
+                @endcan
                 
-                {{-- @can('patient_edit')
+                @can('client_edit')
                 <div class="menu-item px-3">
                   <button class="btn btn-sm menu-link">
-                    <a href="{{ route('patients.edit', $patient->id) }}" class="text-primary">Edit</a>
+                    <a href="{{ route('clients.edit', $client->id) }}" class="text-primary">Edit</a>
                   </button>
                 </div>
-                @endcan --}}
+                @endcan
 
-                {{-- @can('patient_delete')
+                @can('patient_delete')
                 <div class="menu-item px-3">
-                  <form action="{{ route('patients.destroy', $patient->id) }}" onsubmit="return confirm('Are you sure want to delete?');" method="POST">
+                  <form action="{{ route('clients.destroy', $client->id) }}" onsubmit="return confirm('Are you sure want to delete?');" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-sm menu-link text-primary">
@@ -60,7 +60,7 @@
                     </button>
                   </form>
                 </div>
-                @endcan --}}
+                @endcan
               </div>
             </td>
           </tr>

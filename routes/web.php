@@ -38,6 +38,7 @@ Route::prefix('/patients')->middleware(['auth'])->group(function () {
     Route::get('/{id}', [PatientsController::class, 'show'])->name('patients.show');
     Route::get('/edit/{id}', [PatientsController::class, 'edit'])->name('patients.edit');
     Route::patch('/{id}', [PatientsController::class, 'update'])->name('patients.update');
+    Route::delete('/{id}', [PatientsController::class, 'destroy'])->name('patients.destroy');
 
     // Route::middleware('can:isAdmin')->group(function () {
     //     Route::get('/create', [StudentsController::class, 'create'])->name('students.create');
@@ -51,16 +52,21 @@ Route::prefix('/patients')->middleware(['auth'])->group(function () {
 Route::prefix('/clients')->middleware(['auth'])->group(function () {
     Route::get('/', [ClientsController::class, 'index'])->name('clients.index');
     Route::get('/create', [ClientsController::class, 'create'])->name('clients.create');
-    // Route::post('/', [PatientsController::class, 'store'])->name('patients.store');
-    // Route::get('/{id}', [PatientsController::class, 'show'])->name('patients.show');
-    // Route::get('/edit/{id}', [PatientsController::class, 'edit'])->name('patients.edit');
+    Route::post('/', [ClientsController::class, 'store'])->name('clients.store');
+    Route::get('/{id}', [ClientsController::class, 'show'])->name('clients.show');
+    Route::get('/edit/{id}', [ClientsController::class, 'edit'])->name('clients.edit');
+    Route::patch('/{id}', [ClientsController::class, 'update'])->name('clients.update');
+    Route::delete('/{id}', [ClientsController::class, 'destroy'])->name('clients.destroy');
 });
 
 Route::prefix('/staffs')->middleware(['auth'])->group(function () {
     Route::get('/', [StaffsController::class, 'index'])->name('staffs.index');
-    // Route::post('/', [PatientsController::class, 'store'])->name('patients.store');
-    // Route::get('/{id}', [PatientsController::class, 'show'])->name('patients.show');
-    // Route::get('/edit/{id}', [PatientsController::class, 'edit'])->name('patients.edit');
+    Route::get('/create', [StaffsController::class, 'create'])->name('staffs.create');
+    Route::post('/', [StaffsController::class, 'store'])->name('staffs.store');
+    Route::get('/{id}', [StaffsController::class, 'show'])->name('staffs.show');
+    Route::get('/edit/{id}', [StaffsController::class, 'edit'])->name('staffs.edit');
+    Route::patch('/{id}', [StaffsController::class, 'update'])->name('staffs.update');
+    Route::delete('/{id}', [StaffsController::class, 'destroy'])->name('staffs.destroy');
 });
 
 Route::prefix('/calendar')->middleware(['auth'])->group(function () {

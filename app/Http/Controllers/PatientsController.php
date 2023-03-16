@@ -34,7 +34,7 @@ class PatientsController extends Controller
         $newImageName = time() . '-' . $request->name . '.' .$request->image->extension();
         $request->image->move(public_path('storage'), $newImageName);
 
-        Patient::create([
+        $patient = Patient::create([
             'name' => $request->name,
             'dob' => $request->dob,
             'breed' => $request->breed,
@@ -48,7 +48,7 @@ class PatientsController extends Controller
             'created_by_id' => auth()->user()->id,
         ]);
 
-        $patient = Patient::create($request->all());
+        //$patient = Patient::create($request->all());
 
         if ($request->input('photo', false)) {
             $patient->addMedia(storage_path('tmp/uploads/' . basename($request->input('photo'))))->toMediaCollection('photo');
@@ -131,6 +131,8 @@ class PatientsController extends Controller
 
     public function destroy($id)
     {
-        //
+        Patient::destroy($id);
+
+        return redirect()->route('patients.index')->with('message', 'Patient has been deleted');
     }
 }

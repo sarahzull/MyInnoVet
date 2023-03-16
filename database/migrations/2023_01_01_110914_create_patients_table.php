@@ -16,18 +16,18 @@ return new class extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->date('dob')->nullable();
-            $table->string('breed')->nullable();
-            $table->string('gender')->nullable();
-            $table->unsignedBigInteger('species')->nullable();
+            $table->date('dob');
+            $table->string('breed');
+            $table->string('gender');
+            $table->string('height');
+            $table->string('weight');
+            $table->string('chronic_disease');
+            $table->string('image');
+            $table->unsignedBigInteger('species_id');
             $table->foreign('species_id')->references('id')->on('species')->onDelete('cascade');
-            $table->string('height')->nullable();
-            $table->string('weight')->nullable();
-            $table->string('chronic_disease')->nullable();
-            $table->string('image')->nullable();
-            $table->unsignedBigInteger('owner_id')->nullable();
+            $table->unsignedBigInteger('owner_id');
             $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('created_by_id')->nullable();
+            $table->unsignedBigInteger('created_by_id');
             $table->foreign('created_by_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

@@ -1,9 +1,9 @@
 @extends('layout.master')
 @section('title', 'Staff List')
-@section('breadcrumb', 'Staff')
+@section('breadcrumb', 'Staffs')
 @section('header-button')
-  @can('patient_create')
-    <a href="{{ route('clients.create')}}" class="btn btn-sm fw-bold btn-success">Add Client</a>
+  @can('staff_create')
+    <a href="{{ route('staffs.create') }}" class="btn btn-sm fw-bold btn-success">Add Staff</a>
   @endcan
 @endsection
 
@@ -34,25 +34,25 @@
                 </span>
               </a>
               <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4 text-center" data-kt-menu="true">
-                {{-- @can('patient_view')
+                @can('staff_show')
                 <div class="d-grid menu-item px-3">
                   <button class="btn btn-sm btn-block menu-link">
-                    <a href="{{ route('patients.show', $patient->id) }}" class="text-primary">View</a>
+                    <a href="{{ route('staffs.show', $staff->id) }}" class="text-primary">View</a>
                   </button>
                 </div>
-                @endcan --}}
+                @endcan
                 
-                {{-- @can('patient_edit')
+                @can('staff_edit')
                 <div class="menu-item px-3">
                   <button class="btn btn-sm menu-link">
-                    <a href="{{ route('patients.edit', $patient->id) }}" class="text-primary">Edit</a>
+                    <a href="{{ route('staffs.edit', $staff->id) }}" class="text-primary">Edit</a>
                   </button>
                 </div>
-                @endcan --}}
+                @endcan
 
-                {{-- @can('patient_delete')
+                @can('staff_delete')
                 <div class="menu-item px-3">
-                  <form action="{{ route('patients.destroy', $patient->id) }}" onsubmit="return confirm('Are you sure want to delete?');" method="POST">
+                  <form action="{{ route('staffs.destroy', $staff->id) }}" onsubmit="return confirm('Are you sure want to delete?');" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-sm menu-link text-primary">
@@ -60,7 +60,7 @@
                     </button>
                   </form>
                 </div>
-                @endcan --}}
+                @endcan
               </div>
             </td>
           </tr>
@@ -89,6 +89,10 @@
     })
   </script>
 @endsection
+
+
+
+
 
 
 

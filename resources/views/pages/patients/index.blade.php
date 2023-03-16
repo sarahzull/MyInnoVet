@@ -56,7 +56,7 @@
                 </div>
                 @endcan
 
-                {{-- @can('patient_delete')
+                @can('patient_delete')
                 <div class="menu-item px-3">
                   <form action="{{ route('patients.destroy', $patient->id) }}" onsubmit="return confirm('Are you sure want to delete?');" method="POST">
                     @csrf
@@ -66,7 +66,7 @@
                     </button>
                   </form>
                 </div>
-                @endcan --}}
+                @endcan
               </div>
             </td>
           </tr>

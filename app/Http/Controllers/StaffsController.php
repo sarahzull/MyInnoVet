@@ -27,7 +27,7 @@ class StaffsController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.staffs.create');
     }
 
     /**
@@ -38,7 +38,20 @@ class StaffsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $staff = new User();
+        $staff->name = $request->input('name');
+        $staff->phone_no = $request->input('phone_no');
+        $staff->email = $request->input('email');
+        $staff->password = bcrypt($request->password);
+        $staff->dob = $request->input('dob');
+        $staff->street_address = $request->input('street_address');
+        $staff->city = $request->input('city');
+        $staff->state = $request->input('state');
+        $staff->postcode = $request->input('postcode');
+        $staff->assignRole('Staff');
+        $staff->save();
+    
+        return redirect()->route('staffs.index');
     }
 
     /**
@@ -49,7 +62,8 @@ class StaffsController extends Controller
      */
     public function show($id)
     {
-        //
+        $staff = User::find($id);
+        return view('pages.staffs.show', compact('staff'));
     }
 
     /**
@@ -60,7 +74,8 @@ class StaffsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $staff = User::find($id);
+        return view('pages.staffs.edit', compact('staff'));
     }
 
     /**
@@ -72,7 +87,19 @@ class StaffsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $staff = User::find($id);
+        $staff->name = $request->input('name');
+        $staff->phone_no = $request->input('phone_no');
+        $staff->email = $request->input('email');
+        $staff->password = bcrypt($request->password);
+        $staff->dob = $request->input('dob');
+        $staff->street_address = $request->input('street_address');
+        $staff->city = $request->input('city');
+        $staff->state = $request->input('state');
+        $staff->postcode = $request->input('postcode');
+        $staff->update();
+
+        return redirect()->route('staffs.index');
     }
 
     /**
@@ -83,6 +110,7 @@ class StaffsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        return redirect()->route('staffs.index');
     }
 }
