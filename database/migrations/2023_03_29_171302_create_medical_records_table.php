@@ -13,13 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('appointments', function (Blueprint $table) {
+        Schema::create('medical_records', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('patient_id');
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
-            $table->string('type');
-            $table->date('date');
-            $table->time('time');
+            $table->string('diagnosis')->nullable();
+            $table->string('treatment')->nullable();
+            $table->string('medication')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->unsignedBigInteger('created_by_id');
             $table->foreign('created_by_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
@@ -33,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('appointments');
+        Schema::dropIfExists('medical_records');
     }
 };

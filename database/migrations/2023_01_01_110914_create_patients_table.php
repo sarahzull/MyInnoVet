@@ -16,13 +16,13 @@ return new class extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->date('dob');
-            $table->string('breed');
-            $table->string('gender');
-            $table->string('height');
-            $table->string('weight');
-            $table->string('chronic_disease');
-            $table->string('image');
+            $table->date('dob')->nullable();
+            $table->string('breed')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('height')->nullable();
+            $table->string('weight')->nullable();
+            $table->string('chronic_disease')->nullable();
+            $table->string('image')->nullable();
             $table->unsignedBigInteger('species_id');
             $table->foreign('species_id')->references('id')->on('species')->onDelete('cascade');
             $table->unsignedBigInteger('owner_id');
