@@ -7,6 +7,9 @@ use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MedicalRecordsController;
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\SpeciesController;
 use App\Http\Controllers\StaffsController;
 use Illuminate\Support\Facades\Route;
 
@@ -69,6 +72,16 @@ Route::prefix('/staffs')->middleware(['auth'])->group(function () {
     Route::delete('/{id}', [StaffsController::class, 'destroy'])->name('staffs.destroy');
 });
 
+Route::prefix('/medical-records')->middleware(['auth'])->group(function () {
+    Route::get('/', [MedicalRecordsController::class, 'index'])->name('medical-records.index');
+    Route::get('/create', [MedicalRecordsController::class, 'create'])->name('medical-records.create');
+    Route::post('/', [MedicalRecordsController::class, 'store'])->name('medical-records.store');
+    Route::get('/{id}', [MedicalRecordsController::class, 'show'])->name('medical-records.show');
+    Route::get('/edit/{id}', [MedicalRecordsController::class, 'edit'])->name('medical-records.edit');
+    Route::patch('/{id}', [MedicalRecordsController::class, 'update'])->name('medical-records.update');
+    Route::delete('/{id}', [MedicalRecordsController::class, 'destroy'])->name('medical-records.destroy');
+});
+
 Route::prefix('/calendar')->middleware(['auth'])->group(function () {
     Route::get('/', [CalendarController::class, 'index'])->name('calendar.index');
     // Route::get('/create', [ClientsController::class, 'create'])->name('clients.create');
@@ -78,6 +91,8 @@ Route::prefix('/calendar')->middleware(['auth'])->group(function () {
 });
 
 Route::prefix('/settings')->middleware(['auth'])->group(function () {
+    Route::get('/', [SettingsController::class, 'index'])->name('settings.index');
+
     //Role
     Route::prefix('/roles')->middleware(['can:role_access'])->group(function () {
         Route::get('/', [RolesController::class, 'index'])->name('roles.index');
@@ -108,6 +123,17 @@ Route::prefix('/settings')->middleware(['auth'])->group(function () {
         Route::patch('/{id}', [UsersController::class, 'update'])->name('users.update');
         Route::delete('/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
     });
+
+    //Species
+    Route::prefix('/species')->middleware(['auth'])->group(function () {
+        Route::get('/', [SpeciesController::class, 'index'])->name('species.index');
+        Route::get('/create', [SpeciesController::class, 'create'])->name('species.create');
+        Route::post('/', [SpeciesController::class, 'store'])->name('species.store');
+        Route::get('/edit/{id}', [SpeciesController::class, 'edit'])->name('species.edit');
+        Route::patch('/{id}', [SpeciesController::class, 'update'])->name('species.update');
+        Route::delete('/{id}', [SpeciesController::class, 'destroy'])->name('species.destroy');
+    });
+    
 });
 
 require __DIR__.'/auth.php';

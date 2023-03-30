@@ -20,6 +20,13 @@
 
 @section('content')
 <div class="card">
+  <div class="card-header">
+    <div class="card-title ">
+      <a class="text-sm" href="{{ route('clients.index') }}">
+        {!! getSvgIcon('duotune/arrows/arr063.svg', 'svg-icon svg-icon-2') !!}
+      </a>
+    </div>
+  </div>
   <div class="card-body">
     <div class="d-flex justify-between mb-4">
       <div class="col text-start">

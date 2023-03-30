@@ -13,10 +13,10 @@
     </div> --}}
     <!--end::Activities-->
     <!--begin::Settings-->
-    @can('settings_access')
+    @can('species_access')
         <div class="app-navbar-item ms-1 ms-lg-3">
             <div class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px">
-                <a href="">{!! getSvgIcon('duotune/coding/cod001.svg', 'svg-icon svg-icon-1') !!}</a>
+                <a href="{{ route('species.index') }}">{!! getSvgIcon('duotune/coding/cod001.svg', 'svg-icon svg-icon-1') !!}</a>
             </div>
         </div>
     @endcan

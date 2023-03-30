@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Patient;
 use App\Models\Species;
-use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Models\MedicalRecord;
 
 class PatientsController extends Controller
 {
     public function index()
     {
-        $patients = Patient::with('species')->get();
+        $patients = Patient::with('species')->latest()->get();
 
         return view('pages.patients.index', compact('patients'));
     }
@@ -72,8 +73,10 @@ class PatientsController extends Controller
         $patient = Patient::findOrFail($id);
         $birthDate = Carbon::parse($patient->dob)->format('d F Y');
         $joinedDate = Carbon::parse($patient->created_at)->format('d F Y');
+        $medicalRecords = MedicalRecord::where('patient_id', $id)->orderByDesc('created_at')->get();
+        $lastVisit = MedicalRecord::where('patient_id', $id)->latest('created_at')->value('created_at');
 
-        return view('pages.patients.show', compact('patient', 'birthDate', 'joinedDate'));
+        return view('pages.patients.show', compact('patient', 'birthDate', 'joinedDate', 'medicalRecords', 'lastVisit'));
     }
 
     public function edit($id)

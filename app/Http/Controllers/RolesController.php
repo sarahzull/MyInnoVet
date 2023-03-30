@@ -12,7 +12,7 @@ class RolesController extends Controller
     public function index()
     {
         // $roles = Role::all();
-        $roles = Role::with(['permissions'])->get();
+        $roles = Role::with(['permissions'])->latest()->get();
 
         return view('pages.settings.roles.index', compact('roles'));
     }

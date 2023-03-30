@@ -5,6 +5,13 @@
 @section('content')
 
 <div class="card">
+  <div class="card-header">
+    <div class="card-title ">
+      <a class="text-sm" href="{{ route('roles.index') }}">
+        {!! getSvgIcon('duotune/arrows/arr063.svg', 'svg-icon svg-icon-2') !!}
+      </a>
+    </div>
+  </div>
   <div class="card-body">
     <form
         action="{{ route('roles.store') }}"

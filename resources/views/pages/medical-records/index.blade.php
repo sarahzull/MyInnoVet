@@ -1,9 +1,9 @@
 @extends('layout.master')
-@section('title', 'Client List')
-@section('breadcrumb', 'Clients')
+@section('title', 'Medical Records')
+@section('breadcrumb', 'Medical Records')
 @section('header-button')
-  @can('patient_create')
-    <a href="{{ route('clients.create')}}" class="btn btn-sm fw-bold btn-success">Add Client</a>
+  @can('medical_record_create')
+    <a href="{{ route('medical-records.create') }}" class="btn btn-sm fw-bold btn-success">Add Record</a>
   @endcan
 @endsection
 
@@ -22,15 +22,20 @@
         <thead>
           <tr class="text-start text-gray-700 fw-bold fs-7 text-uppercase bg-light">
             <th scope="col" class="text-center w-70px">ID</th>
-            <th scope="col">Name</th>
+            <th scope="col">Patient's Name</th>
+            <td scope="col">Created At</td>
             <th scope="col" class="text-center w-150px">Action</th>
           </tr>
         </thead>
         <tbody>
-          @foreach ($clients as $index => $client)
+          @foreach ($records as $index => $record)
             <tr>
-            <th scope="row" class="text-center w-30px">{{ $index + 1 }}</th>
-            <td>{{ $client->name }}</td>
+            <th scope="row" class="text-center">{{ $index + 1 }}</th>
+            <td>{{ $record->patient->name }}</td>
+            <td>
+              <span>{{ $record->created_at->format('d F Y') }}</span>
+              <span>{{ $record->created_at->format('g:i A') }}</span>
+            </td>
             <td class="text-center">
               <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
                 <span class="svg-icon svg-icon-5 m-0">
@@ -40,28 +45,28 @@
                 </span>
               </a>
               <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4 text-center" data-kt-menu="true">
-                @can('client_show')
+                @can('medical_record_show')
                 <div class="d-grid menu-item px-3">
                   <button class="btn btn-sm btn-block menu-link">
-                    <a href="{{ route('clients.show', $client->id) }}" class="text-primary">View</a>
+                    <a href="{{ route('medical-records.show', $record->id) }}" class="text-primary">View</a>
                   </button>
                 </div>
                 @endcan
                 
-                @can('client_edit')
-                <div class="menu-item px-3">
-                  <button class="btn btn-sm menu-link">
-                    <a href="{{ route('clients.edit', $client->id) }}" class="text-primary">Edit</a>
+                @can('medical_record_edit')
+                <div class="d-grid menu-item px-3">
+                  <button class="btn btn-sm btn-block menu-link">
+                    <a href="{{ route('medical-records.edit', $record->id) }}" class="text-primary">Edit</a>
                   </button>
                 </div>
                 @endcan
 
-                @can('patient_delete')
-                <div class="menu-item px-3">
-                  <form action="{{ route('clients.destroy', $client->id) }}" onsubmit="return confirm('Are you sure want to delete?');" method="POST">
+                @can('medical_record_delete')
+                <div class="d-grid menu-item px-3">
+                  <form action="{{ route('medical-records.destroy', $record->id) }}" onsubmit="return confirm('Are you sure want to delete?');" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-sm menu-link text-primary">
+                    <button type="submit" class="btn btn-sm btn-block menu-link text-primary">
                         Delete
                     </button>
                   </form>
@@ -95,6 +100,10 @@
     })
   </script>
 @endsection
+
+
+
+
 
 
 

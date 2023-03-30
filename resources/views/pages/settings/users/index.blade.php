@@ -11,6 +11,12 @@
 
 <div class="card">
   <div class="card-body">
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="table-responsive">
       <table id="kt_datatable" class="table table-bordered gy-3 gs-3 align-middle">
         <thead>
@@ -18,15 +24,29 @@
             <th scope="col" class="text-center w-70px">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
+            <th scope="col">Role</th>
             <th scope="col" class="text-center w-150px">Action</th>
           </tr>
         </thead>
         <tbody>
-          @foreach ($users as $user)
+          @foreach ($users as $index => $user)
             <tr>
-              <th scope="row" class="text-center">{{ $user->id ?? '' }}</th>
+              <th scope="row" class="text-center">{{ $index + 1 }}</th>
               <td>{{ $user->name ?? '' }}</td>
               <td>{{ $user->email ?? '' }}</td>
+              <td>
+                @foreach ($user->roles as $role)
+                  @if ($role->name == 'Customer Service Executive')
+                    <span class="badge badge-dark">{{ $role->name }}</span>
+                  @elseif ($role->name == 'Veterinarian')
+                    <span class="badge badge-warning">{{ $role->name }}</span>
+                  @elseif ($role->name == 'Patient')
+                    <span class="badge badge-success">{{ $role->name }}</span>
+                  @elseif ($role->name == 'Client')
+                    <span class="badge badge-primary">{{ $role->name }}</span>
+                  @endif
+                @endforeach
+              </td>
               <td class="text-center">
                 <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
                   <span class="svg-icon svg-icon-5 m-0">

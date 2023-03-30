@@ -4,15 +4,10 @@
 
 @section('content')
 
-<!--begin::Row-->
 <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
-  <!--begin::Col-->
   <div class="col-xxl-6">
-    <!--begin::Engage widget 10-->
     <div class="card card-flush h-md-100">
-      <!--begin::Body-->
       <div class="card-body d-flex flex-column justify-content-between bgi-no-repeat bgi-size-cover bgi-position-x-center pb-0">
-        <!--begin::Wrapper-->
         <div class="mb-10">
           <div class="col py-2">
             <div class="d-flex justify-between">
@@ -94,10 +89,11 @@
                 </p>
                 <p class="mb-1">
                   <span class="fw-bold">Last Visit: </span>
+                  {{ $lastVisit->format('d F Y') }}
                 </p>
                 <p class="mb-1">
                   <span class="fw-bold">Chronic Disease: </span>
-                  @if ($patient->chronic_disease == NULL)
+                  @if ($patient->chronic_disease)
                     None
                   @endif
                 </p>
@@ -107,17 +103,13 @@
             </div>
           </div>
         </div>
-        <!--end::Wrapper-->
       </div>
-      <!--end::Body-->
     </div>
-    <!--end::Engage widget 10-->
   </div>
+
   <div class="col-xxl-6">
     <div class="card card-flush h-md-100">
-      <!--begin::Body-->
       <div class="card-body d-flex flex-column justify-content-between mt-9 bgi-no-repeat bgi-size-cover bgi-position-x-center pb-0">
-        <!--begin::Wrapper-->
         <div class="mb-10">
           <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap justify-content-center">
             <li class="nav-item">
@@ -135,22 +127,50 @@
 
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="pills-medical-tab" role="tabpanel">
-              This is medical history
+              <div class="scroll h-400px px-4">
+                @foreach($medicalRecords as $record)
+                  <div class="card border mt-2">
+                    <div class="card-body p-6">
+                      <p class="fs-5 fw-bold mb-0">{{ $record->diagnosis }}</p>
+                      <p class="mb-0 text-muted">{{ $record->created_at->format('d F Y') }}</p>
+                      <p class="mb-0 text-muted">
+                        @if ($record->creator->id == 1)
+                          Admin
+                        @else
+                          Veterinarian {{ $record->creator->name }}
+                        @endif
+                      </p>
+                    </div>
+                  </div>   
+                @endforeach           
+              </div>            
             </div>
             <div class="tab-pane fade" id="pills-medications-tab" role="tabpanel">
-              This is medications
+              @foreach($medicalRecords as $record)
+                  <div class="card border mt-2">
+                    <div class="card-body p-6">
+                      <p class="fs-5 fw-bold mb-0">{{ $record->diagnosis }}</p>
+                      <p class="mb-0 text-muted">{{ $record->medication }}</p>
+                      <p class="mb-0 text-muted">{{ $record->created_at->format('d F Y') }}</p>
+                      {{-- <p class="mb-0 text-muted">
+                        @if ($record->creator->id == 1)
+                          Admin
+                        @else
+                          Veterinarian {{ $record->creator->name }}
+                        @endif
+                      </p> --}}
+                    </div>
+                  </div>   
+                @endforeach     
             </div>
             <div class="tab-pane fade" id="pills-appointments-tab" role="tabpanel">
               This is appointments
             </div>
           </div>
         </div>
-        <!--end::Wrapper-->
       </div>
-      <!--end::Body-->
     </div>
   </div>
-  <!--end::Col-->
 </div>
-<!--end::Row-->
+
 @endsection

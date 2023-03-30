@@ -20,17 +20,14 @@
 
 @section('content')
 <div class="card">
-  <div class="card-body">
-    <div class="d-flex justify-between mb-4">
-      <div class="col text-start">
-        <a class="text-sm" href="{{ route('users.index') }}">
-          {!! getSvgIcon('duotune/arrows/arr063.svg', 'svg-icon svg-icon-2') !!}
-        </a>
-      </div>
-      <div class="col"></div>
-      <div class="col"></div>
+  <div class="card-header">
+    <div class="card-title ">
+      <a class="text-sm" href="{{ route('users.index') }}">
+        {!! getSvgIcon('duotune/arrows/arr063.svg', 'svg-icon svg-icon-2') !!}
+      </a>
     </div>
-    
+  </div>
+  <div class="card-body">
     <form
       action="{{ route('users.update', $user->id) }}"
       method="POST">

@@ -11,6 +11,12 @@
 
 <div class="card">
   <div class="card-body">
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+    
     <div class="table-responsive">
       <table id="kt_datatable" class="table table-bordered gy-3 gs-3 align-middle">
         <thead>
@@ -22,9 +28,9 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($roles as $role)
+          @foreach ($roles as $index => $role)
             <tr>
-              <th scope="row" class="text-center">{{ $role->id }}</th>
+              <th scope="row" class="text-center">{{ $index + 1 }}</th>
               <td>{{ $role->name }}</td>
               <td>
                 @foreach($role->permissions as $key => $item)

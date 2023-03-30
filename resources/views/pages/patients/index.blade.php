@@ -11,6 +11,12 @@
 
 <div class="card">
   <div class="card-body">
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+    
     <div class="table-responsive">
       <table id="kt_datatable" class="table table-bordered gy-3 gs-3 align-middle">
         <thead>
@@ -24,9 +30,9 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($patients as $patient)
+          @foreach ($patients as $index => $patient)
             <tr>
-            <th scope="row" class="text-center">{{ $patient->id }}</th>
+            <th scope="row" class="text-center">{{ $index + 1 }}</th>
             <td>{{ $patient->name ?? '' }}</td>
             <td>{{ $patient->breed ?? '' }}</td>
             <td>{{ $patient->gender ?? '' }}</td>

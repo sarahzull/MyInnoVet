@@ -5,12 +5,19 @@
 @section('content')
 
 <div class="card">
-  <div class="card-body">
-    <div class="d-grid gap-2 d-md-block mb-4">
-      <a href="{{ route('patients.index') }}" class="text-sm">
+  <div class="card-header">
+    <div class="card-title ">
+      <a class="text-sm" href="{{ route('patients.index') }}">
         {!! getSvgIcon('duotune/arrows/arr063.svg', 'svg-icon svg-icon-2') !!}
       </a>
     </div>
+  </div>
+  <div class="card-body">
+    {{-- <div class="d-grid gap-2 d-md-block mb-4">
+      <a href="{{ route('patients.index') }}" class="text-sm">
+        {!! getSvgIcon('duotune/arrows/arr063.svg', 'svg-icon svg-icon-2') !!}
+      </a>
+    </div> --}}
 
     <form
       action="{{ route('patients.update', $patient->id) }}"
@@ -53,7 +60,7 @@
           <div class="col-lg-8">
             <div class="row">
               <div class="col-lg-12 fv-row">
-                <select name="patient" id="patient" aria-label="Select owner" data-control="select2" data-placeholder="Select a owner" class="form-select form-select-solid form-select-lg fw-semibold">
+                <select name="owner_id" id="owner_id" aria-label="Select owner" data-control="select2" data-placeholder="Select a owner" class="form-select form-select-solid form-select-lg fw-semibold">
                   @foreach ($owners as $own)
                     <option value="{{ $own->id }}" {{ (old('owners') ? old('owners') : $patient->owner->id ?? '') == $own->id ? 'selected' : '' }}>{{ $own->name }}</option>
                   @endforeach

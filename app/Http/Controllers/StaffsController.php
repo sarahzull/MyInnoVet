@@ -16,7 +16,7 @@ class StaffsController extends Controller
     public function index()
     {
         $role = Role::findByName('Staff');
-        $staffs = User::role($role)->get();
+        $staffs = User::role($role)->latest()->get();
         return view('pages.staffs.index', compact('staffs'));
     }
 

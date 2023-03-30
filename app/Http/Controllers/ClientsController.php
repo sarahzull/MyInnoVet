@@ -13,7 +13,8 @@ class ClientsController extends Controller
     public function index()
     {
         $role = Role::findByName('client');
-        $clients = User::role($role)->get();
+        $clients = User::role($role)->latest()->get();
+
         return view('pages.clients.index', compact('clients'));
     }
 

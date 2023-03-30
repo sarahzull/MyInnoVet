@@ -103,8 +103,21 @@
 			<div class="menu-item">
 				<!--begin:Menu link-->
 				<a class="menu-link" href="{{ route('calendar.index') }}">
-					<span class="menu-icon">{!! getSvgIcon('duotune/general/gen014.svg', 'svg-icon svg-icon-2') !!}</span>
+					<span class="menu-icon">{!! getSvgIcon('duotune/communication/com003.svg', 'svg-icon svg-icon-2') !!}</span>
 					<span class="menu-title">Calendar</span>
+				</a>
+				<!--end:Menu link-->
+			</div>
+			@endcan
+			<!--end:Menu item-->
+
+			<!--begin:Menu item-->
+			@can('medical_record_access')
+			<div class="menu-item">
+				<!--begin:Menu link-->
+				<a class="menu-link" href="{{ route('medical-records.index') }}">
+					<span class="menu-icon">{!! getSvgIcon('duotune/general/gen014.svg', 'svg-icon svg-icon-2') !!}</span>
+					<span class="menu-title">Medical Records</span>
 				</a>
 				<!--end:Menu link-->
 			</div>

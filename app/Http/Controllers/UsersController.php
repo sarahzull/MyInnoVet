@@ -11,7 +11,7 @@ class UsersController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::with('roles')->latest()->get();
 
         return view('pages.settings.users.index', compact('users'));
     }

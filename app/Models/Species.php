@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Patient;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Species extends Model
 {
@@ -15,8 +16,8 @@ class Species extends Model
         'name',
     ];
 
-    public function patient()
+    public function patients()
     {
-        return $this->hasOne(Patient::class);
+        return $this->hasMany(Patient::class);
     }
 }

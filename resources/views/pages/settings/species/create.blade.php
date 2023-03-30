@@ -1,20 +1,20 @@
 @extends('layout.master-page')
-@section('title', 'Create Permission')
-@section('breadcrumb', 'Permissions')
+@section('title', 'Create Species')
+@section('breadcrumb', 'Species')
 
 @section('content')
 
 <div class="card">
   <div class="card-header">
     <div class="card-title ">
-      <a class="text-sm" href="{{ route('permissions.index') }}">
+      <a class="text-sm" href="{{ route('species.index') }}">
         {!! getSvgIcon('duotune/arrows/arr063.svg', 'svg-icon svg-icon-2') !!}
       </a>
     </div>
   </div>
   <div class="card-body">
     <form
-        action="{{ route('permissions.store') }}"
+        action="{{ route('species.store') }}"
         method="POST">
         @csrf
 
@@ -36,21 +36,6 @@
       </div>
     </form>
 
-    @if (Session::has('success'))
-    <script>
-      KTUtil.onDOMContentLoaded(function () {
-        .Swal.fire("Message", "{{ Session::get('success') }}", "success", {
-          button: true,
-          button: "OK",
-          timer: 3000,
-        })
-        .then(function() {
-          window.location = "{{ route('permissions.index') }}";
-        })
-      });
-    </script>
-    @endif
-    
   </div>
 </div>
 
