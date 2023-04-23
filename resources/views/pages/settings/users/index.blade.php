@@ -3,7 +3,7 @@
 @section('breadcrumb', 'Users')
 @section('header-button')
   @can('patient_create')
-    <a href="#" class="btn fw-bold btn-success">Add User</a>
+    <a href="{{ route('users.create') }}" class="btn fw-bold btn-success">Add User</a>
   @endcan
 @endsection
 
@@ -25,6 +25,8 @@
             <th scope="col">Name</th>
             <th scope="col">Email</th>
             <th scope="col">Role</th>
+            <th scope="col">Last Seen</th>
+            <th scope="col">Status</th>
             <th scope="col" class="text-center w-150px">Action</th>
           </tr>
         </thead>
@@ -46,6 +48,16 @@
                     <span class="badge badge-primary">{{ $role->name }}</span>
                   @endif
                 @endforeach
+              </td>
+              <td>
+                {{ $user->last_seen ? Carbon\Carbon::parse($user->last_seen)->diffForHumans() : '' }}
+              </td>
+              <td class="text-center">
+                  @if(Cache::has('user-is-online-' . $user->id))
+                      <span class="text-success">Online</span>
+                  @else
+                      <span class="text-secondary">Offline</span>
+                  @endif
               </td>
               <td class="text-center">
                 <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions

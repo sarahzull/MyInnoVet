@@ -58,6 +58,27 @@
 
       <div class="mb-6">
         <div class="row">
+          <label class="col-lg-4 col-form-label required fw-semibold fs-6">Role</label>
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col-lg-12 fv-row">
+                <div style="padding-bottom: 4px">
+                    <span class="btn btn-info btn-sm btn-sm select-all">Select All</span>
+                    <span class="btn btn-info btn-sm btn-sm deselect-all">Deselect All</span>
+                </div>
+                <select class="form-control select2" name="roles[]" id="roles" multiple required>
+                    @foreach($roles as $id => $role)
+                        <option value="{{ $id }}">{{ $role }}</option>
+                    @endforeach
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="row">
           <label class="col-lg-4 col-form-label required fw-semibold fs-6">Phone Number</label>
           <div class="col-lg-8">
             <div class="row">
@@ -190,5 +211,18 @@
     altInput: true,
     altFormat: "j F Y",
   });
+
+  $('.select-all').click(function () {
+      let $select2 = $(this).parent().siblings('.select2')
+      $select2.find('option').prop('selected', 'selected')
+      $select2.trigger('change')
+  })
+  $('.deselect-all').click(function () {
+      let $select2 = $(this).parent().siblings('.select2')
+      $select2.find('option').prop('selected', '')
+      $select2.trigger('change')
+  })
+  $('#roles').select2();
+  
 </script>
 @endsection
