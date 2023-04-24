@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Patient;
@@ -74,9 +75,10 @@ class PatientsController extends Controller
         $birthDate = Carbon::parse($patient->dob)->format('d F Y');
         $joinedDate = Carbon::parse($patient->created_at)->format('d F Y');
         $medicalRecords = MedicalRecord::where('patient_id', $id)->orderByDesc('created_at')->get();
+        $appointments = Appointment::where('patient_id', $id)->orderByDesc('date')->get();
         $lastVisit = MedicalRecord::where('patient_id', $id)->latest('created_at')->value('created_at');
 
-        return view('pages.patients.show', compact('patient', 'birthDate', 'joinedDate', 'medicalRecords', 'lastVisit'));
+        return view('pages.patients.show', compact('patient', 'birthDate', 'joinedDate', 'medicalRecords', 'appointments','lastVisit'));
     }
 
     public function edit($id)
