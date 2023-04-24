@@ -34,6 +34,7 @@
             <td>{{ $record->patient->name }}</td>
             <td>
               <span>{{ $record->created_at->format('d F Y') }}</span>
+              <br>
               <span>{{ $record->created_at->format('g:i A') }}</span>
             </td>
             <td class="text-center">
