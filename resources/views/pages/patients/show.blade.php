@@ -89,12 +89,16 @@
                 </p>
                 <p class="mb-1">
                   <span class="fw-bold">Last Visit: </span>
-                  {{ $lastVisit->format('d F Y') }}
+                  @if ($lastVisit)
+                    {{ $lastVisit->format('d F Y') }}
+                  @else
+                      N/A
+                  @endif
                 </p>
                 <p class="mb-1">
                   <span class="fw-bold">Chronic Disease: </span>
                   @if ($patient->chronic_disease)
-                    None
+                    N/A
                   @endif
                 </p>
               </div>
@@ -164,7 +168,24 @@
                 @endforeach     
             </div>
             <div class="tab-pane fade" id="pills-appointments-tab" role="tabpanel">
-              This is appointments
+              <div class="scroll h-400px px-4">
+                @foreach($appointments as $apt)
+                  <div class="card border mt-2">
+                    <div class="card-body p-6">
+                      <p class="fs-5 fw-bold mb-0">{{ \Carbon\Carbon::parse($apt->date)->format('d F Y') }}</p>
+                      <p class="mb-0 text-muted">{{ \Carbon\Carbon::parse($apt->start_time)->format('g:i A') }}</p>
+                      <p class="fs-5 text-muted">{{ ucfirst($apt->type) }}</p>
+                      <p class="mb-0 text-muted">
+                        {{-- @if ($record->creator->id == 1)
+                          Admin
+                        @else
+                          Veterinarian {{ $record->creator->name }}
+                        @endif --}}
+                      </p>
+                    </div>
+                  </div>   
+                @endforeach           
+              </div>           
             </div>
           </div>
         </div>

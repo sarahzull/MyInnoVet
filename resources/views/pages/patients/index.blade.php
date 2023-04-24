@@ -22,6 +22,7 @@
         <thead>
           <tr class="text-start text-gray-700 fw-bold fs-7 text-uppercase bg-light">
             <th scope="col" class="text-center w-70px">ID</th>
+            <th scope="col">Owner</th>
             <th scope="col">Name</th>
             <th scope="col">Breed</th>
             <th scope="col">Gender</th>
@@ -33,6 +34,7 @@
           @foreach ($patients as $index => $patient)
             <tr>
             <th scope="row" class="text-center">{{ $index + 1 }}</th>
+            <td>{{ $patient->owner->name ?? '' }}</td>
             <td>{{ $patient->name ?? '' }}</td>
             <td>{{ $patient->breed ?? '' }}</td>
             <td>{{ $patient->gender ?? '' }}</td>
