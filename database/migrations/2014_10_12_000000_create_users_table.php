@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('state')->nullable();
             $table->string('postcode')->nullable();
             $table->timestamp('dob')->nullable();
+            $table->timestamp('last_seen')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

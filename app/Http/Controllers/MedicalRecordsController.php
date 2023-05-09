@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 use App\Models\MedicalRecord;
+use App\Models\Visit;
 use Illuminate\Support\Facades\Redirect;
 
 class MedicalRecordsController extends Controller
@@ -23,6 +24,13 @@ class MedicalRecordsController extends Controller
         $patients = Patient::all();
 
         return view('pages.medical-records.create', compact('patients'));
+    }
+
+    public function createById($id)
+    {
+        $visit = Visit::where('id', $id)->first();
+
+        return view('pages.medical-records.create-id', compact('visit'));
     }
 
     public function store(Request $request)
@@ -52,6 +60,14 @@ class MedicalRecordsController extends Controller
         $record = MedicalRecord::findOrFail($id);
 
         return view('pages.medical-records.show', compact('record'));
+    }
+
+    public function showById($patient_id)
+    {
+        $patient = Patient::where('id', $patient_id)->first();
+        $records = MedicalRecord::where('patient_id', $patient_id)->get();
+
+        return view('pages.medical-records.show-id', compact('patient', 'records'));
     }
 
     public function edit($id)

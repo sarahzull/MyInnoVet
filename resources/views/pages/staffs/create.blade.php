@@ -168,7 +168,7 @@
       </div>
 
       <div class="d-flex justify-content-end gap-2">
-        <a href="{{ route('staff.index') }}" class="btn btn-secondary">Back</a>
+        <a href="{{ route('staffs.index') }}" class="btn btn-secondary">Back</a>
         <button type="submit" class="btn btn-success">Save</button>
       </div>
     </form>

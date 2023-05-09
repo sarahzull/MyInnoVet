@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppointmentsController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\PatientsController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\MedicalRecordsController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SpeciesController;
 use App\Http\Controllers\StaffsController;
+use App\Http\Controllers\VisitsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,14 +44,6 @@ Route::prefix('/patients')->middleware(['auth'])->group(function () {
     Route::get('/edit/{id}', [PatientsController::class, 'edit'])->name('patients.edit');
     Route::patch('/{id}', [PatientsController::class, 'update'])->name('patients.update');
     Route::delete('/{id}', [PatientsController::class, 'destroy'])->name('patients.destroy');
-
-    // Route::middleware('can:isAdmin')->group(function () {
-    //     Route::get('/create', [StudentsController::class, 'create'])->name('students.create');
-    //     Route::post('/', [StudentsController::class, 'store'])->name('students.store');
-    //     Route::get('/edit/{id}', [StudentsController::class, 'edit'])->name('students.edit');
-    //     Route::patch('/{id}', [StudentsController::class, 'update'])->name('students.update');
-    //     Route::delete('/{id}', [StudentsController::class, 'destroy'])->name('students.destroy');
-    // });
 });
 
 Route::prefix('/clients')->middleware(['auth'])->group(function () {
@@ -75,11 +69,23 @@ Route::prefix('/staffs')->middleware(['auth'])->group(function () {
 Route::prefix('/medical-records')->middleware(['auth'])->group(function () {
     Route::get('/', [MedicalRecordsController::class, 'index'])->name('medical-records.index');
     Route::get('/create', [MedicalRecordsController::class, 'create'])->name('medical-records.create');
+    Route::get('/create/{id}', [MedicalRecordsController::class, 'createById'])->name('medical-records.createId');
     Route::post('/', [MedicalRecordsController::class, 'store'])->name('medical-records.store');
     Route::get('/{id}', [MedicalRecordsController::class, 'show'])->name('medical-records.show');
+    Route::get('/show/{patient_id}', [MedicalRecordsController::class, 'showById'])->name('medical-records.showId');
     Route::get('/edit/{id}', [MedicalRecordsController::class, 'edit'])->name('medical-records.edit');
     Route::patch('/{id}', [MedicalRecordsController::class, 'update'])->name('medical-records.update');
     Route::delete('/{id}', [MedicalRecordsController::class, 'destroy'])->name('medical-records.destroy');
+});
+
+Route::prefix('/appointments')->middleware(['auth'])->group(function () {
+    Route::get('/', [AppointmentsController::class, 'index'])->name('appointments.index');
+    Route::get('/create', [AppointmentsController::class, 'create'])->name('appointments.create');
+    Route::post('/', [AppointmentsController::class, 'store'])->name('appointments.store');
+    // Route::get('/{id}', [AppointmentsController::class, 'show'])->name('appointments.show');
+    // Route::get('/edit/{id}', [AppointmentsController::class, 'edit'])->name('appointments.edit');
+    // Route::patch('/{id}', [AppointmentsController::class, 'update'])->name('appointments.update');
+    // Route::delete('/{id}', [AppointmentsController::class, 'destroy'])->name('appointments.destroy');
 });
 
 Route::prefix('/calendar')->middleware(['auth'])->group(function () {

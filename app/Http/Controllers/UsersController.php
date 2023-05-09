@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 
 class UsersController extends Controller
@@ -18,7 +19,8 @@ class UsersController extends Controller
 
     public function create()
     {
-        return view('pages.settings.users.create');
+        $roles = Role::pluck('name', 'id');
+        return view('pages.settings.users.create', compact('roles'));
     }
 
     public function store(Request $request)
@@ -36,6 +38,10 @@ class UsersController extends Controller
         $user->postcode = $request->input('postcode');
         $user->assignRole('user');
         $user->save();
+
+        $role_ids = $request->input('roles'); // assumes roles are passed as an array of IDs
+        $roles = Role::find($role_ids);
+        $user->roles()->saveMany($roles);
     
         return redirect()->route('users.index');
     }

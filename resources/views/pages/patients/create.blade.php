@@ -181,9 +181,9 @@
   KTUtil.onDOMContentLoaded(function() {
     $('#dob').flatpickr({
       altInput: true,
-      altFormat: 'j F Y'
+      altFormat: 'j F Y',
+      dateFormat: "Y-m-d",
     });
-
   })
 </script>
 @endsection

@@ -1,10 +1,14 @@
 @extends('layout.master')
-@section('title', 'Medical Records')
-@section('breadcrumb', 'Medical Records')
+@section('head')
+  @livewireStyles
+@endsection
+
+@section('title', 'Scheduled Appointments')
+@section('breadcrumb', 'Appointments')
 @section('header-button')
-  {{-- @can('medical_record_create')
-    <a href="{{ route('medical-records.create') }}" class="btn btn-sm fw-bold btn-success">Add Record</a>
-  @endcan --}}
+  @can('medical_record_create')
+    <a href="{{ route('appointments.create') }}" class="btn btn-sm fw-bold btn-success">Book Appointment</a>
+  @endcan
 @endsection
 
 @section('content')
@@ -22,20 +26,46 @@
         <thead>
           <tr class="text-start text-gray-700 fw-bold fs-7 text-uppercase bg-light">
             <th scope="col" class="text-center w-70px">ID</th>
-            <th scope="col">Patient's Name</th>
-            <td scope="col">Created At</td>
+            <th scope="col">Owner</th>
+            <td scope="col">Patient</td>
+            <td scope="col">Species</td>
+            <td scope="col">Date Time</td>
+            <td scope="col">Type</td>
+            <td scope="col">Status</td>
             <th scope="col" class="text-center w-150px">Action</th>
           </tr>
         </thead>
         <tbody>
-          @foreach ($records as $index => $record)
+          @foreach ($appointments as $index => $appointment)
             <tr>
             <th scope="row" class="text-center">{{ $index + 1 }}</th>
-            <td>{{ $record->patient->name }}</td>
+            <td>{{ $appointment->patient->name }}</td>
+            <td>{{ $appointment->patient->owner->name }}</td>
+            <td>{{ $appointment->patient->species->name }}</td>
             <td>
-              <span>{{ $record->created_at->format('d F Y') }}</span>
+              <span>{{ \Carbon\Carbon::parse($appointment->start_time)->format('d F Y') }}</span>
               <br>
-              <span>{{ $record->created_at->format('g:i A') }}</span>
+              <span>{{ \Carbon\Carbon::parse($appointment->start_time)->format('g:i A') }}</td></span>
+            </td>
+            <td>
+              @if ($appointment->type == 'Checkup')
+                <span class="badge badge-info">{{ $appointment->type }}</span>
+              @elseif ($appointment->type == 'Consultation')
+                <span class="badge badge-primary">{{ $appointment->type }}</span>
+              @elseif ($appointment->type == 'Vaccination')
+                <span class="badge badge-success">{{ $appointment->type }}</span>
+              @elseif ($appointment->type == 'Surgery')
+                <span class="badge badge-warning">{{ $appointment->type }}</span>
+              @endif
+            </td>
+            <td class="text-center">
+              @if($appointment->is_confirmed == 1)
+                  <span class="text-success fw-bold">Confirmed</span>
+              @elseif ($appointment->is_confirmed == 2)
+                <span class="text-warning fw-bold">Rescheduled</span>
+              @else
+                  <span class="text-secondary fw-bold">Cancelled</span>
+              @endif
             </td>
             <td class="text-center">
               <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
@@ -46,7 +76,7 @@
                 </span>
               </a>
               <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4 text-center" data-kt-menu="true">
-                @can('medical_record_show')
+                {{-- @can('medical_record_show')
                 <div class="d-grid menu-item px-3">
                   <button class="btn btn-sm btn-block menu-link">
                     <a href="{{ route('medical-records.show', $record->id) }}" class="text-primary">View</a>
@@ -72,7 +102,7 @@
                     </button>
                   </form>
                 </div>
-                @endcan
+                @endcan --}}
               </div>
             </td>
           </tr>
@@ -87,6 +117,7 @@
 @endsection
 
 @section('scripts')
+@livewireScripts
   <script>
     KTUtil.onDOMContentLoaded(function () {
       $("#kt_datatable").DataTable({

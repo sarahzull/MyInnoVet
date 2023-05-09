@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Patient;
+use App\Models\Appointment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -19,8 +20,21 @@ class MedicalRecord extends Model
         'medication',
         'start_date',
         'end_date',
-        'created_by_id'
+        'created_by_id',
+        'appointment_id', 
+        'walk_in_id',
+        'is_confirmed'
     ];
+
+    public function appointment()
+    {
+        return $this->belongsTo(Appointment::class);
+    }
+
+    public function walkIn()
+    {
+        return $this->belongsTo(WalkIn::class);
+    }
 
     public function patient()
     {

@@ -132,6 +132,13 @@
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="pills-medical-tab" role="tabpanel">
               <div class="scroll h-400px px-4">
+                <div class="d-flex justify-between">
+                  <div class="col"></div>
+                  <div class="col"></div>
+                  <div class="col text-end">
+                    <a href="{{ route('medical-records.showId', $patient->id) }}" class="btn btn-sm btn-outline btn-outline-line btn-outline-primary">View All</a>
+                  </div>
+                </div>
                 @foreach($medicalRecords as $record)
                   <div class="card border mt-2">
                     <div class="card-body p-6">
@@ -169,22 +176,22 @@
             </div>
             <div class="tab-pane fade" id="pills-appointments-tab" role="tabpanel">
               <div class="scroll h-400px px-4">
-                @foreach($appointments as $apt)
+                {{-- @foreach($appointments as $apt)
                   <div class="card border mt-2">
                     <div class="card-body p-6">
                       <p class="fs-5 fw-bold mb-0">{{ \Carbon\Carbon::parse($apt->date)->format('d F Y') }}</p>
                       <p class="mb-0 text-muted">{{ \Carbon\Carbon::parse($apt->start_time)->format('g:i A') }}</p>
                       <p class="fs-5 text-muted">{{ ucfirst($apt->type) }}</p>
                       <p class="mb-0 text-muted">
-                        {{-- @if ($record->creator->id == 1)
+                        @if ($record->creator->id == 1)
                           Admin
                         @else
                           Veterinarian {{ $record->creator->name }}
-                        @endif --}}
+                        @endif
                       </p>
                     </div>
                   </div>   
-                @endforeach           
+                @endforeach            --}}
               </div>           
             </div>
           </div>

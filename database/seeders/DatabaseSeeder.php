@@ -26,6 +26,9 @@ class DatabaseSeeder extends Seeder
             SpeciesSeeder::class,
             PatientSeeder::class,
             RoleSeeder::class,
+            ModelHasRoleSeeder::class,
+            PermissionSeeder::class,
+            RoleHasPermissionSeeder::class,
         ]);
     }
 }

@@ -2,7 +2,7 @@
 @section('title', 'User List')
 @section('breadcrumb', 'Users')
 @section('header-button')
-  @can('patient_create')
+  @can('user_create')
     <a href="{{ route('users.create') }}" class="btn fw-bold btn-success">Add User</a>
   @endcan
 @endsection

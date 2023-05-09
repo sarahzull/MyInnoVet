@@ -25,12 +25,6 @@ class RolesController extends Controller
 
     public function store(Request $request)
     {
-        // $role = Role::find($request->id);
-        // $permissions = Permission::whereIn('permissions', $request->id)->get();
-        // $role->syncPermissions($permissions);
-
-        // $validated = $request->validate(['name' => ['required', 'min:3']]);
-        // Role::create(($validated));
 
         $role = Role::create($request->all());
         $role->permissions()->sync($request->input('permissions', []));
