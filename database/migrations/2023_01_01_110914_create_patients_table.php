@@ -19,12 +19,12 @@ return new class extends Migration
             $table->date('dob')->nullable();
             $table->string('breed')->nullable();
             $table->string('gender')->nullable();
-            $table->unsignedBigInteger('species_id')->nullable();
-            $table->foreign('species_id')->references('id')->on('species')->onDelete('cascade');
             $table->string('height')->nullable();
             $table->string('weight')->nullable();
             $table->string('chronic_disease')->nullable();
             $table->string('image')->nullable();
+            $table->unsignedBigInteger('species_id')->nullable();
+            $table->foreign('species_id')->references('id')->on('species')->onDelete('cascade');
             $table->unsignedBigInteger('owner_id')->nullable();
             $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('created_by_id')->nullable();

@@ -34,14 +34,6 @@ class UserSeeder extends Seeder
             ],
             [
                 'id'             => 3,
-                'name'           => 'Vet Asisstant',
-                'email'          => 'vetassistant@mail.com',
-                'phone_no'       => '01137627101',
-                'password'       => bcrypt('password'),
-                'remember_token' => null,
-            ],
-            [
-                'id'             => 4,
                 'name'           => 'Client',
                 'email'          => 'client@mail.com',
                 'phone_no'       => '017456342',

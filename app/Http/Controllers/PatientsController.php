@@ -2,26 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Patient;
 use App\Models\Species;
-use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Models\MedicalRecord;
 
 class PatientsController extends Controller
 {
     public function index()
     {
-        $patients = Patient::with('species')->get();
+        $patients = Patient::with('species')->latest()->get();
 
-        return view('patients.index', compact('patients'));
+        return view('pages.patients.index', compact('patients'));
     }
 
     public function create()
     {
         $species = Species::all();
 
-        return view('patients.create', compact('species'));
+        return view('pages.patients.create', compact('species'));
     }
 
     public function store(Request $request)
@@ -32,14 +34,14 @@ class PatientsController extends Controller
         ]);
 
         $newImageName = time() . '-' . $request->name . '.' .$request->image->extension();
-        $request->image->move(public_path('images'), $newImageName);
+        $request->image->move(public_path('storage'), $newImageName);
 
-        Patient::create([
+        $patient = Patient::create([
             'name' => $request->name,
             'dob' => $request->dob,
             'breed' => $request->breed,
             'gender' => $request->gender,
-            'species_id' => $request->species_id,
+            'species_id' => $request->species,
             'height' => $request->height,
             'weight' => $request->weight,
             'chronic_disease' => $request->chronic_disease,
@@ -48,7 +50,7 @@ class PatientsController extends Controller
             'created_by_id' => auth()->user()->id,
         ]);
 
-        $patient = Patient::create($request->all());
+        //$patient = Patient::create($request->all());
 
         if ($request->input('photo', false)) {
             $patient->addMedia(storage_path('tmp/uploads/' . basename($request->input('photo'))))->toMediaCollection('photo');
@@ -58,7 +60,7 @@ class PatientsController extends Controller
             Media::whereIn('id', $media)->update(['model_id' => $patient->id]);
         }
 
-        return back()->with('message', 'Patient has been created');
+        return redirect()->route('patients.index')->with('message', 'Patient has been created');
     }
 
     /**
@@ -72,8 +74,11 @@ class PatientsController extends Controller
         $patient = Patient::findOrFail($id);
         $birthDate = Carbon::parse($patient->dob)->format('d F Y');
         $joinedDate = Carbon::parse($patient->created_at)->format('d F Y');
+        $medicalRecords = MedicalRecord::where('patient_id', $id)->orderByDesc('created_at')->get();
+        //$appointments = Appointment::where('patient_id', $id)->orderByDesc('date')->get();
+        $lastVisit = MedicalRecord::where('patient_id', $id)->latest('created_at')->value('created_at');
 
-        return view('patients.show', compact('patient', 'birthDate', 'joinedDate'));
+        return view('pages.patients.show', compact('patient', 'birthDate', 'joinedDate', 'medicalRecords', 'lastVisit'));
     }
 
     public function edit($id)
@@ -82,7 +87,7 @@ class PatientsController extends Controller
         $species = Species::all();
         $owners = User::all();
 
-        return view('patients.edit', compact('patient', 'species', 'owners'));
+        return view('pages.patients.edit', compact('patient', 'species', 'owners'));
     }
 
     public function update(Request $request, $id)
@@ -131,6 +136,8 @@ class PatientsController extends Controller
 
     public function destroy($id)
     {
-        //
+        Patient::destroy($id);
+
+        return redirect()->route('patients.index')->with('message', 'Patient has been deleted');
     }
 }

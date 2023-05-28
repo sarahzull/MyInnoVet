@@ -14,8 +14,9 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-        $permissions = Permission::all();
-        return view('settings.permissions.index', compact('permissions'));
+        $permissions = Permission::latest()->get();
+
+        return view('pages.settings.permissions.index', compact('permissions'));
     }
 
     /**
@@ -25,7 +26,7 @@ class PermissionsController extends Controller
      */
     public function create()
     {
-        return view('settings.permissions.create');
+        return view('pages.settings.permissions.create');
     }
 
     /**
@@ -39,7 +40,9 @@ class PermissionsController extends Controller
         $validated = $request->validate(['name' => ['required', 'min:3']]);
         Permission::create(($validated));
 
-        return redirect()->route('permissions.index');
+        session()->flash('success', 'Permission created successfully.');
+
+        return redirect()->route('permissions.index')->with('message', 'Permission created successfully');
     }
 
     /**
@@ -62,7 +65,7 @@ class PermissionsController extends Controller
     public function edit($id)
     {
         $permission = Permission::findById($id);
-        return view('settings.permissions.edit', compact('permission'));
+        return view('pages.settings.permissions.edit', compact('permission'));
     }
 
     /**
@@ -78,7 +81,7 @@ class PermissionsController extends Controller
             'name' => $request->name,
         ]);
 
-        return redirect()->route('permissions.index');
+        return redirect()->route('permissions.index')->with('message', 'Permission updated successfully');
     }
 
     /**

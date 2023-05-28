@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\RefTimeSlot;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,8 +25,15 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UserSeeder::class,
+            SpeciesSeeder::class,
             PatientSeeder::class,
             RoleSeeder::class,
+            ModelHasRoleSeeder::class,
+            PermissionSeeder::class,
+            RoleHasPermissionSeeder::class,
+            RefDayScheduleSeeder::class,
+            RefTimeScheduleSeeder::class,
+            RefTimeSlotSeeder::class,
         ]);
     }
 }

@@ -12,25 +12,19 @@ class RolesController extends Controller
     public function index()
     {
         // $roles = Role::all();
-        $roles = Role::with(['permissions'])->get();
+        $roles = Role::with(['permissions'])->latest()->get();
 
-        return view('settings.roles.index', compact('roles'));
+        return view('pages.settings.roles.index', compact('roles'));
     }
 
     public function create()
     {
         $permissions = Permission::pluck('name', 'id');
-        return view('settings.roles.create', compact('permissions'));
+        return view('pages.settings.roles.create', compact('permissions'));
     }
 
     public function store(Request $request)
     {
-        // $role = Role::find($request->id);
-        // $permissions = Permission::whereIn('permissions', $request->id)->get();
-        // $role->syncPermissions($permissions);
-
-        // $validated = $request->validate(['name' => ['required', 'min:3']]);
-        // Role::create(($validated));
 
         $role = Role::create($request->all());
         $role->permissions()->sync($request->input('permissions', []));
@@ -53,7 +47,7 @@ class RolesController extends Controller
 
         $role->load('permissions');
 
-        return view('settings.roles.edit', compact('permissions', 'role'));
+        return view('pages.settings.roles.edit', compact('permissions', 'role'));
     }
 
     public function update(Request $request, $id)

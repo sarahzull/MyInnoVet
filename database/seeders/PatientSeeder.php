@@ -22,9 +22,10 @@ class PatientSeeder extends Seeder
                 'dob'           => '2008-01-01',
                 'breed'         => 'Siamese',
                 'gender'        => 'Female',
-                'species_id'    => '1',
+                'species_id'    => 1,
                 'height'        => '23',
                 'weight'        => '3.63',
+                'owner_id'      => 3
             ],
             [
                 'id'            => 2,
@@ -32,9 +33,10 @@ class PatientSeeder extends Seeder
                 'dob'           => '2013-11-27',
                 'breed'         => 'American Shorthair',
                 'gender'        => 'Male',
-                'species_id'    => '1',
+                'species_id'    => 1,
                 'height'        => '15',
                 'weight'        => '4',
+                'owner_id'      => 3
             ],
             [
                 'id'            => 3,
@@ -42,12 +44,24 @@ class PatientSeeder extends Seeder
                 'dob'           => '2020-05-13',
                 'breed'         => 'Agnora',
                 'gender'        => 'Male',
-                'species_id'    => '3',
+                'species_id'    => 3,
                 'height'        => '20',
                 'weight'        => '2.5',
+                'owner_id'      => 3
             ],
-            
-        ]; 
+            [
+                'id'            => 4,
+                'name'          => 'Samad Ucuk',
+                'dob'           => '2021-12-21',
+                'breed'         => 'Domestic Short Hair',
+                'gender'        => 'Male',
+                'species_id'    => 1,
+                'height'        => '20',
+                'weight'        => '7.7',
+                'owner_id'      => 3
+            ],
+
+        ];
 
         Patient::insert($patients);
     }
