@@ -27,18 +27,18 @@ class Schedule extends Component
         $this->user = User::find($id);
         $this->name = $this->user->name;
 
-        // Get StaffSchedules for the user
+        // get StaffSchedules for the user
         $staffSchedules = StaffSchedule::where('user_id', $id)->get();
 
         foreach ($this->days as $day) {
-            // Get the schedule for the day if it exists
+            // get the schedule for the day if it exists
             $schedule = $staffSchedules->firstWhere('day_id', $day->id);
 
             if ($schedule) {
                 $this->startTime[$day->id] = $schedule->start_time;
                 $this->endTime[$day->id] = $schedule->end_time;
 
-                // Check the day if it has start time and end time
+                // check the day if it has start time and end time
                 if ($schedule->start_time && $schedule->end_time) {
                     $this->checkedDays[] = $day->id;
                 }

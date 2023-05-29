@@ -50,7 +50,7 @@ class AppointmentsController extends Controller
             'type' => 'required|in:consultation,vaccine,checkup,surgery',
         ]);
 
-        // Check if the selected time slot is available
+        // check if the selected time slot is available
         $start_time = Carbon::parse($request->date . ' ' . $request->time);
         $end_time = $start_time->copy()->addMinutes(15);
         $is_available = Appointment::where('start_time', '<=', $start_time)
@@ -63,7 +63,7 @@ class AppointmentsController extends Controller
             return redirect()->back()->withErrors(['The selected time slot is not available. Please choose another slot.']);
         }
 
-        // Create the appointment
+        // create the appointment
         $appointment = new Appointment();
         $appointment->patient_id = $request->patient_id;
         $appointment->type = $request->type;
@@ -72,7 +72,7 @@ class AppointmentsController extends Controller
         $appointment->finish_time = $end_time;
         $appointment->save();
 
-        // Send email to patient's owner
+        // send email to patient's owner
         $patient = $appointment->patient;
         $owner = $patient->owner;
         $data = [
@@ -82,7 +82,7 @@ class AppointmentsController extends Controller
         ];
         Mail::to($owner->email)->send(new AppointmentCreated($data));
 
-        // Send WhatsApp message to patient's owner
+        // send WhatsApp message to patient's owner
         $client = new Client(env('TWILIO_SID'), env('TWILIO_AUTH_TOKEN'));
         $client->messages->create(
             'whatsapp:' . $owner->phone_number,

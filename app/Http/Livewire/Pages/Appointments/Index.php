@@ -31,7 +31,7 @@ class Index extends Component
                                     ->join('slots', 'appointments.slot_id', '=', 'slots.id')
                                     ->orderBy('slots.date', 'asc')
                                     ->orderBy('slots.slot', 'asc')
-                                    ->select('appointments.*') // Avoids ambiguity in SQL select
+                                    ->select('appointments.*') // avoids ambiguity in SQL select
                                     ->get();
 
         return view('livewire.pages.appointments.index', [

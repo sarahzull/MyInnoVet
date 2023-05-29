@@ -63,12 +63,6 @@ class PatientsController extends Controller
         return redirect()->route('patients.index')->with('message', 'Patient has been created');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $patient = Patient::findOrFail($id);

@@ -43,19 +43,19 @@ class Create extends Component
 
     public function updatedDate($value)
     {
-        // Store the selected patient ID
+        // store the selected patient ID
         $selectedPatient = $this->patient;
 
-        // Local anonymous function to get start and end time
+        // local anonymous function to get start and end time
         $getTimeRange = function ($value) {
             $date = Carbon::createFromFormat('Y-m-d', $value);
             $dayName = strtoupper($date->dayName);
 
             $start_time = $end_time = null;
 
-            // Loop through the schedule
+            // loop through the schedule
             foreach ($this->schedule as $schedule) {
-                // Check if the day in schedule matches the day name
+                // check if the day in schedule matches the day name
                 if ($schedule['day'] == $dayName) {
                     $start_time = date("H:i:s", strtotime($schedule['start_time']));
                     $end_time = date("H:i:s", strtotime($schedule['end_time']));
@@ -65,7 +65,7 @@ class Create extends Component
             return [$start_time, $end_time];
         };
 
-        // Local anonymous function to update slots
+        // local anonymous function to update slots
         $updateSlots = function ($value, $start_time, $end_time) {
             if ($start_time == null || $end_time == null) {
                 $this->slots = collect([]);
@@ -80,10 +80,10 @@ class Create extends Component
             }
         };
 
-        // Get slot data
+        // get slot data
         $dateSlot = Slot::whereDate('date', $value)->get();
 
-        // If slot for date does not exist
+        // if slot for date does not exist
         if ($dateSlot->isEmpty()) {
             $slots = RefTimeSlot::get();
 
@@ -95,13 +95,13 @@ class Create extends Component
             }
         }
 
-        // Get time range
+        // get time range
         [$start_time, $end_time] = $getTimeRange($value);
 
-        // Update slots
+        // update slots
         $updateSlots($value, $start_time, $end_time);
 
-        // Restore the selected patient
+        // restore the selected patient
         $this->patient = $selectedPatient;
     }
 
