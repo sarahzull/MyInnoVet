@@ -89,19 +89,6 @@
 			@can('appointment_access')
 			<div class="menu-item">
 				<!--begin:Menu link-->
-				<a class="menu-link" href="#">
-					<span class="menu-icon">{!! getSvgIcon('duotune/files/fil002.svg', 'svg-icon svg-icon-2') !!}</span>
-					<span class="menu-title">Visits</span>
-				</a>
-				<!--end:Menu link-->
-			</div>
-			@endcan
-			<!--end:Menu item-->
-
-			<!--begin:Menu item-->
-			@can('appointment_access')
-			<div class="menu-item">
-				<!--begin:Menu link-->
 				<a class="menu-link" href="{{ route('appointments.index') }}">
 					<span class="menu-icon">{!! getSvgIcon('duotune/general/gen066.svg', 'svg-icon svg-icon-2') !!}</span>
 					<span class="menu-title">Appointment</span>
