@@ -42,13 +42,13 @@
                                     {{ $appointment->slots->date->format('d F Y') }} <br> {{ $appointment->slots->slotDetails->description }}
                                 </td>
                                 <td>
-                                    @if ($appointment->type == 'checkup')
+                                    @if ($appointment->type == 'Checkup')
                                         <span class="badge badge-info">{{ $appointment->type }}</span>
-                                    @elseif ($appointment->type == 'consultation')
+                                    @elseif ($appointment->type == 'Consultation')
                                         <span class="badge badge-primary">{{ $appointment->type }}</span>
-                                    @elseif ($appointment->type == 'vaccine')
+                                    @elseif ($appointment->type == 'Vaccine')
                                         <span class="badge badge-success">{{ $appointment->type }}</span>
-                                    @elseif ($appointment->type == 'surgery')
+                                    @elseif ($appointment->type == 'Surgery')
                                         <span class="badge badge-warning">{{ $appointment->type }}</span>
                                     @endif
                                 </td>
