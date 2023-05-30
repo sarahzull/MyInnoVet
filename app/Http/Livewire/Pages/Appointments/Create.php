@@ -132,11 +132,12 @@ class Create extends Component
                                 ->first();
  
         $ownerName = $appointment->patient->owner->name;
+        $petName = $appointment->patient->name;
         $slotDate = $appointment->slots->date->format('d F Y');
         $slotTime = $appointment->slots->slotDetails->description;
     
         $bodyMessage = "Hello *$ownerName*,\n\n";
-        $bodyMessage .= "We would like to inform you that your appointment has been booked successfully.\n";
+        $bodyMessage .= "We would like to inform you that your pet *$petName* appointment has been booked successfully.\n";
         $bodyMessage .= "Your appointment details:\n\n";
         $bodyMessage .= "*Date: $slotDate*\n";
         $bodyMessage .= "*Time: $slotTime*\n\n";

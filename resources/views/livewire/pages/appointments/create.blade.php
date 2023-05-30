@@ -78,10 +78,10 @@
                                 <div class="col-lg-12 fv-row">
                                     <select class="form-control mt-2" id="type" name="type" wire:model="type">
                                         <option >Select type</option>
-                                        <option value="consultation">Consultation</option>
-                                        <option value="vaccine">Vaccine</option>
-                                        <option value="checkup">Checkup</option>
-                                        <option value="surgery">Surgery</option>
+                                        <option value="Consultation">Consultation</option>
+                                        <option value="Vaccine">Vaccine</option>
+                                        <option value="Checkup">Checkup</option>
+                                        <option value="Surgery">Surgery</option>
                                     </select>
                                 </div>
                             </div>

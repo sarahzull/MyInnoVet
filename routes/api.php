@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\TwilioController;
 use App\Mail\TestMail;
 use App\Mail\WelcomeMail;
@@ -47,3 +48,4 @@ Route::post('/subscribe', function () {
 });
 
 Route::get('/send-whatsapp-message', [TwilioController::class, 'sendWhatsAppMessage']);
+Route::get('/test-query', [TestController::class, 'testQuery']);
