@@ -28,7 +28,7 @@
     </div>
   </div>
   <div class="card-body">
-    <div class="d-flex justify-between mb-4">
+    {{-- <div class="d-flex justify-between mb-4">
       <div class="col text-start">
         <a class="text-sm" href="{{ route('staffs.index') }}">
           {!! getSvgIcon('duotune/arrows/arr063.svg', 'svg-icon svg-icon-2') !!}
@@ -36,7 +36,7 @@
       </div>
       <div class="col"></div>
       <div class="col"></div>
-    </div>
+    </div> --}}
     
     <form
       action="{{ route('clients.store') }}"
@@ -186,9 +186,9 @@
 @section('scripts')
 <script>
     
-  $('#dob').flatpickr({
-    altInput: true,
-    altFormat: "j F Y",
-  });
+  // $('#dob').flatpickr({
+  //   altInput: true,
+  //   altFormat: "j F Y",
+  // });
 </script>
 @endsection

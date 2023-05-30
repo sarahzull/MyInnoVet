@@ -30,11 +30,18 @@ class PatientsController extends Controller
     {
         $request->validate([
             'name'  => 'required',
-            'image' => 'required|mimes:jpg,png,jpeg|max:2048'
+            // 'image' => 'required|mimes:jpg,png,jpeg|max:2048'
         ]);
 
-        $newImageName = time() . '-' . $request->name . '.' .$request->image->extension();
-        $request->image->move(public_path('storage'), $newImageName);
+        if ($request->hasFile('image')) {
+            $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
+            $request->image->move(public_path('storage'), $newImageName);
+        } else {
+            $newImageName = 'assets/media/avatars/blank.png'; // Replace 'default-image.jpg' with the name of your default image file
+        }
+
+        // $newImageName = time() . '-' . $request->name . '.' .$request->image->extension();
+        // $request->image->move(public_path('storage'), $newImageName);
 
         $patient = Patient::create([
             'name' => $request->name,
@@ -50,7 +57,6 @@ class PatientsController extends Controller
             'created_by_id' => auth()->user()->id,
         ]);
 
-        //$patient = Patient::create($request->all());
 
         if ($request->input('photo', false)) {
             $patient->addMedia(storage_path('tmp/uploads/' . basename($request->input('photo'))))->toMediaCollection('photo');
@@ -60,7 +66,7 @@ class PatientsController extends Controller
             Media::whereIn('id', $media)->update(['model_id' => $patient->id]);
         }
 
-        return redirect()->route('patients.index')->with('message', 'Patient has been created');
+        return redirect()->route('patients.index')->with('message', 'Patient has been created')->withErrors(['error' => 'An error occurred. Please check your inputs.']);
     }
 
     public function show($id)

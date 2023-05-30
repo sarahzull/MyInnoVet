@@ -50,7 +50,7 @@ class ClientsController extends Controller
     public function edit($id)
     {
         $client = User::find($id);
-        return view('pages.clients.edit', compact('client'));
+        return view('pages.clients.edit', compact('client'))->with('success', 'Client has been created');
     }
 
     public function update(Request $request, $id)
@@ -67,12 +67,12 @@ class ClientsController extends Controller
         $client->postcode = $request->input('postcode');
         $client->update();
 
-        return redirect()->route('clients.index');
+        return redirect()->route('clients.index')->with('success', 'Client has been updated');
     }
 
     public function destroy($id)
     {
         User::destroy($id);
-        return redirect()->route('clients.index');
+        return redirect()->route('clients.index')->with('success', 'Client has been deleted');
     }
 }

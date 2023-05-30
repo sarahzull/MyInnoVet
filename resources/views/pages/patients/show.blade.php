@@ -25,6 +25,13 @@
                 @endcan
               </div>
             </div>
+
+            @if(session('success'))
+                <div class="alert alert-success mt-5">
+                    {{ session('success') }}
+                </div>
+            @endif
+
             <div class="text-center mb-3">
               <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
                 <img src="{{ asset('storage/image/' . $patient->image) }}" class="" width="40%">

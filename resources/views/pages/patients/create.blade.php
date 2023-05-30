@@ -12,6 +12,16 @@
     </div>
   </div>
   <div class="card-body">
+    @if ($errors->any())
+      <div class="alert alert-danger">
+        <ul>
+          @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
+
     <form
       action="{{ route('patients.store') }}"
       method="POST">
@@ -19,7 +29,7 @@
       
       <div class="mb-6">
         <div class="row">
-          <label class="col-lg-4 col-form-label required fw-semibold fs-6">Image</label>
+          <label class="col-lg-4 col-form-label fw-semibold fs-6">Image</label>
           <div class="col-lg-8">
             <div class="row">
               <div class="col-lg-12 fv-row">
@@ -176,7 +186,7 @@
 </div>
 @endsection
 
-@section('scripts')
+{{-- @section('scripts')
 <script>
   KTUtil.onDOMContentLoaded(function() {
     $('#dob').flatpickr({
@@ -186,4 +196,4 @@
     });
   })
 </script>
-@endsection
+@endsection --}}

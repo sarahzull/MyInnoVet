@@ -29,6 +29,7 @@ class Create extends Component
         'selectedSlot' => 'required',
     ];
 
+
     public function updatedStaff($value)
     {
         $staff = User::with('schedules', 'schedules.days', 'schedules.start_times', 'schedules.end_times')->whereId($value)->first();
@@ -122,6 +123,22 @@ class Create extends Component
             'slot_id' => $slotData->id,
             'created_by_id' => auth()->id(),
         ]);
+
+        if ($slotData) {
+            $appointment = Appointment::find($slotData->id);
+            $patient = Patient::find($this->patient);
+            $staff = User::find($this->staff);
+    
+            if ($appointment && $patient && $staff) {
+                if ($appointment->wasRecentlyCreated) {
+                    // Appointment created
+                    Mail::to($staff->email)->send(new AppointmentCreated($appointment, $patient, $staff));
+                } else {
+                    // Appointment updated
+                    Mail::to($staff->email)->send(new AppointmentUpdated($appointment, $patient, $staff));
+                }
+            }
+        }    
 
         session()->flash('success', 'Appoinment booked successfully.');
 

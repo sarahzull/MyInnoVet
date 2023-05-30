@@ -2,9 +2,9 @@
 @section('title', 'Medical Records')
 @section('breadcrumb', 'Medical Records')
 @section('header-button')
-  {{-- @can('medical_record_create')
+  @can('medical_record_create')
     <a href="{{ route('medical-records.create') }}" class="btn btn-sm fw-bold btn-success">Add Record</a>
-  @endcan --}}
+  @endcan
 @endsection
 
 @section('content')
