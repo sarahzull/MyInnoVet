@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\TwilioController;
+use App\Mail\TestMail;
+use App\Mail\WelcomeMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,3 +21,29 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/testroute', function() {
+    $name = "Funny Coder";
+
+    // The email sending is done using the to method on the Mail facade
+    Mail::to('muhammadsalehuddin1@gmail.com')->send(new TestMail($name));
+
+    return response()->json(['message' => 'Email sent successfully']);
+});
+
+Route::post('/subscribe', function () {
+
+    $name = "Funny Coder";
+
+    Mail::to('s4rhzl@gmail.com')->send(new WelcomeMail($name));
+
+    return new JsonResponse(
+        [
+            'success' => true, 
+            'message' => "Message sent successfully"
+        ], 
+        200
+    );
+});
+
+Route::get('/send-whatsapp-message', [TwilioController::class, 'sendWhatsAppMessage']);
