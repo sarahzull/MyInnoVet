@@ -22,11 +22,17 @@ class PatientsController extends Controller
                         ->where('owner_id', $user->id)
                         ->latest()
                         ->get();
+            $pageTitle = 'Pet List';
+            $breadcrumb = 'Pets';
+            $addButton = 'Add Pet';
         } else {
             $patients = Patient::with('species')->latest()->get();
+            $pageTitle = 'Patient List';
+            $breadcrumb = 'Patients';
+            $addButton = 'Add Patient';
         }
 
-        return view('pages.patients.index', compact('patients'));
+        return view('pages.patients.index', compact('patients', 'pageTitle', 'breadcrumb', 'addButton'));
     }
 
     public function create()
