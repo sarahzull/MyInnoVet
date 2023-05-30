@@ -10,18 +10,18 @@ class TwilioService
 
     public function __construct()
     {
-        $sid = config('twilio.sid');
-        $token = config('twilio.token');
+        $sid = env('TWILIO_SID');
+        $token = env('TWILIO_TOKEN');
 
         $this->client = new Client($sid, $token);
     }
 
-    public function sendWhatsAppMessage($to, $body)
+    public function sendWhatsAppMessage($body)
     {
         $message = $this->client->messages->create(
-            'whatsapp:' . $to,
+            'whatsapp:+601121690600',
             [
-                'from' => 'whatsapp:' . config('twilio.whatsapp_number'),
+                'from' => 'whatsapp:+14155238886',
                 'body' => $body,
             ]
         );
