@@ -31,7 +31,7 @@ class DashboardController extends Controller
 
         $todayRegisteredPatients = Patient::whereDate('created_at', now()->toDateString())->count();
 
-        $today = Carbon::now()->format('l d F Y g:iA');
+        $today = Carbon::now()->format('d F Y');
 
         $todayPatients = Patient::whereDate('created_at', now()->toDateString())->get();
 

@@ -2,34 +2,27 @@
 
 namespace App\Mail;
 
-use App\Models\User;
-use App\Models\Patient;
-use App\Models\Appointment;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\SerializesModels;
 
-class AppointmentCreated extends Mailable
+class TestMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $appointment;
-    public $patient;
-    public $staff;
+    public $name;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Appointment $appointment, Patient $patient, User $staff)
+    public function __construct($name)
     {
-        $this->appointment = $appointment;
-        $this->patient = $patient;
-        $this->staff = $staff;
+        $this->name = $name;
     }
 
     /**
@@ -40,7 +33,7 @@ class AppointmentCreated extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Appointment Created',
+            subject: 'Test Mail',
         );
     }
 
@@ -52,8 +45,8 @@ class AppointmentCreated extends Mailable
     public function content()
     {
         return new Content(
-            view: 'emails.appointments.created',
-            // with: ['name' => $this->name],
+            view: 'emails.test-email',
+            with: ['name' => $this->name],
         );
     }
 

@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('slots:generate')->daily();
+        $schedule->command('reminder:whatsapp')->hourly();
         // $schedule->command('inspire')->hourly();
     }
 
