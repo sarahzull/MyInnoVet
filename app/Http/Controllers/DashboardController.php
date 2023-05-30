@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Patient;
+use App\Models\Appointment;
 
 class DashboardController extends Controller
 {
@@ -15,8 +17,32 @@ class DashboardController extends Controller
         $totalClients = User::whereHas('roles', function ($query) {
             $query->where('name', 'client');
         })->count();
+
         $totalPatients = Patient::count();
 
-        return view('pages.dashboards.index', compact('totalClients', 'totalPatients'));
+        $totalVets = User::whereHas('roles', function ($query) {
+            $query->where('name', 'Veterinarian');
+        })->count();
+
+        $todayAppointments = Appointment::with(['slots', 'slots.slotDetails'])
+        ->join('slots', 'appointments.slot_id', '=', 'slots.id')
+        ->whereDate('slots.date', now()->format('Y-m-d')) // Filter appointments for today's date
+        ->count();
+
+        $todayRegisteredPatients = Patient::whereDate('created_at', now()->toDateString())->count();
+
+        $today = Carbon::now()->format('l d F Y g:iA');
+
+        $todayPatients = Patient::whereDate('created_at', now()->toDateString())->get();
+
+        return view('pages.dashboards.index', compact(
+            'totalClients', 
+            'totalPatients', 
+            'totalVets', 
+            'todayAppointments', 
+            'todayRegisteredPatients', 
+            'today', 
+            'todayPatients',
+        ));
     }
 }
