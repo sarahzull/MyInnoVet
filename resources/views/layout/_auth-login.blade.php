@@ -38,12 +38,12 @@
                 <div class="d-flex flex-column flex-center py-7 py-lg-15 px-5 px-md-15 w-100">
                     <!--begin::Logo-->
                     <a href="/" class="mb-12">
-                        <img alt="Logo" src="{{ image('logos/custom-myinnovet-1.svg') }}" class="h-60px h-lg-75px"/>
+                        <img alt="Logo" src="{{ asset('images/custom-myinnovet-1.svg') }}" class="h-60px h-lg-75px"/>
                     </a>
                     <!--end::Logo-->
 
                     <!--begin::Image-->
-                    <img class="d-none d-lg-block mx-auto w-275px w-md-50 w-xl-600px mb-10 mb-lg-20" src="{{ image('misc/auth-screen-login.svg') }}" alt=""/>
+                    <img class="d-none d-lg-block mx-auto w-275px w-md-50 w-xl-600px mb-10 mb-lg-20" src="{{ asset('images/login-img.svg') }}" alt=""/>
                     <!--end::Image-->
 
                 </div>

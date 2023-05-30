@@ -4,13 +4,13 @@
 	<a href="/">
 		@php $bodyAttribute = getHtmlAttribute('body', 'data-kt-app-layout') @endphp
 		@if ($bodyAttribute === 'dark-sidebar')
-			<img alt="Logo" src="{{ image('logos/custom-myinnovet-1.svg') }}" class="h-35px app-sidebar-logo-default" />
+			<img alt="Logo" src="{{ asset('images/myinnovet-logo-2.svg') }}" class="h-35px app-sidebar-logo-default" />
         @elseif($bodyAttribute === 'light-sidebar')
-				<img alt="Logo" src="{{ image('logos/custom-myinnovet-1.svg') }}" class="theme-light-show h-25px app-sidebar-logo-default" />
-				<img alt="Logo" src="{{ image('logos/custom-myinnovet-1.svg') }}" class="theme-dark-show h-25px app-sidebar-logo-default" />
+				<img alt="Logo" src="{{ asset('images/myinnovet-logo-2.svg') }}" class="theme-light-show h-25px app-sidebar-logo-default" />
+				<img alt="Logo" src="{{ asset('images/myinnovet-logo-2.svg') }}" class="theme-dark-show h-25px app-sidebar-logo-default" />
 		@endif
-
-		<img alt="Logo" src="{{ image('logos/myinnovet-default-small.svg') }}" class="h-20px app-sidebar-logo-minimize" />
+		
+		<img alt="Logo" src="{{ asset('images/myinnovet-default-small.svg') }}" class="h-20px app-sidebar-logo-minimize" />
 	</a>
 	<!--end::Logo image-->
 	<!--begin::Sidebar toggle-->
