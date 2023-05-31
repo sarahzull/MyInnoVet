@@ -20,7 +20,6 @@ class Schedule extends Component
 
     public function mount($id)
     {
-        // $x = substr(strtoupper(now()->dayName), 0, 3);
         $this->days = RefDaySchedule::all();
         $this->times = RefTimeSchedule::all();
 
@@ -81,6 +80,26 @@ class Schedule extends Component
 
     public function render()
     {
-        return view('livewire.pages.staffs.schedule')->extends(('layout.master-page'));
+        $user = auth()->user();
+        $userRole = $user->getRoleNames()->first();
+
+        if ($userRole === 'Veterinarian') {
+            $title = 'My Schedule';
+            $breadcrumb = 'Schedule';
+            $name = 'Name';
+            $schedule = 'Schedule';
+        } else {
+            $title = 'Staff Schedule';
+            $breadcrumb = 'Staff Schedule';
+            $name = 'Staff Name';
+            $schedule = 'Staff Schedule';
+        }
+
+        return view('livewire.pages.staffs.schedule', [
+            'title' => $title,
+            'breadcrumb' => $breadcrumb,
+            'name' => $name,
+            'schedule' => $schedule
+        ])->extends(('layout.master-page'));
     }
 }

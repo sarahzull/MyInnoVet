@@ -78,7 +78,7 @@ Route::prefix('/medical-records')->middleware(['auth'])->group(function () {
     Route::post('/', [MedicalRecordsController::class, 'store'])->name('medical-records.store');
     Route::get('/{id}', [MedicalRecordsController::class, 'show'])->name('medical-records.show');
     Route::get('/show/{patient_id}', [MedicalRecordsController::class, 'showById'])->name('medical-records.showId');
-    // Route::get('/edit/{id}', [MedicalRecordsController::class, 'edit'])->name('medical-records.edit');
+    Route::get('/edit/{id}', [MedicalRecordsController::class, 'edit'])->name('medical-records.edit');
     // Route::get('/edit/{id}', AppointmentsUpdate::class)->name('medical-records.edit');
     Route::patch('/{id}', [MedicalRecordsController::class, 'update'])->name('medical-records.update');
     Route::delete('/{id}', [MedicalRecordsController::class, 'destroy'])->name('medical-records.destroy');

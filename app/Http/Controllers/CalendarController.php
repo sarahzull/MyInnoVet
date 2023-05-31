@@ -12,7 +12,7 @@ class CalendarController extends Controller
 
     public function index()
     {
-        $appointments = Appointment::with(['patient', 'slots', 'slots.slotDetails'])->get();
+        $appointments = Appointment::with(['patient', 'staffs', 'slots', 'slots.slotDetails'])->get();
         return view('pages.calendar.index', ['appointments' => $appointments]);
     }
     

@@ -164,10 +164,27 @@
 				<!--begin:Menu link-->
 				<a class="menu-link" href="{{ route('staffs.index') }}">
 					<span class="menu-icon"><i class="fa-solid fa-people-group fs-3"></i></span>
-					<span class="menu-title">Staff</span>
+					<span class="menu-title">
+								Staffs
+					</span>
 				</a>
 				<!--end:Menu link-->
 			</div>
+			@endcan
+			<!--end:Menu item-->
+
+			<!--begin:Menu item-->
+			@can('schedule_access')
+					<div class="menu-item">
+							<!--begin:Menu link-->
+							<a class="menu-link" href="{{ route('staffs.schedule', ['id' => auth()->id()]) }}">
+									<span class="menu-icon"><i class="fa-solid fa-clock fs-3"></i></span>
+									<span class="menu-title">
+											My Schedule
+									</span>
+							</a>
+							<!--end:Menu link-->
+					</div>
 			@endcan
 			<!--end:Menu item-->
 
