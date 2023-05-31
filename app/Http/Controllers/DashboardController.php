@@ -35,6 +35,10 @@ class DashboardController extends Controller
 
         $todayPatients = Patient::whereDate('created_at', now()->toDateString())->get();
 
+        $totalClients = User::whereHas('roles', function ($query) {
+            $query->where('name', 'Client');
+        })->count();
+
         return view('pages.dashboards.index', compact(
             'totalClients', 
             'totalPatients', 
@@ -43,6 +47,7 @@ class DashboardController extends Controller
             'todayRegisteredPatients', 
             'today', 
             'todayPatients',
+            'totalClients'
         ));
     }
 }
