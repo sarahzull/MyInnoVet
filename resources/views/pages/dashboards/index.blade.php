@@ -1,16 +1,12 @@
-
 @extends('layout.master')
 @section('title', 'Dashboard')
 @section('breadcrumb', 'Dashboard')
-
 {{-- <style>
     .clickable-row {
         cursor: pointer;
     }
 </style> --}}
-
 @section('content')
-
     <!--begin::Row-->
     <div class="row g-6 g-xl-10 mb-5 mb-xl-10">
         <div class="col-12 mb-4">
@@ -28,7 +24,6 @@
                     </div>
                     </a>
                 </div>
-
                 <div class="col-xxl-3 col-xl-4 col-sm-6 widget">
                     <a href="{{ route('patients.index') }}" class="text-decoration-none">
                         <div class="bg-success rounded p-xxl-10 px-7 py-10 d-flex align-items-center justify-content-between my-3">
@@ -42,7 +37,6 @@
                         </div>
                     </a>
                 </div>
-
                 <div class="col-xxl-3 col-xl-4 col-sm-6 widget">
                     <a href="{{ route('appointments.index') }}" class="text-decoration-none">
                         <div class="bg-warning rounded p-xxl-10 px-7 py-10 d-flex align-items-center justify-content-between my-3">
@@ -52,11 +46,12 @@
                             <div class="text-end text-white">
                                 <h2 class="fs-2hx fw-bold text-white me-2 lh-1">{{ $todayAppointments }}</h2>
                                 <h3 class="fs-6 fw-semibold text-white">Today Appointments</h3>
+                                <h2 class="fs-2hx fw-bold text-white me-2 lh-1">{{ $totalClients }}</h2>
+                                <h3 class="fs-6 fw-semibold text-white">Total Clients</h3>
                             </div>
                         </div>
                     </a>
                 </div>
-
                 <div class="col-xxl-3 col-xl-4 col-sm-6 widget">
                     <a href="{{ route('patients.index') }}" class="text-decoration-none">
                         <div class="bg-primary rounded p-xxl-10 px-7 py-10 d-flex align-items-center justify-content-between my-3">
@@ -66,12 +61,15 @@
                             <div class="text-end text-white">
                                 <h2 class="fs-2hx fw-bold text-white me-2 lh-1">{{ $todayRegisteredPatients }}</h2>
                                 <h3 class="fs-6 fw-semibold text-white">Today Registered Patients</h3>
+                                <h2 class="fs-2hx fw-bold text-white me-2 lh-1">{{ $todayAppointments }}</h2>
+                                <h3 class="fs-6 fw-semibold text-white">Today Appointments</h3>
                             </div>
                         </div>
                     </a>
                 </div>
             </div>
         </div>
+    </div>
 
     <div class="row gx-5 gx-xl-10">
         <div class="col-xxl-12 mb-5 mb-xl-10">
@@ -88,7 +86,6 @@
                     </div> --}}
                     <!--end::Toolbar-->
                 </div>
-
                 <div class="card-body pt-6">
                     <div class="table-responsive">
                         <table class="table table-row-dashed table-hover align-middle gs-0 gy-3 my-0">
@@ -141,7 +138,6 @@
         </div>
     </div>
 @endsection
-
 @section('scripts')
   <script>
     KTUtil.onDOMContentLoaded(function () {
