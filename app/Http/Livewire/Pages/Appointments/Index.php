@@ -25,6 +25,23 @@ class Index extends Component
         }
     }
 
+    public function deleteAppointment($id)
+    {
+        $this->emit('showDeleteConfirmation', $id);
+    }
+
+    public function confirmDeleteAppointment($id)
+    {
+        $apt = Appointment::find($id);
+        $apt->slots->update(['status' => 0]);
+        Appointment::whereId($id)->delete();
+
+        session()->flash('success', 'Appoinment deleted successfully.');
+
+        // redirect to users list after deleting
+        return redirect()->route('appointments.index');
+    }
+
     public function render()
     {
         $user = auth()->user();

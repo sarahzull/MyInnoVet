@@ -15,6 +15,7 @@ use App\Http\Controllers\StaffsController;
 use App\Http\Controllers\VisitsController;
 use App\Http\Livewire\Pages\Appointments\Create;
 use App\Http\Livewire\Pages\Appointments\Index;
+use App\Http\Livewire\Pages\Appointments\Update;
 use App\Http\Livewire\Pages\Staffs\Schedule;
 use Illuminate\Support\Facades\Route;
 
@@ -77,21 +78,17 @@ Route::prefix('/medical-records')->middleware(['auth'])->group(function () {
     Route::post('/', [MedicalRecordsController::class, 'store'])->name('medical-records.store');
     Route::get('/{id}', [MedicalRecordsController::class, 'show'])->name('medical-records.show');
     Route::get('/show/{patient_id}', [MedicalRecordsController::class, 'showById'])->name('medical-records.showId');
-    Route::get('/edit/{id}', [MedicalRecordsController::class, 'edit'])->name('medical-records.edit');
+    // Route::get('/edit/{id}', [MedicalRecordsController::class, 'edit'])->name('medical-records.edit');
+    // Route::get('/edit/{id}', AppointmentsUpdate::class)->name('medical-records.edit');
     Route::patch('/{id}', [MedicalRecordsController::class, 'update'])->name('medical-records.update');
     Route::delete('/{id}', [MedicalRecordsController::class, 'destroy'])->name('medical-records.destroy');
 });
 
 Route::prefix('/appointments')->middleware(['auth'])->group(function () {
-    // Route::get('/', [AppointmentsController::class, 'index'])->name('appointments.index');
     Route::get('/', Index::class)->name('appointments.index');
-    // Route::get('/create', [AppointmentsController::class, 'create'])->name('appointments.create');
     Route::get('/create', Create::class)->name('appointments.create');
+    Route::get('/update/{id}', Update::class)->name('appointments.update');
     Route::post('/', [AppointmentsController::class, 'store'])->name('appointments.store');
-    // Route::get('/{id}', [AppointmentsController::class, 'show'])->name('appointments.show');
-    // Route::get('/edit/{id}', [AppointmentsController::class, 'edit'])->name('appointments.edit');
-    // Route::patch('/{id}', [AppointmentsController::class, 'update'])->name('appointments.update');
-    // Route::delete('/{id}', [AppointmentsController::class, 'destroy'])->name('appointments.destroy');
 });
 
 Route::prefix('/calendar')->middleware(['auth'])->group(function () {

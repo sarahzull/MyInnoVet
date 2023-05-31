@@ -76,27 +76,23 @@
                                             <a href="{{ route('medical-records.show', $record->id) }}" class="text-primary">View</a>
                                         </button>
                                         </div>
-                                        @endcan
-
-                                        @can('medical_record_edit')
-                                        <div class="d-grid menu-item px-3">
-                                        <button class="btn btn-sm btn-block menu-link">
-                                            <a href="{{ route('medical-records.edit', $record->id) }}" class="text-primary">Edit</a>
-                                        </button>
-                                        </div>
-                                        @endcan
-
-                                        @can('medical_record_delete')
-                                        <div class="d-grid menu-item px-3">
-                                        <form action="{{ route('medical-records.destroy', $record->id) }}" onsubmit="return confirm('Are you sure want to delete?');" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-block menu-link text-primary">
-                                                Delete
-                                            </button>
-                                        </form>
-                                        </div>
                                         @endcan --}}
+
+                                        {{-- @can('medical_record_edit') --}}
+                                        <div class="d-grid menu-item px-3">
+                                            <button class="btn btn-sm btn-block menu-link">
+                                                <a href="{{ route('appointments.update', $appointment->id) }}" class="text-primary">Edit</a>
+                                            </button>
+                                        </div>
+                                        {{-- @endcan --}}
+
+                                        {{-- @can('medical_record_delete') --}}
+                                        <div class="d-grid menu-item px-3">
+                                            <button class="btn btn-sm btn-block menu-link" wire:click="deleteAppointment({{ $appointment->id }})">
+                                                <p class="text-primary">Delete</p>
+                                            </button>
+                                        </div>
+                                        {{-- @endcan --}}
                                     </div>
                                 </td>
                             </tr>
@@ -123,3 +119,23 @@
         })
     </script>
 @endsection
+
+@push('js')
+    <script>
+        window.livewire.on('showDeleteConfirmation', (id) => {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.livewire.emit('confirmDeleteAppointment', id)
+                }
+            })
+        });
+    </script>
+@endpush
