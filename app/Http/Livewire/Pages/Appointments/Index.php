@@ -9,6 +9,8 @@ use Livewire\Component;
 
 class Index extends Component
 {
+    protected $listeners = ['confirmDeleteAppointment'];
+
     public function mount()
     {
         $todaySlot = Slot::whereDate('date', now()->format('Y-m-d'))->get();
@@ -25,27 +27,31 @@ class Index extends Component
         }
     }
 
+    public function deleteAppointment($id)
+    {
+        $this->emit('showDeleteConfirmation', $id);
+    }
+
+    public function confirmDeleteAppointment($id)
+    {
+        $apt = Appointment::find($id);
+        $apt->slots->update(['status' => 0]);
+        Appointment::whereId($id)->delete();
+
+        session()->flash('success', 'Appoinment deleted successfully.');
+
+        // redirect to users list after deleting
+        return redirect()->route('appointments.index');
+    }
+
     public function render()
     {
-        $user = auth()->user();
-        $userRole = $user->getRoleNames()->first();
-
-        // dd($userRole);
-
-        $query = Appointment::with(['patient', 'staffs', 'slots', 'slots.slotDetails'])
-            ->join('slots', 'appointments.slot_id', '=', 'slots.id')
-            ->join('patients', 'appointments.patient_id', '=', 'patients.id')
-            ->orderBy('slots.date', 'asc')
-            ->orderBy('slots.slot', 'asc')
-            ->select('appointments.*'); // avoids ambiguity in SQL select
-
-        if ($userRole === 'Client') {
-            $query->where('patients.owner_id', $user->id);
-        }
-
-        $appointments = $query->get();
-
-        // dd($appointments);
+        $appointments = Appointment::with(['patient', 'staffs', 'slots', 'slots.slotDetails'])
+                                    ->join('slots', 'appointments.slot_id', '=', 'slots.id')
+                                    ->orderBy('slots.date', 'asc')
+                                    ->orderBy('slots.slot', 'asc')
+                                    ->select('appointments.*') // avoids ambiguity in SQL select
+                                    ->get();
 
         return view('livewire.pages.appointments.index', [
             'appointments' => $appointments

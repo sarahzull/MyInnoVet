@@ -129,16 +129,9 @@
 			@can('patient_access')
 			<div class="menu-item">
 				<!--begin:Menu link-->
-				
 				<a class="menu-link" href="{{ route('patients.index') }}">
 					<span class="menu-icon"><i class="fa-solid fa-paw fs-3"></i></span>
-					<span class="menu-title">
-						@if(auth()->check() && auth()->user()->getRoleNames()->first() === 'Client')
-								Pets
-						@else
-								Patients
-						@endif
-					</span>
+					<span class="menu-title">Patients</span>
 				</a>
 				<!--end:Menu link-->
 			</div>

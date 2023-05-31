@@ -23,9 +23,9 @@ return new class extends Migration
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->unsignedBigInteger('created_by_id')->nullable();
-            $table->foreign('created_by_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('created_by_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('updated_by_id')->nullable();
-            $table->foreign('updated_by_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('updated_by_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

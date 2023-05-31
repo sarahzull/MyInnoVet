@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'id'             => 1,
+                // 'id'             => 1,
                 'name'           => 'Customer Service Executive',
                 'email'          => 'cse@mail.com',
                 'phone_no'       => '0193822850',
@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
                 'remember_token' => null,
             ],
             [
-                'id'             => 2,
+                // 'id'             => 2,
                 'name'           => 'Vet',
                 'email'          => 'vet@mail.com',
                 'phone_no'       => '0122500064',
@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
                 'remember_token' => null,
             ],
             [
-                'id'             => 3,
+                // 'id'             => 3,
                 'name'           => 'Client',
                 'email'          => 'client@mail.com',
                 'phone_no'       => '017456342',

@@ -43,6 +43,8 @@
     <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}"/>
     <link href="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet" type="text/css" />
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     @yield('styles')
     @livewireStyles
 </head>

@@ -28,7 +28,7 @@ return new class extends Migration
             $table->unsignedBigInteger('owner_id')->nullable();
             $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('created_by_id')->nullable();
-            $table->foreign('created_by_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('created_by_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

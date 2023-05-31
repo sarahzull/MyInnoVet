@@ -25,8 +25,6 @@ class ClientsController extends Controller
 
     public function store(Request $request)
     {
-        $role = Role::where('name', 'Client')->first();
-
         $client = new User();
         $client->name = $request->input('name');
         $client->phone_no = $request->input('phone_no');
@@ -37,9 +35,9 @@ class ClientsController extends Controller
         $client->city = $request->input('city');
         $client->state = $request->input('state');
         $client->postcode = $request->input('postcode');
-        $client->assignRole($role);
+        $client->assignRole('Client');
         $client->save();
-
+    
         return redirect()->route('clients.index');
     }
 

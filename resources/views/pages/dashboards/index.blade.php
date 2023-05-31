@@ -3,152 +3,209 @@
 @section('title', 'Dashboard')
 @section('breadcrumb', 'Dashboard')
 
-{{-- <style>
-    .clickable-row {
-        cursor: pointer;
-    }
-</style> --}}
-
 @section('content')
 
     <!--begin::Row-->
     <div class="row g-6 g-xl-10 mb-5 mb-xl-10">
-        <div class="col-12 mb-4">
-            <div class="row">
-                <div class="col-xxl-3 col-xl-4 col-sm-6 widget">
-                    <a href="{{ route('staffs.index') }}" class=" text-decoration-none">
-                    <div class="bg-info rounded p-xxl-10 px-7 py-10 d-flex align-items-center justify-content-between my-3">
-                        <div class="rounded d-flex align-items-center justify-content-center">
-                            <i class="fas fa-user-md text-white fs-4x"></i>
+        <div class="col-md-6 col-xxl-4">
+            <div class="card card-flush">
+                <div class="card-body d-flex justify-content-between flex-column px-0 pb-0">
+                    <div class="mb-4 px-9">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="fs-4 fw-semibold text-gray-400 align-self-start me-1&gt;"></span>
+                            <span class="fs-2hx fw-bold text-gray-800 me-2 lh-1">{{ $totalPatients }}</span>
+                            <span class="badge badge-light-success fs-base">
+                            <i class="ki-duotone ki-arrow-up fs-5 text-success ms-n1">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>2.2%</span>
                         </div>
-                        <div class="text-end text-white">
-                            <h2 class="fs-2hx fw-bold text-white me-2 lh-1">{{ $totalVets }}</h2>
-                            <h3 class="fs-6 fw-semibold text-white">Total Veterinarians</h3>
-                        </div>
+                        <span class="fs-6 fw-semibold text-gray-400">Total Online Sales</span>
                     </div>
-                    </a>
-                </div>
-
-                <div class="col-xxl-3 col-xl-4 col-sm-6 widget">
-                    <a href="{{ route('patients.index') }}" class="text-decoration-none">
-                        <div class="bg-success rounded p-xxl-10 px-7 py-10 d-flex align-items-center justify-content-between my-3">
-                            <div class="rounded d-flex align-items-center justify-content-center">
-                                <i class="fa-solid fa-cat text-white fs-4x"></i>
-                            </div>
-                            <div class="text-end text-white">
-                                <h2 class="fs-2hx fw-bold text-white me-2 lh-1">{{ $totalPatients }}</h2>
-                                <h3 class="fs-6 fw-semibold text-white">Total Patients</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-xxl-3 col-xl-4 col-sm-6 widget">
-                    <a href="{{ route('appointments.index') }}" class="text-decoration-none">
-                        <div class="bg-warning rounded p-xxl-10 px-7 py-10 d-flex align-items-center justify-content-between my-3">
-                            <div class="rounded d-flex align-items-center justify-content-center">
-                                <i class="fa-solid fa-calendar-check text-white fs-4x"></i>
-                            </div>
-                            <div class="text-end text-white">
-                                <h2 class="fs-2hx fw-bold text-white me-2 lh-1">{{ $totalClients }}</h2>
-                                <h3 class="fs-6 fw-semibold text-white">Total Clients</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-xxl-3 col-xl-4 col-sm-6 widget">
-                    <a href="{{ route('patients.index') }}" class="text-decoration-none">
-                        <div class="bg-primary rounded p-xxl-10 px-7 py-10 d-flex align-items-center justify-content-between my-3">
-                            <div class="rounded d-flex align-items-center justify-content-center">
-                                <i class="fa-solid fa-shield-cat text-white fs-4x"></i>
-                            </div>
-                            <div class="text-end text-white">
-                                <h2 class="fs-2hx fw-bold text-white me-2 lh-1">{{ $todayAppointments }}</h2>
-                                <h3 class="fs-6 fw-semibold text-white">Today Appointments</h3>
-                            </div>
-                        </div>
-                    </a>
+                    <div id="kt_card_active" class="min-h-auto" style="height: 125px"></div>
                 </div>
             </div>
         </div>
-    </div>
 
+        <div class="col-md-6 col-xxl-4">
+            <div class="card card-flush">
+                <div class="card-body d-flex justify-content-between flex-column px-0 pb-0">
+                    <div class="mb-4 px-9">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="fs-4 fw-semibold text-gray-400 align-self-start me-1&gt;">$</span>
+                            <span class="fs-2hx fw-bold text-gray-800 me-2 lh-1">69,700</span>
+                            <span class="badge badge-light-success fs-base">
+                            <i class="ki-duotone ki-arrow-up fs-5 text-success ms-n1">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>2.2%</span>
+                        </div>
+                        <span class="fs-6 fw-semibold text-gray-400">Total Patients</span>
+                    </div>
+                    <div id="kt_card_patients" class="min-h-auto" style="height: 125px"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xxl-4">
+            <div class="card card-flush">
+                <div class="card-body d-flex justify-content-between flex-column px-0 pb-0">
+                    <div class="mb-4 px-9">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="fs-4 fw-semibold text-gray-400 align-self-start me-1&gt;">$</span>
+                            <span class="fs-2hx fw-bold text-gray-800 me-2 lh-1">69,700</span>
+                            <span class="badge badge-light-success fs-base">
+                            <i class="ki-duotone ki-arrow-up fs-5 text-success ms-n1">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>2.2%</span>
+                        </div>
+                        <span class="fs-6 fw-semibold text-gray-400">Total Online Sales</span>
+                    </div>
+                    <div id="kt_card_widget_8_chart" class="min-h-auto" style="height: 125px"></div>
+                </div>
+            </div>
+        </div>
+
+        {{-- <div class="col-md-6 col-xxl-4">
+            <div class="card card-flush">
+                <div class="card-body d-flex flex-column justify-content-between bgi-no-repeat bgi-size-cover bgi-position-x-center pb-0">
+                    <div class="row row-cols-2">
+                        <div>
+                            <div class="symbol symbol-75px symbol-circle">
+                                <i class="fa-regular fa-paw-simple fs-4x"></i>
+                                <div class="symbol-label fs-2 fw-semibold text-success">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <span>
+                                <p>Total Patients</p>
+                                <p>{{ $totalPatients }}</p>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mb-10">
+                        <div class="fs-2hx fw-bold text-gray-800 text-center mb-13">
+                        <span class="me-2">Try our all new Enviroment with
+                        <br />
+                        <span class="position-relative d-inline-block text-danger">
+                            <a href="/" class="text-danger opacity-75-hover">Pro Plan</a>
+                            <span class="position-absolute opacity-15 bottom-0 start-0 border-4 border-danger border-bottom w-100"></span>
+                        </span></span>for Free</div>
+                        <div class="text-center">
+                            <a href='#' class="btn btn-sm btn-dark fw-bold" data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">Upgrade Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xxl-4">
+            <div class="card card-flush">
+                <div class="card-body d-flex flex-column justify-content-between mt-9 bgi-no-repeat bgi-size-cover bgi-position-x-center pb-0">
+                    <div class="mb-10">
+                        <div class="fs-2hx fw-bold text-gray-800 text-center mb-13">
+                        <span class="me-2">Try our all new Enviroment with
+                        <br />
+                        <span class="position-relative d-inline-block text-danger">
+                            <a href="/" class="text-danger opacity-75-hover">Pro Plan</a>
+                            <span class="position-absolute opacity-15 bottom-0 start-0 border-4 border-danger border-bottom w-100"></span>
+                        </span></span>for Free</div>
+                        <div class="text-center">
+                            <a href='#' class="btn btn-sm btn-dark fw-bold" data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">Upgrade Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 col-xxl-4">
+            <div class="card card-flush">
+                <div class="card-body d-flex flex-column justify-content-between mt-9 bgi-no-repeat bgi-size-cover bgi-position-x-center pb-0">
+                    <div class="mb-10">
+                        <div class="fs-2hx fw-bold text-gray-800 text-center mb-13">
+                        <span class="me-2">Try our all new Enviroment with
+                        <br />
+                        <span class="position-relative d-inline-block text-danger">
+                            <a href="/" class="text-danger opacity-75-hover">Pro Plan</a>
+                            <span class="position-absolute opacity-15 bottom-0 start-0 border-4 border-danger border-bottom w-100"></span>
+                        </span></span>for Free</div>
+                        <div class="text-center">
+                            <a href='#' class="btn btn-sm btn-dark fw-bold" data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">Upgrade Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+    </div>
+    <!--end::Row-->
+
+    <!--begin::Row-->
     <div class="row gx-5 gx-xl-10">
-        <div class="col-xxl-12 mb-5 mb-xl-10">
-            <div class="card card-flush h-md-100">
-                <div class="card-header pt-7">
-                    <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bold text-gray-800">Recent Patients Registration</span>
-                        <span class="text-gray-400 mt-1 fw-semibold fs-6">{{ $today }}</span>
-                    </h3>
-                    <!--end::Title-->
-                    <!--begin::Toolbar-->
-                    {{-- <div class="card-toolbar">
-                        <a href="/" class="btn btn-sm btn-light">History</a>
-                    </div> --}}
-                    <!--end::Toolbar-->
-                </div>
-
-                <div class="card-body pt-6">
-                    <div class="table-responsive">
-                        <table class="table table-row-dashed table-hover align-middle gs-0 gy-3 my-0">
-                            <thead>
-                                <tr class="fs-7 fw-bold text-gray-400 border-bottom-0">
-                                    <th class="p-0 pb-3 min-w-10px text-start">#</th>
-                                    <th class="p-0 pb-3 min-w-50px text-start">NAME</th>
-                                    <th class="p-0 pb-3 min-w-50px text-start">BREED</th>
-                                    <th class="p-0 pb-3 min-w-50px text-start pe-12">SPECIES</th>
-                                    <th class="p-0 pb-3 min-w-10px text-start pe-7">GENDER</th>
-                                    <th class="p-0 pb-3 w-50px text-start">REGISTERED</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($todayPatients as $index => $patient)
-                                    <tr class="clickable-row" data-href="{{ route('patients.show', $patient->id) }}">
-                                        <td>
-                                            <span class="text-gray-600 fw-bold fs-6">{{ $index + 1 }}</span>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <div class="symbol symbol-50px me-3">
-                                                    <img src="{{ asset('storage/image/' . $patient->image) }}" class="" alt="" />
-                                                </div>
-                                                <div class="d-flex justify-content-start flex-column">
-                                                    <a href="{{ route('patients.show', $patient->id) }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">{{ $patient->name ?? '' }}</a>
-                                                    <span class="text-gray-400 fw-semibold d-block fs-7">{{ $patient->owner->name ?? '' }}</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-start pe-0">
-                                            <span class="text-gray-600 fw-bold fs-6">{{ $patient->breed ?? '' }}</span>
-                                        </td>
-                                        <td class="text-start pe-0">
-                                            <span class="text-gray-600 fw-bold fs-6">{{ $patient->species->name ?? '' }}</span>
-                                        </td>
-                                        <td class="text-start pe-12">
-                                            <span class="text-gray-600 fw-bold fs-6">{{ $patient->gender ?? '' }}</span>
-                                        </td>
-                                        <td class="text-start pe-12">
-                                            <span class="text-gray-600 fw-bold fs-6">{{ $patient->created_at ?? '' }}</span>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+        <!--begin::Col-->
+        <div class="col-xxl-6 mb-5 mb-xl-10">
+            @include('partials/widgets/charts/_widget-8')
         </div>
+        <!--end::Col-->
+        <!--begin::Col-->
+        <div class="col-xl-6 mb-5 mb-xl-10">
+            @include('partials/widgets/tables/_widget-16')
+        </div>
+        <!--end::Col-->
     </div>
+    <!--end::Row-->
+
+    <!--begin::Row-->
+    <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
+        <!--begin::Col-->
+        <div class="col-xxl-6">
+            @include('partials/widgets/cards/_widget-18')
+        </div>
+        <!--end::Col-->
+        <!--begin::Col-->
+        <div class="col-xl-6">
+            @include('partials/widgets/charts/_widget-36')
+        </div>
+        <!--end::Col-->
+    </div>
+    <!--end::Row-->
+
+    <!--begin::Row-->
+    <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
+        <!--begin::Col-->
+        <div class="col-xl-4">
+            @include('partials/widgets/charts/_widget-35')
+        </div>
+        <!--end::Col-->
+        <!--begin::Col-->
+        <div class="col-xl-8">
+            @include('partials/widgets/tables/_widget-14')
+        </div>
+        <!--end::Col-->
+    </div>
+    <!--end::Row-->
+
+    <!--begin::Row-->
+    <div class="row gx-5 gx-xl-10">
+        <!--begin::Col-->
+        <div class="col-xl-4">
+            @include('partials/widgets/charts/_widget-31')
+        </div>
+        <!--end::Col-->
+        <!--begin::Col-->
+        <div class="col-xl-8">
+            @include('partials/widgets/charts/_widget-24')
+        </div>
+        <!--end::Col-->
+    </div>
+    <!--end::Row-->
 @endsection
 
 @section('scripts')
   <script>
     KTUtil.onDOMContentLoaded(function () {
-        $(".clickable-row").click(function() {
-            window.location = $(this).data("href");
-        });
     })
   </script>
 @endsection

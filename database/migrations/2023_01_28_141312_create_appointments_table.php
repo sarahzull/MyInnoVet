@@ -22,7 +22,7 @@ return new class extends Migration
             $table->bigInteger('slot_id')->nullable();
             $table->boolean('is_confirmed')->default(1);
             $table->unsignedBigInteger('created_by_id');
-            $table->foreign('created_by_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('created_by_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

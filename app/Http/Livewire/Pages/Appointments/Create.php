@@ -7,7 +7,6 @@ use App\Models\Patient;
 use App\Models\RefTimeSlot;
 use App\Models\Slot;
 use App\Models\User;
-use App\Services\TwilioService;
 use Carbon\Carbon;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
@@ -29,7 +28,6 @@ class Create extends Component
         'type' => 'required',
         'selectedSlot' => 'required',
     ];
-
 
     public function updatedStaff($value)
     {
@@ -107,7 +105,7 @@ class Create extends Component
         $this->patient = $selectedPatient;
     }
 
-    public function submit(TwilioService $twilioService)
+    public function submit()
     {
         $this->validate();
 
@@ -117,7 +115,7 @@ class Create extends Component
 
         $slotData = Slot::whereSlot($this->selectedSlot)->whereDate('date', $this->date)->first();
 
-        $appointments = Appointment::create([
+        Appointment::create([
             'patient_id' => $this->patient,
             'staff_id' => $this->staff,
             'type' => $this->type,
@@ -125,25 +123,21 @@ class Create extends Component
             'created_by_id' => auth()->id(),
         ]);
 
-        $appointment = Appointment::with(['patient', 'staffs', 'slots', 'slots.slotDetails'])
-                                ->join('slots', 'appointments.slot_id', '=', 'slots.id')
-                                ->where('appointments.id', $appointments->id)
-                                ->select('appointments.*')
-                                ->first();
- 
-        $ownerName = $appointment->patient->owner->name;
-        $petName = $appointment->patient->name;
-        $slotDate = $appointment->slots->date->format('d F Y');
-        $slotTime = $appointment->slots->slotDetails->description;
-    
-        $bodyMessage = "Hello *$ownerName*,\n\n";
-        $bodyMessage .= "We would like to inform you that your pet *$petName* appointment has been booked successfully.\n";
-        $bodyMessage .= "Your appointment details:\n\n";
-        $bodyMessage .= "*Date: $slotDate*\n";
-        $bodyMessage .= "*Time: $slotTime*\n\n";
-        $bodyMessage .= "Thank you for choosing MyInnoVet for your veterinary services.";
+        if ($slotData) {
+            $appointment = Appointment::find($slotData->id);
+            $patient = Patient::find($this->patient);
+            $staff = User::find($this->staff);
 
-        $twilioService->sendWhatsAppMessage($bodyMessage);
+            if ($appointment && $patient && $staff) {
+                if ($appointment->wasRecentlyCreated) {
+                    // Appointment created
+                    Mail::to($staff->email)->send(new AppointmentCreated($appointment, $patient, $staff));
+                } else {
+                    // Appointment updated
+                    Mail::to($staff->email)->send(new AppointmentUpdated($appointment, $patient, $staff));
+                }
+            }
+        }
 
         session()->flash('success', 'Appoinment booked successfully.');
 

@@ -17,7 +17,7 @@ class PatientSeeder extends Seeder
     {
         $patients = [
             [
-                'id'            => 1,
+                // 'id'            => 1,
                 'name'          => 'Mittens',
                 'dob'           => '2008-01-01',
                 'breed'         => 'Siamese',
@@ -28,7 +28,7 @@ class PatientSeeder extends Seeder
                 'owner_id'      => 3
             ],
             [
-                'id'            => 2,
+                // 'id'            => 2,
                 'name'          => 'Ruben',
                 'dob'           => '2013-11-27',
                 'breed'         => 'American Shorthair',
@@ -39,7 +39,7 @@ class PatientSeeder extends Seeder
                 'owner_id'      => 3
             ],
             [
-                'id'            => 3,
+                // 'id'            => 3,
                 'name'          => 'Fred',
                 'dob'           => '2020-05-13',
                 'breed'         => 'Agnora',
@@ -50,7 +50,7 @@ class PatientSeeder extends Seeder
                 'owner_id'      => 3
             ],
             [
-                'id'            => 4,
+                // 'id'            => 4,
                 'name'          => 'Samad Ucuk',
                 'dob'           => '2021-12-21',
                 'breed'         => 'Domestic Short Hair',

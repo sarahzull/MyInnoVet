@@ -14,25 +14,9 @@ class PatientsController extends Controller
 {
     public function index()
     {
-        $user = auth()->user();
-        $userRole = $user->getRoleNames()->first();
+        $patients = Patient::with('species')->latest()->get();
 
-        if ($userRole === 'Client') {
-            $patients = Patient::with('species')
-                        ->where('owner_id', $user->id)
-                        ->latest()
-                        ->get();
-            $pageTitle = 'Pet List';
-            $breadcrumb = 'Pets';
-            $addButton = 'Add Pet';
-        } else {
-            $patients = Patient::with('species')->latest()->get();
-            $pageTitle = 'Patient List';
-            $breadcrumb = 'Patients';
-            $addButton = 'Add Patient';
-        }
-
-        return view('pages.patients.index', compact('patients', 'pageTitle', 'breadcrumb', 'addButton'));
+        return view('pages.patients.index', compact('patients'));
     }
 
     public function create()
@@ -53,43 +37,26 @@ class PatientsController extends Controller
             $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
             $request->image->move(public_path('storage'), $newImageName);
         } else {
-            $newImageName = 'blank.png'; // Replace 'default-image.jpg' with the name of your default image file
+            $newImageName = 'assets/media/avatars/blank.png'; // Replace 'default-image.jpg' with the name of your default image file
         }
 
         // $newImageName = time() . '-' . $request->name . '.' .$request->image->extension();
         // $request->image->move(public_path('storage'), $newImageName);
 
-        $user = auth()->user();
-        $userRole = $user->getRoleNames()->first();
-        if ($userRole === 'Client') {
-            $patient = Patient::create([
-                'name' => $request->name,
-                'dob' => $request->dob,
-                'breed' => $request->breed,
-                'gender' => $request->gender,
-                'species_id' => $request->species,
-                'height' => $request->height,
-                'weight' => $request->weight,
-                'chronic_disease' => $request->chronic_disease,
-                'image' => $newImageName,
-                'owner_id' => auth()->user()->id,
-                'created_by_id' => auth()->user()->id,
-            ]);
-        } else {
-            $patient = Patient::create([
-                'name' => $request->name,
-                'dob' => $request->dob,
-                'breed' => $request->breed,
-                'gender' => $request->gender,
-                'species_id' => $request->species,
-                'height' => $request->height,
-                'weight' => $request->weight,
-                'chronic_disease' => $request->chronic_disease,
-                'image' => $newImageName,
-                'owner_id' => $request->owner_id,
-                'created_by_id' => auth()->user()->id,
-            ]);
-        }
+        $patient = Patient::create([
+            'name' => $request->name,
+            'dob' => $request->dob,
+            'breed' => $request->breed,
+            'gender' => $request->gender,
+            'species_id' => $request->species,
+            'height' => $request->height,
+            'weight' => $request->weight,
+            'chronic_disease' => $request->chronic_disease,
+            'image' => $newImageName,
+            'owner_id' => $request->owner_id,
+            'created_by_id' => auth()->user()->id,
+        ]);
+
 
         if ($request->input('photo', false)) {
             $patient->addMedia(storage_path('tmp/uploads/' . basename($request->input('photo'))))->toMediaCollection('photo');

@@ -1,9 +1,9 @@
 @extends('layout.master')
-@section('title', $pageTitle)
-@section('breadcrumb', $breadcrumb)
+@section('title', 'Patient List')
+@section('breadcrumb', 'Patients')
 @section('header-button')
   @can('patient_create')
-    <a href="{{ route('patients.create')}}" class="btn fw-bold btn-success">{{ $addButton }}</a>
+    <a href="{{ route('patients.create')}}" class="btn fw-bold btn-success">Add Patient</a>
   @endcan
 @endsection
 

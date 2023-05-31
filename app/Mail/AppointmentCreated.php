@@ -53,7 +53,6 @@ class AppointmentCreated extends Mailable
     {
         return new Content(
             view: 'emails.appointments.created',
-            // with: ['name' => $this->name],
         );
     }
 
