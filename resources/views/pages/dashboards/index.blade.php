@@ -44,8 +44,6 @@
                                 <i class="fa-solid fa-calendar-check text-white fs-4x"></i>
                             </div>
                             <div class="text-end text-white">
-                                <h2 class="fs-2hx fw-bold text-white me-2 lh-1">{{ $todayAppointments }}</h2>
-                                <h3 class="fs-6 fw-semibold text-white">Today Appointments</h3>
                                 <h2 class="fs-2hx fw-bold text-white me-2 lh-1">{{ $totalClients }}</h2>
                                 <h3 class="fs-6 fw-semibold text-white">Total Clients</h3>
                             </div>
@@ -59,8 +57,6 @@
                                 <i class="fa-solid fa-shield-cat text-white fs-4x"></i>
                             </div>
                             <div class="text-end text-white">
-                                <h2 class="fs-2hx fw-bold text-white me-2 lh-1">{{ $todayRegisteredPatients }}</h2>
-                                <h3 class="fs-6 fw-semibold text-white">Today Registered Patients</h3>
                                 <h2 class="fs-2hx fw-bold text-white me-2 lh-1">{{ $todayAppointments }}</h2>
                                 <h3 class="fs-6 fw-semibold text-white">Today Appointments</h3>
                             </div>
