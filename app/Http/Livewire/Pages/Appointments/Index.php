@@ -35,8 +35,8 @@ class Index extends Component
         $query = Appointment::with(['patient', 'staffs', 'slots', 'slots.slotDetails'])
             ->join('slots', 'appointments.slot_id', '=', 'slots.id')
             ->join('patients', 'appointments.patient_id', '=', 'patients.id')
-            ->orderBy('slots.date', 'asc')
-            ->orderBy('slots.slot', 'asc')
+            ->orderBy('slots.date', 'desc')
+            ->orderBy('slots.slot', 'desc')
             ->select('appointments.*'); // avoids ambiguity in SQL select
 
         if ($userRole === 'Client') {
