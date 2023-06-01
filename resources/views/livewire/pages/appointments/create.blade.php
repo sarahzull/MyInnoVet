@@ -36,12 +36,12 @@
             <form wire:submit.prevent="submit">
                 <div class="mb-6">
                     <div class="row">
-                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">Patient's Name: </label>
+                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">{{ $name }}'s Name: </label>
                         <div class="col-lg-8">
                             <div class="row">
                                 <div class="col-lg-12 fv-row">
                                     <select class="form-control mt-2" id="patient" name="patient" wire:model="patient">
-                                        <option >Select patient</option>
+                                        <option >Select {{ $name }}</option>
                                         @foreach ($patients as $pt)
                                             <option value="{{ $pt->id }}">{{ $pt->name }}</option>
                                         @endforeach

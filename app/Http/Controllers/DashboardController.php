@@ -87,32 +87,60 @@ class DashboardController extends Controller
             );
         } elseif ($userRole === 'Client') {
 
-            $clientTodayAppointments = Appointment::with(['slots', 'slots.slotDetails'])
-                ->join('slots', 'appointments.slot_id', '=', 'slots.id')
-                ->whereDate('slots.date', now()->format('Y-m-d'))
-                ->where('appointments.staff_id', $userId)
-                ->count();
+            // Retrieve the patient IDs associated with the authenticated user
+            $patientIds = Patient::where('owner_id', $userId)->pluck('id');
 
-            $clientTotalAppointments = Appointment::with(['slots', 'slots.slotDetails'])
-                ->join('slots', 'appointments.slot_id', '=', 'slots.id')
-                ->where('appointments.staff_id', $userId)
-                ->count();
+            if ($patientIds->isNotEmpty()) {
+                $clientTodayAppointments = Appointment::with(['slots', 'slots.slotDetails'])
+                    ->join('slots', 'appointments.slot_id', '=', 'slots.id')
+                    ->whereDate('slots.date', now()->format('Y-m-d'))
+                    ->whereIn('appointments.patient_id', $patientIds)
+                    ->count();
 
-            $clientUpcomingAppointments = Appointment::with(['slots', 'slots.slotDetails'])
-            ->join('slots', 'appointments.slot_id', '=', 'slots.id')
-            ->whereDate('slots.date', '>', now()->format('Y-m-d'))
-            ->where('appointments.staff_id', $userId)
-            ->count();
+                $clientCompletedAppointments = Appointment::with(['slots', 'slots.slotDetails'])
+                    ->join('slots', 'appointments.slot_id', '=', 'slots.id')
+                    ->whereDate('slots.date', '<', now()->format('Y-m-d'))
+                    ->whereIn('appointments.patient_id', $patientIds)
+                    ->count();
 
-            $data = compact(
-                'clientTodayAppointments', 
-                'clientTotalAppointments', 
-                'clientUpcomingAppointments', 
-            );
+                $clientUpcomingAppointments = Appointment::with(['slots', 'slots.slotDetails'])
+                    ->join('slots', 'appointments.slot_id', '=', 'slots.id')
+                    ->whereDate('slots.date', '>', now()->format('Y-m-d'))
+                    ->whereIn('appointments.patient_id', $patientIds)
+                    ->count();
+
+                $todayAppointments = Appointment::with(['patient', 'staffs', 'slots', 'slots.slotDetails'])
+                    ->join('slots', 'appointments.slot_id', '=', 'slots.id')
+                    ->join('patients', 'appointments.patient_id', '=', 'patients.id')
+                    ->whereDate('slots.date', now()->format('Y-m-d'))
+                    ->whereIn('appointments.patient_id', $patientIds)
+                    ->orderBy('slots.date', 'desc')
+                    ->orderBy('slots.slot', 'desc')
+                    ->get();
+
+                $upcomingAppointments = Appointment::with(['patient', 'staffs', 'slots', 'slots.slotDetails'])
+                    ->join('slots', 'appointments.slot_id', '=', 'slots.id')
+                    ->join('patients', 'appointments.patient_id', '=', 'patients.id')
+                    ->whereDate('slots.date', '>', now()->format('Y-m-d'))
+                    ->whereIn('appointments.patient_id', $patientIds)
+                    ->orderBy('slots.date', 'desc')
+                    ->orderBy('slots.slot', 'desc')
+                    ->get();
+
+                $data = compact(
+                    'clientTodayAppointments', 
+                    'clientCompletedAppointments', 
+                    'clientUpcomingAppointments', 
+                    'today', 
+                    'todayAppointments',
+                    'upcomingAppointments'
+                );
+            } else {
+                // Handle case where no patients are associated with the authenticated user
+                $data = [];
+            }
 
         }
-    
-
 
         return view('pages.dashboards.index', $data);
     }

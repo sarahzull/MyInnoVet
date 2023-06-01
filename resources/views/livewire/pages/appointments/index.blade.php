@@ -1,7 +1,7 @@
 @section('title', 'Scheduled Appointments')
 @section('breadcrumb', 'Appointments')
 @section('header-button')
-    @can('medical_record_create')
+    @can('appointment_create')
         <a href="{{ route('appointments.create') }}" class="btn btn-sm fw-bold btn-success">Book Appointment</a>
     @endcan
 @endsection
