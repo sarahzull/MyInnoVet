@@ -109,7 +109,7 @@ class DashboardController extends Controller
                     ->whereIn('appointments.patient_id', $patientIds)
                     ->count();
 
-                $todayAppointments = Appointment::with(['patient', 'staffs', 'slots', 'slots.slotDetails'])
+                $clientTodayAppointments = Appointment::with(['patient', 'staffs', 'slots', 'slots.slotDetails'])
                     ->join('slots', 'appointments.slot_id', '=', 'slots.id')
                     ->join('patients', 'appointments.patient_id', '=', 'patients.id')
                     ->whereDate('slots.date', now()->format('Y-m-d'))
@@ -118,7 +118,7 @@ class DashboardController extends Controller
                     ->orderBy('slots.slot', 'desc')
                     ->get();
 
-                $upcomingAppointments = Appointment::with(['patient', 'staffs', 'slots', 'slots.slotDetails'])
+                $clientUpcomingAppointments = Appointment::with(['patient', 'staffs', 'slots', 'slots.slotDetails'])
                     ->join('slots', 'appointments.slot_id', '=', 'slots.id')
                     ->join('patients', 'appointments.patient_id', '=', 'patients.id')
                     ->whereDate('slots.date', '>', now()->format('Y-m-d'))
@@ -132,8 +132,8 @@ class DashboardController extends Controller
                     'clientCompletedAppointments', 
                     'clientUpcomingAppointments', 
                     'today', 
-                    'todayAppointments',
-                    'upcomingAppointments'
+                    'clientTodayAppointments',
+                    'clientUpcomingAppointments'
                 );
             } else {
                 // Handle case where no patients are associated with the authenticated user

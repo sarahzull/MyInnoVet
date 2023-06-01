@@ -77,12 +77,6 @@
                             <span class="card-label fw-bold text-gray-800">Recent Patients Registration</span>
                             <span class="text-gray-400 mt-1 fw-semibold fs-6">{{ $today }}</span>
                         </h3>
-                        <!--end::Title-->
-                        <!--begin::Toolbar-->
-                        {{-- <div class="card-toolbar">
-                            <a href="/" class="btn btn-sm btn-light">History</a>
-                        </div> --}}
-                        <!--end::Toolbar-->
                     </div>
                     <div class="card-body pt-6">
                         <div class="table-responsive">
@@ -91,9 +85,10 @@
                                     <tr class="fs-7 fw-bold text-gray-400 border-bottom-0">
                                         <th class="p-0 pb-3 min-w-10px text-start">#</th>
                                         <th class="p-0 pb-3 min-w-50px text-start">NAME</th>
-                                        <th class="p-0 pb-3 min-w-50px text-start pe-12">SPECIES</th>
-                                        <th class="p-0 pb-3 w-50px text-start">TIME</th>
-                                        <th class="p-0 pb-3 w-50px text-start">TIME</th>
+                                        <th class="p-0 pb-3 min-w-50px text-start">BREED</th>
+                                        <th class="p-0 pb-3 min-w-50px text-start">SPECIES</th>
+                                        <th class="p-0 pb-3 min-w-50px text-start">GENDER</th>
+                                        <th class="p-0 pb-3 min-w-50px text-start">TIME</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -123,7 +118,7 @@
                                                 <span class="text-gray-600 fw-bold fs-6">{{ $patient->gender ?? '' }}</span>
                                             </td>
                                             <td class="text-start pe-12">
-                                                <span class="text-gray-600 fw-bold fs-6">{{ $patient->created_at ?? '' }}</span>
+                                                <span class="text-gray-600 fw-bold fs-6">{{ \Carbon\Carbon::parse($patient->created_at)->format('j F Y, g:i A') ?? '' }}</span>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -309,7 +304,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($todayAppointments as $index => $appointment)
+                                    @foreach ($clientTodayAppointments as $index => $appointment)
                                         <tr>
                                             <td>
                                                 <span class="text-gray-600 fw-bold fs-6">{{ $index + 1 }}</span>
@@ -375,7 +370,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($upcomingAppointments as $index => $appointment)
+                                    @foreach ($clientUpcomingAppointments as $index => $appointment)
                                         <tr>
                                             <td>
                                                 <span class="text-gray-600 fw-bold fs-6">{{ $index + 1 }}</span>
