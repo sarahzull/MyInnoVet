@@ -108,10 +108,18 @@ class PatientsController extends Controller
         $birthDate = Carbon::parse($patient->dob)->format('d F Y');
         $joinedDate = Carbon::parse($patient->created_at)->format('d F Y');
         $medicalRecords = MedicalRecord::where('patient_id', $id)->orderByDesc('created_at')->get();
-        //$appointments = Appointment::where('patient_id', $id)->orderByDesc('date')->get();
         $lastVisit = MedicalRecord::where('patient_id', $id)->latest('created_at')->value('created_at');
 
-        return view('pages.patients.show', compact('patient', 'birthDate', 'joinedDate', 'medicalRecords', 'lastVisit'));
+        $appointments = Appointment::with(['patient', 'staffs', 'slots', 'slots.slotDetails'])
+            ->join('slots', 'appointments.slot_id', '=', 'slots.id')
+            ->join('patients', 'appointments.patient_id', '=', 'patients.id')
+            ->orderBy('slots.date', 'desc')
+            ->orderBy('slots.slot', 'desc')
+            ->select('appointments.*') // avoids ambiguity in SQL select
+            ->where('appointments.patient_id', $id)
+            ->get();
+
+        return view('pages.patients.show', compact('patient', 'birthDate', 'joinedDate', 'medicalRecords', 'lastVisit', 'appointments'));
     }
 
     public function edit($id)
