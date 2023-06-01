@@ -11,9 +11,11 @@
       </a>
       {{-- <h2 class="fw-bold">Medical Record Details</h2> --}}
     </div>
-    <div class="card-toolbar">
-      <a href="{{ route('medical-records.edit', $record->id) }}" class="btn btn-light">Update Medical Record</a>
-    </div>
+    @if (auth()->check() && auth()->user()->getRoleNames()->first() === 'Veterinarian')
+      <div class="card-toolbar">
+        <a href="{{ route('medical-records.edit', $record->id) }}" class="btn btn-light">Update Medical Record</a>
+      </div>
+    @endif
   </div>
   <div class="card-body">
     <div class="d-flex justify-between mb-4">

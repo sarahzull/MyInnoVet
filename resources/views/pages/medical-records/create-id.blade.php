@@ -47,7 +47,7 @@
           <div class="col-lg-8">
             <div class="row">
               <div class="col-lg-12 fv-row">
-                <input type="patient_id" name="patient_id" id="patient_id" class="form-control form-control-flush" value="{{ $visit->patient->name }}" disabled/>
+                <input name="patient" id="patient" class="form-control form-control-flush" value="{{ $patient->name }}" disabled/>
               </div>
             </div>
           </div>
@@ -92,6 +92,9 @@
           </div>
         </div>
       </div>
+
+      <input type="hidden" name="appointment_id" value="{{ request()->query('appointment_id') }}" />
+      <input type="hidden" name="patient_id" value="{{ request()->query('patient_id') }}" />
 
       <div class="d-flex justify-content-end gap-2">
         <a href="{{ route('medical-records.index') }}" class="btn btn-secondary">Back</a>

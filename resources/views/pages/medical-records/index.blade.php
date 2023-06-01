@@ -1,11 +1,11 @@
 @extends('layout.master')
 @section('title', 'Medical Records')
 @section('breadcrumb', 'Medical Records')
-@section('header-button')
+{{-- @section('header-button')
   @can('medical_record_create')
     <a href="{{ route('medical-records.create') }}" class="btn btn-sm fw-bold btn-success">Add Record</a>
   @endcan
-@endsection
+@endsection --}}
 
 @section('content')
 
@@ -22,7 +22,7 @@
         <thead>
           <tr class="text-start text-gray-700 fw-bold fs-7 text-uppercase bg-light">
             <th scope="col" class="text-center w-70px">ID</th>
-            <th scope="col">Patient's Name</th>
+            <th scope="col">Patient</th>
             <td scope="col">Created At</td>
             <th scope="col" class="text-center w-150px">Action</th>
           </tr>

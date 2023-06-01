@@ -55,13 +55,16 @@
                                 <td class="text-center">
                                     @if($appointment->is_confirmed == 1)
                                         <span class="text-success fw-bold">Confirmed</span>
-                                    {{-- @elseif ($appointment->is_confirmed == 2)
-                                        <span class="text-warning fw-bold">Rescheduled</span> --}}
+                                    @elseif ($appointment->is_confirmed == 2)
+                                        <span class="text-info fw-bold">Completed</span>
                                     @else
                                         <span class="text-secondary fw-bold">Cancelled</span>
                                     @endif
                                 </td>
                                 <td class="text-center">
+                                    @if ($appointment->is_confirmed == 2)
+                                        
+                                    @else
                                     <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
                                         <span class="svg-icon svg-icon-5 m-0">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -94,6 +97,7 @@
                                         </div>
                                         {{-- @endcan --}}
                                     </div>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
