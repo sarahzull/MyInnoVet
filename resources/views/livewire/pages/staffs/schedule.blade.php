@@ -26,7 +26,7 @@
                 @else
                     <div class="mb-6">
                         <div class="row">
-                            <label class="col-lg-4 col-form-label fw-semibold fs-5">{{ $name }}:</label>
+                            <label class="col-lg-4 col-form-label fw-semibold fs-5">{{ $nameForm }}:</label>
                             <div class="col-lg-8">
                                 <div class="row">
                                     <div class="col-lg-12 fv-row">

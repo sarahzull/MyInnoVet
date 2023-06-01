@@ -165,7 +165,7 @@
 				<a class="menu-link" href="{{ route('staffs.index') }}">
 					<span class="menu-icon"><i class="fa-solid fa-people-group fs-3"></i></span>
 					<span class="menu-title">
-								Staffs
+								Veterinarians
 					</span>
 				</a>
 				<!--end:Menu link-->

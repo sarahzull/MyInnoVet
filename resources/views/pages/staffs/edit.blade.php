@@ -1,6 +1,6 @@
 @extends('layout.master-page')
-@section('title', 'Create Staff')
-@section('breadcrumb', 'Staffs')
+@section('title', 'Edit Veterinarian')
+@section('breadcrumb', 'Veterinarians')
 
 @section('styles')
 <style>

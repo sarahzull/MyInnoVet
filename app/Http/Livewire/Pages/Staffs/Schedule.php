@@ -73,7 +73,7 @@ class Schedule extends Component
             }
         }
 
-        session()->flash('success', 'Staff schedules saved successfully.');
+        session()->flash('success', 'Vet schedules saved successfully.');
 
         return redirect()->route('staffs.index');
     }
@@ -86,19 +86,19 @@ class Schedule extends Component
         if ($userRole === 'Veterinarian') {
             $title = 'My Schedule';
             $breadcrumb = 'Schedule';
-            $name = 'Name';
+            $nameForm = 'Name';
             $schedule = 'Schedule';
         } else {
-            $title = 'Staff Schedule';
-            $breadcrumb = 'Staff Schedule';
-            $name = 'Staff Name';
-            $schedule = 'Staff Schedule';
+            $title = 'Vet Schedule';
+            $breadcrumb = 'Vet Schedule';
+            $nameForm = 'Vet Name';
+            $schedule = 'Vet Schedule';
         }
 
         return view('livewire.pages.staffs.schedule', [
             'title' => $title,
             'breadcrumb' => $breadcrumb,
-            'name' => $name,
+            'nameForm' => $nameForm,
             'schedule' => $schedule
         ])->extends(('layout.master-page'));
     }
