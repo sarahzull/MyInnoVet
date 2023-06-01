@@ -304,7 +304,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($clientTodayAppointments as $index => $appointment)
+                                    @foreach ($TodayAppointments as $index => $appointment)
                                         <tr>
                                             <td>
                                                 <span class="text-gray-600 fw-bold fs-6">{{ $index + 1 }}</span>
@@ -370,7 +370,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($clientUpcomingAppointments as $index => $appointment)
+                                    @foreach ($UpcomingAppointments as $index => $appointment)
                                         <tr>
                                             <td>
                                                 <span class="text-gray-600 fw-bold fs-6">{{ $index + 1 }}</span>
