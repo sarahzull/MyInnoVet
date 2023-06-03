@@ -1,5 +1,5 @@
 @extends('layout.master-page')
-@section('title', 'Create Staff')
+@section('title', 'View Staff')
 @section('breadcrumb', 'Staffs')
 
 @section('content')
