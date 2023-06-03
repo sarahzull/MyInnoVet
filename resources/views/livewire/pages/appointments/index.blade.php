@@ -30,9 +30,8 @@
                                 <th scope="col" class="text-center w-150px">Action</th>
                             @else
                                 <th scope="col" class="text-center w-70px">ID</th>
-                                <th scope="col">Owner</th>
+                                <th scope="col">Patient</th>
                                 <th scope="col">Doctor</th>
-                                <td scope="col">Patient</td>
                                 <td scope="col">Species</td>
                                 <td scope="col">Date Time</td>
                                 <td scope="col">Type</td>
@@ -111,9 +110,15 @@
                                     @endif
                                 @else
                                     <th scope="row" class="text-center">{{ $index + 1 }}</th>
-                                    <td>{{ $appointment->patient->owner->name ?? '' }}</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                          <div class="d-flex justify-content-start flex-column">
+                                              <span>{{ $appointment->patient->name }}</span>
+                                              <span class="text-gray-400 fw-semibold d-block fs-7">Owner: {{ $appointment->patient->owner->name ?? '' }}</span>
+                                          </div>
+                                        </div>
+                                      </td>
                                     <td>{{ $appointment->staffs->name ?? '' }}</td>
-                                    <td>{{ $appointment->patient->name }}</td>
                                     <td>{{ $appointment->patient->species->name }}</td>
                                     <td>
                                         {{ $appointment->slots->date->format('d F Y') }} <br> {{ $appointment->slots->slotDetails->description }}

@@ -229,9 +229,13 @@
                                             <td class="text-start pe-12">
                                                 {{ $appointment->slots->date->format('d F Y') }} <br> {{ $appointment->slots->slotDetails->description }}
                                             </td>
-                                            <td class="text-start pe-0">
-                                                <a href="{{ route('medical-records.createId', ['appointment_id' => $appointment, 'patient_id' => $appointment->patient->id]) }}" class="btn btn-icon btn-secondary"><i class="bi bi-chat-square-text-fill fs-4 me-2"></i></a>
-                                            </td>
+                                            @if ($appointment->is_confirmed == 1)
+                                                <td class="text-start pe-0">
+                                                    <a href="{{ route('medical-records.createId', ['appointment_id' => $appointment, 'patient_id' => $appointment->patient->id]) }}" class="btn btn-icon btn-secondary"><i class="bi bi-chat-square-text-fill fs-4 me-2"></i></a>
+                                                </td>
+                                            @else
+                                                
+                                            @endif
                                         </tr>
                                     @endforeach
                                 </tbody>
