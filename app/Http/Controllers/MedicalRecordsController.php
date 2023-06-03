@@ -27,7 +27,7 @@ class MedicalRecordsController extends Controller
                 ->orderByDesc('created_at')
                 ->get();
         } else {
-            $records = MedicalRecord::with('patient')->orderByDesc('created_at')->get();
+            $records = MedicalRecord::with('patient')->whereHas('appointment')->orderByDesc('created_at')->get();
         }
 
         return view('pages.medical-records.index', compact('records'));
