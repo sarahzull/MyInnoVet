@@ -40,7 +40,7 @@
                         <div class="col-lg-8">
                             <div class="row">
                                 <div class="col-lg-12 fv-row">
-                                    <select class="form-control mt-2" id="patient" name="patient" wire:model="patient">
+                                    <select class="form-control mt-2" id="patient" name="patient" wire:model="patient" disabled>
                                         <option >Select patient</option>
                                         @foreach ($patients as $pt)
                                             <option value="{{ $pt->id }}">{{ $pt->name }}</option>
