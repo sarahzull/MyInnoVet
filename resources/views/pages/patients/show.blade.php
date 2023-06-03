@@ -150,7 +150,10 @@
                   <div class="card border mt-2">
                     <div class="card-body p-6">
                       <p class="fs-5 fw-bold mb-0">{{ $record->diagnosis }}</p>
-                      <p class="mb-0 text-muted">{{ $record->created_at->format('d F Y') }}</p>
+                      {{-- <p class="mb-0 text-muted">{{ $record->created_at->format('d F Y') }}</p> --}}
+                      <p class="mb-0 text-muted">
+                        {{ $record->appointment->slots->date->format('d F Y') }} <br> {{ $record->appointment->slots->slotDetails->description }}
+                      </p>
                       <p class="mb-0 text-muted">
                         @if ($record->creator->id == 1)
                           Admin

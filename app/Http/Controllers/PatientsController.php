@@ -107,7 +107,7 @@ class PatientsController extends Controller
         $patient = Patient::findOrFail($id);
         $birthDate = Carbon::parse($patient->dob)->format('d F Y');
         $joinedDate = Carbon::parse($patient->created_at)->format('d F Y');
-        $medicalRecords = MedicalRecord::where('patient_id', $id)->orderByDesc('created_at')->get();
+        $medicalRecords = MedicalRecord::with(['appointment'])->where('patient_id', $id)->orderByDesc('created_at')->get();
         $lastVisit = MedicalRecord::where('patient_id', $id)->latest('created_at')->value('created_at');
 
         $appointments = Appointment::with(['patient', 'staffs', 'slots', 'slots.slotDetails'])
