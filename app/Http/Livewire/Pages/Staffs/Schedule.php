@@ -20,7 +20,6 @@ class Schedule extends Component
 
     public function mount($id)
     {
-        // $x = substr(strtoupper(now()->dayName), 0, 3);
         $this->days = RefDaySchedule::all();
         $this->times = RefTimeSchedule::all();
 
@@ -74,13 +73,33 @@ class Schedule extends Component
             }
         }
 
-        session()->flash('success', 'Staff schedules saved successfully.');
+        session()->flash('success', 'Vet schedules saved successfully.');
 
         return redirect()->route('staffs.index');
     }
 
     public function render()
     {
-        return view('livewire.pages.staffs.schedule')->extends(('layout.master-page'));
+        $user = auth()->user();
+        $userRole = $user->getRoleNames()->first();
+
+        if ($userRole === 'Veterinarian') {
+            $title = 'My Schedule';
+            $breadcrumb = 'Schedule';
+            $nameForm = 'Name';
+            $schedule = 'Schedule';
+        } else {
+            $title = 'Vet Schedule';
+            $breadcrumb = 'Vet Schedule';
+            $nameForm = 'Vet Name';
+            $schedule = 'Vet Schedule';
+        }
+
+        return view('livewire.pages.staffs.schedule', [
+            'title' => $title,
+            'breadcrumb' => $breadcrumb,
+            'nameForm' => $nameForm,
+            'schedule' => $schedule
+        ])->extends(('layout.master-page'));
     }
 }

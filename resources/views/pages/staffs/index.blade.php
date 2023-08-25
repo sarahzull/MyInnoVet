@@ -1,9 +1,9 @@
 @extends('layout.master')
-@section('title', 'Staff List')
-@section('breadcrumb', 'Staffs')
+@section('title', 'Veterinarian List')
+@section('breadcrumb', 'Veterinarians')
 @section('header-button')
   @can('staff_create')
-    <a href="{{ route('staffs.create') }}" class="btn btn-sm fw-bold btn-success">Add Staff</a>
+    <a href="{{ route('staffs.create') }}" class="btn btn-sm fw-bold btn-success">Add Veterinarian</a>
   @endcan
 @endsection
 

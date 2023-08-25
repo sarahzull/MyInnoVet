@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Visit;
 use App\Models\Patient;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Models\MedicalRecord;
-use App\Models\Visit;
 use Illuminate\Support\Facades\Redirect;
 
 class MedicalRecordsController extends Controller
@@ -13,42 +14,58 @@ class MedicalRecordsController extends Controller
     
     public function index()
     {
-        $records = MedicalRecord::with('patient')->orderByDesc('created_at')->get();
+        $user = auth()->user();
+        $userRole = $user->getRoleNames()->first();
+
+        $records = [];
+
+        if ($userRole === 'Veterinarian') {
+            $records = MedicalRecord::with('patient')
+                ->whereHas('appointment', function ($query) use ($user) {
+                    $query->where('staff_id', $user->id);
+                })
+                ->orderByDesc('created_at')
+                ->get();
+        } else {
+            $records = MedicalRecord::with('patient')->whereHas('appointment')->orderByDesc('created_at')->get();
+        }
 
         return view('pages.medical-records.index', compact('records'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        // $patients = Patient::latest()->take(2)->get();
         $patients = Patient::all();
 
-        return view('pages.medical-records.create', compact('patients'));
+        return view('pages.medical-records.create', compact('patients', 'patient'));
     }
 
-    public function createById($id)
+    public function createById(Request $request)
     {
-        $visit = Visit::where('id', $id)->first();
+        $patient_id = $request['patient_id'];
+        $patient = Patient::find($patient_id);
 
-        return view('pages.medical-records.create-id', compact('visit'));
+        return view('pages.medical-records.create-id', compact('patient'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'patient_id' => 'required',
-            'diagnosis' => 'required',
-            'treatment' => 'required',
-            'medication' => 'required',
-        ]);
-
-        MedicalRecord::create([
+        $medicalRecord = MedicalRecord::create([
             'patient_id' => $request->patient_id,
             'diagnosis' => $request->diagnosis,
             'treatment' => $request->treatment,
             'medication' => $request->medication,
+            'appointment_id' => $request->appointment_id,
             'created_by_id' => auth()->user()->id,
         ]);
+
+        // dd($medicalRecord);
+
+        $appointment = Appointment::findOrFail($request->appointment_id);
+        $appointment->is_confirmed = 2;
+        $appointment->save();
+
+        // dd($medicalRecord, $appointment);
 
         session()->flash('success', 'Medical record created successfully.');
 

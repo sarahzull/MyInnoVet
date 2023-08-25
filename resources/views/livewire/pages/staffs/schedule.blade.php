@@ -1,5 +1,5 @@
-@section('title', 'Staff Schedule')
-@section('breadcrumb', 'Staff')
+@section('title', $title)
+@section('breadcrumb', $breadcrumb)
 
 <div>
     <div class="card">
@@ -21,22 +21,26 @@
             </div>
 
             <form wire:submit.prevent="submit">
-                <div class="mb-6">
-                    <div class="row">
-                        <label class="col-lg-4 col-form-label fw-semibold fs-6">Staff's Name</label>
-                        <div class="col-lg-8">
-                            <div class="row">
-                                <div class="col-lg-12 fv-row">
-                                    <input type="text" name="date" id="name" class="form-control form-control-solid ps-12" name="name" wire:model="name" disabled/>
+                @if(auth()->check() && auth()->user()->getRoleNames()->first() === 'Veterinarian')
+                    
+                @else
+                    <div class="mb-6">
+                        <div class="row">
+                            <label class="col-lg-4 col-form-label fw-semibold fs-5">{{ $nameForm }}:</label>
+                            <div class="col-lg-8">
+                                <div class="row">
+                                    <div class="col-lg-12 fv-row">
+                                        <input type="text" name="date" id="name" class="form-control form-control-solid ps-12" name="name" wire:model="name" disabled/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endif
 
                 <div class="mb-6">
                     <div class="">
-                        <label class="col-lg-4 col-form-label fw-semibold fs-6">Staff's Schedule</label>
+                        <label class="col-lg-4 col-form-label fw-semibold fs-5">{{ $schedule }}:</label>
                         <div class="col-lg-12">
                             <table class="table align-middle">
                                 <thead class="">

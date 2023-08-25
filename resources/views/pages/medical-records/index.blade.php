@@ -1,11 +1,11 @@
 @extends('layout.master')
 @section('title', 'Medical Records')
 @section('breadcrumb', 'Medical Records')
-@section('header-button')
+{{-- @section('header-button')
   @can('medical_record_create')
     <a href="{{ route('medical-records.create') }}" class="btn btn-sm fw-bold btn-success">Add Record</a>
   @endcan
-@endsection
+@endsection --}}
 
 @section('content')
 
@@ -22,7 +22,8 @@
         <thead>
           <tr class="text-start text-gray-700 fw-bold fs-7 text-uppercase bg-light">
             <th scope="col" class="text-center w-70px">ID</th>
-            <th scope="col">Patient's Name</th>
+            <th scope="col">Patient</th>
+            <th scope="col">Status</th>
             <td scope="col">Created At</td>
             <th scope="col" class="text-center w-150px">Action</th>
           </tr>
@@ -32,6 +33,14 @@
             <tr>
             <th scope="row" class="text-center">{{ $index + 1 }}</th>
             <td>{{ $record->patient->name }}</td>
+            <td class="text-center">
+              @if ($record->appointment->is_confirmed == 2)
+                <span class="badge badge-success">Completed</span>
+              @else 
+                <span class="badge badge-warning">Not Created Yet</span>
+              @endif
+              {{ $record->appointment->is_}}
+            </td>
             <td>
               <span>{{ $record->created_at->format('d F Y') }}</span>
               <br>
@@ -61,8 +70,8 @@
                   </button>
                 </div>
                 @endcan
-
-                @can('medical_record_delete')
+                
+                {{-- @can('medical_record_delete')
                 <div class="d-grid menu-item px-3">
                   <form action="{{ route('medical-records.destroy', $record->id) }}" onsubmit="return confirm('Are you sure want to delete?');" method="POST">
                     @csrf
@@ -72,7 +81,7 @@
                     </button>
                   </form>
                 </div>
-                @endcan
+                @endcan --}}
               </div>
             </td>
           </tr>

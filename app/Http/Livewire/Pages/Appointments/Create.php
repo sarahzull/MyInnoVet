@@ -152,13 +152,26 @@ class Create extends Component
 
     public function render()
     {
-        $patients = Patient::all();
+        $user = auth()->user();
+        $userRole = $user->getRoleNames()->first();
+        $userId = $user->id;
+
+        if ($userRole === 'Client') {
+            $patients = Patient::where('owner_id', $userId)->get();
+            $name = 'Pet';
+
+        } else {
+            $patients = Patient::all();
+            $name = 'Patient';
+        }
+        
         $role = Role::findByName('Veterinarian');
         $staffs = User::role($role)->latest()->get();
 
         return view('livewire.pages.appointments.create', [
             'patients' => $patients,
-            'staffs' => $staffs
+            'staffs' => $staffs,
+            'name' => $name
         ])->extends(('layout.master-page'));
     }
 }

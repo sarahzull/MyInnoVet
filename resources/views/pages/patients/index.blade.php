@@ -1,9 +1,9 @@
 @extends('layout.master')
-@section('title', 'Patient List')
-@section('breadcrumb', 'Patients')
+@section('title', $pageTitle)
+@section('breadcrumb', $breadcrumb)
 @section('header-button')
   @can('patient_create')
-    <a href="{{ route('patients.create')}}" class="btn fw-bold btn-success">Add Patient</a>
+    <a href="{{ route('patients.create')}}" class="btn fw-bold btn-success">{{ $addButton }}</a>
   @endcan
 @endsection
 
@@ -22,8 +22,8 @@
         <thead>
           <tr class="text-start text-gray-700 fw-bold fs-7 text-uppercase bg-light">
             <th scope="col" class="text-center w-70px">ID</th>
-            <th scope="col">Owner</th>
             <th scope="col">Name</th>
+            {{-- <th scope="col">Owner</th> --}}
             <th scope="col">Breed</th>
             <th scope="col">Gender</th>
             <th scope="col">Species</th>
@@ -34,8 +34,16 @@
           @foreach ($patients as $index => $patient)
             <tr>
             <th scope="row" class="text-center">{{ $index + 1 }}</th>
-            <td>{{ $patient->owner->name ?? '' }}</td>
-            <td>{{ $patient->name ?? '' }}</td>
+            <td>
+              <div class="d-flex align-items-center">
+                <div class="d-flex justify-content-start flex-column">
+                    <span>{{ $patient->name ?? '' }}</span>
+                    <span class="text-gray-400 fw-semibold d-block fs-7">Owner: {{ $patient->owner->name ?? '' }}</span>
+                </div>
+              </div>
+              {{-- {{ $patient->name ?? '' }} --}}
+            </td>
+            {{-- <td>{{ $patient->owner->name ?? '' }}</td> --}}
             <td>{{ $patient->breed ?? '' }}</td>
             <td>{{ $patient->gender ?? '' }}</td>
             <td>{{ $patient->species->name ?? '' }}</td>

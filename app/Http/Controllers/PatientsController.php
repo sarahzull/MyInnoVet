@@ -22,11 +22,17 @@ class PatientsController extends Controller
                         ->where('owner_id', $user->id)
                         ->latest()
                         ->get();
+            $pageTitle = 'Pet List';
+            $breadcrumb = 'Pets';
+            $addButton = 'Add Pet';
         } else {
             $patients = Patient::with('species')->latest()->get();
+            $pageTitle = 'Patient List';
+            $breadcrumb = 'Patients';
+            $addButton = 'Add Patient';
         }
 
-        return view('pages.patients.index', compact('patients'));
+        return view('pages.patients.index', compact('patients', 'pageTitle', 'breadcrumb', 'addButton'));
     }
 
     public function create()
@@ -101,11 +107,19 @@ class PatientsController extends Controller
         $patient = Patient::findOrFail($id);
         $birthDate = Carbon::parse($patient->dob)->format('d F Y');
         $joinedDate = Carbon::parse($patient->created_at)->format('d F Y');
-        $medicalRecords = MedicalRecord::where('patient_id', $id)->orderByDesc('created_at')->get();
-        //$appointments = Appointment::where('patient_id', $id)->orderByDesc('date')->get();
+        $medicalRecords = MedicalRecord::with(['appointment'])->where('patient_id', $id)->orderByDesc('created_at')->get();
         $lastVisit = MedicalRecord::where('patient_id', $id)->latest('created_at')->value('created_at');
 
-        return view('pages.patients.show', compact('patient', 'birthDate', 'joinedDate', 'medicalRecords', 'lastVisit'));
+        $appointments = Appointment::with(['patient', 'staffs', 'slots', 'slots.slotDetails'])
+            ->join('slots', 'appointments.slot_id', '=', 'slots.id')
+            ->join('patients', 'appointments.patient_id', '=', 'patients.id')
+            ->orderBy('slots.date', 'desc')
+            ->orderBy('slots.slot', 'desc')
+            ->select('appointments.*') // avoids ambiguity in SQL select
+            ->where('appointments.patient_id', $id)
+            ->get();
+
+        return view('pages.patients.show', compact('patient', 'birthDate', 'joinedDate', 'medicalRecords', 'lastVisit', 'appointments'));
     }
 
     public function edit($id)

@@ -1,5 +1,5 @@
 @extends('layout.master-page')
-@section('title', 'Create Staff')
+@section('title', 'View Staff')
 @section('breadcrumb', 'Staffs')
 
 @section('content')
@@ -32,7 +32,7 @@
           </tr>
           <tr class="fs-6 text-gray-800 border-bottom border-gray-200">
             <th class="border w-50">Date of Birth</th>
-            <td>{{ $staff->dob }}</td>
+            <td>{{ \Carbon\Carbon::parse($staff->dob)->format('j F Y') }}</td>
           </tr>
           <tr class="fs-6 text-gray-800 border-bottom border-gray-200">
             <th class="border w-50">Street Address</th>

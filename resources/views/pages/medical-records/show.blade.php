@@ -11,12 +11,14 @@
       </a>
       {{-- <h2 class="fw-bold">Medical Record Details</h2> --}}
     </div>
-    <div class="card-toolbar">
-      <a href="{{ route('medical-records.edit', $record->id) }}" class="btn btn-light">Update Medical Record</a>
-    </div>
+    @if (auth()->check() && auth()->user()->getRoleNames()->first() === 'Veterinarian')
+      <div class="card-toolbar">
+        <a href="{{ route('medical-records.edit', $record->id) }}" class="btn btn-light">Update Medical Record</a>
+      </div>
+    @endif
   </div>
   <div class="card-body">
-    <div class="d-flex justify-between mb-4">
+    {{-- <div class="d-flex justify-between mb-4">
       <div class="col text-start">
         <a class="text-sm" href="{{ url()->previous() }}">
           {!! getSvgIcon('duotune/arrows/arr063.svg', 'svg-icon svg-icon-2') !!}
@@ -24,7 +26,7 @@
       </div>
       <div class="col"></div>
       <div class="col"></div>
-    </div>
+    </div> --}}
     <div class="mb-10">
       @if(session('success'))
         <div class="alert alert-success">
@@ -69,23 +71,25 @@
               <td class="text-gray-800">{{ $record->patient->owner->phone_no }}</td>
             </tr>
             <tr>
-              <td class="text-gray-400">Joined:</td>
+              <td class="text-gray-400">Appointment Date:</td>
               <td class="text-gray-800">
-                @if ($record->patient->created_at)
+                {{ $record->appointment->slots->date->format('d F Y') }}
+                {{-- @if ($record->patient->created_at)
                     {{ $record->patient->created_at->format('d F Y') }}
                 @else
                     N/A
-                @endif
+                @endif --}}
               </td>
             </tr>
             <tr>
-              <td class="text-gray-400">Last Visit:</td>
+              <td class="text-gray-400">Appointment Time:</td>
               <td class="text-gray-800">
-                @if ($record->created_at)
+                {{ $record->appointment->slots->slotDetails->description }}
+                {{-- @if ($record->created_at)
                     {{ $record->created_at->format('d F Y') }}
                 @else
                     N/A
-                @endif
+                @endif --}}
               </td>
             </tr>
           </table>

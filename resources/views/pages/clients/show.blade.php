@@ -29,7 +29,7 @@
           </tr>
           <tr class="fs-6 text-gray-800 border-bottom border-gray-200">
             <th class="border w-50">Date of Birth</th>
-            <td>{{ $client->dob }}</td>
+            <td>{{ \Carbon\Carbon::parse($client->dob)->format('j F Y') }}</td>
           </tr>
           <tr class="fs-6 text-gray-800 border-bottom border-gray-200">
             <th class="border w-50">Street Address</th>
