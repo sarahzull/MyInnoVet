@@ -13,6 +13,7 @@ class DashboardController extends Controller
         $user = auth()->user();
         $userRole = $user->getRoleNames()->first();
         $userId = $user->id;
+        $data = [];
 
         $today = Carbon::now()->format('d F Y');
     
